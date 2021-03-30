@@ -12,7 +12,7 @@ import { API_URL } from '@env';
 export function SignIn({navigation}) {
     const [userEmail, setuserEmail] = useState('')
     const [password, setpassword] = useState('')
-    const context = useContext(AppContext)
+    const {dispatch} = useContext(AppContext)
 
 const handleSubmit= ()=>{
     axios.post(`http://localhost:4000/api/users/login`, {
@@ -20,7 +20,8 @@ const handleSubmit= ()=>{
         password:password
     })
     .then(function (response) {
-        context.dispatch(login())
+        dispatch(login())
+        // dispatch(logout())
     console.log(response);
     })
     .catch(function (error) {

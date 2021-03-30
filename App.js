@@ -18,7 +18,7 @@ import {HeivHome} from './components/userStack/HiveHome';
 import {Profile} from './components/userStack/Porfile';
 import {Post} from './components/userStack/Post';
 
-enableScreens();
+// enableScreens();
 
 const initialState = {isLoggedIn:false};
 export const AppContext = createContext();
