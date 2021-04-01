@@ -6,7 +6,7 @@
 
     - Expo CLI
         setting up Expo cli:
-        - Install Expo => npm install --global expo-cli / npm install -g expo-cli
+        - Install Expo => npm install --global expo-cli /or/ npm install -g expo-cli
         - Create new project => expo init my-project
 
         to start the Development server (Expo-server):

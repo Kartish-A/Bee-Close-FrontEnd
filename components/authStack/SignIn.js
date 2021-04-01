@@ -1,13 +1,9 @@
 import React, {useState, useContext} from 'react';
-import {AppContext} from '../../App'
-import {login} from '../../appContextActions'
-import { View, Text, StyleSheet, Image, Button, TouchableOpacity} from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
-import { ScreenContainer } from 'react-native-screens';
-import { Header } from '../authStack/Header';
+import { AppContext} from '../../App'
+import { login } from '../../appContextActions'
+import { View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {Header,Input} from 'react-native-elements';
 import axios from 'axios';
-import { API_URL } from '@env';
-
 
 export function SignIn({navigation}) {
     const [userEmail, setuserEmail] = useState('')
@@ -29,49 +25,51 @@ const handleSubmit= ()=>{
     });
 }
     return (
-        <ScreenContainer>
-            <Header/>
+        <View>
+            <Header 
+                    backgroundColor='#37cab8'
+                    centerComponent={{ text: 'BEE CLOSE', style: { color: '#fff', fontSize:20 } }}
+                    rightComponent={<Image source={require('../../assets/AppLogo.png')} style={{width:40, height:40}}/> }
+                />
             <View style={styles.container}>
-                <TextInput  style={styles.input} onChangeText={(text)=> setuserEmail(text)}  defaultValue={userEmail} placeholder='your email'/>
-                <TextInput  style={styles.input} onChangeText={(text)=> setpassword(text)}  defaultValue={password} placeholder='password' secureTextEntry={true}/>
-                    <Text>I am Sign In Page</Text>
-                <TouchableOpacity activeOpacity={0.95} style={styles.button} onPress={handleSubmit}>
-                    <Text style={styles.buttontext}>Sign in</Text>
+
+                <View style={{marginTop:100}}>
+                    <Input 
+                        placeholder='E-mail' containerStyle={{width:200,height:60}}
+                        onChangeText={(text)=> setuserEmail(text)}
+                        defaultValue={userEmail}
+                    />
+                    <Input 
+                        placeholder='password' containerStyle={{width:200,height:50}}
+                        onChangeText={(text)=> setpassword(text)}  
+                        defaultValue={password}
+                        secureTextEntry={true}
+                    />
+                </View>
+
+                <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+                    <Text style={{color:'#fff', fontSize:18,fontWeight:'bold'}}>Sign in</Text>
                 </TouchableOpacity>
             </View>
-        </ScreenContainer>
-    )
+        </View>
+    )   
 }
 
 const styles = StyleSheet.create({
     container:{
-        flex:1,
-        alignItems:'center',
+        width:'100%',
+        height:200,
+        alignSelf:'center',
+        alignItems:'center', 
         justifyContent:'center',
-    },
-    input:{
-        height:50,
-        width:200,
-        padding:10,
         margin:10,
-        borderColor:'#37cab8',
-        backgroundColor:'white',
-        borderWidth:2,
-        borderRadius:10
     },
     button: {
-        flexDirection: 'row', 
-        height: 50, 
-        backgroundColor: '#37cab8',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 50,
         width:200,
+        marginTop:10,
+        alignItems: "center",
+        backgroundColor: "#37cab8",
         borderRadius:10,
-        marginBottom:100
-    },
-    buttontext:{
-        fontSize:24,
-        color:'#ffffff'
+        padding: 10
     }
 })

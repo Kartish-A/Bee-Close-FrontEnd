@@ -1,70 +1,91 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image, Button, TouchableOpacity} from 'react-native'
-import { Header } from '../authStack/Header';
+import { Header } from 'react-native-elements';
 
-
-export const ScreenContainer = ({ children }) => (
-    <View style={styles.container}>{children}</View>
-);  
 
 export function LandingPage({navigation}) {
     return (
-        <ScreenContainer>
-            <Header/>
-
-            <View style={styles.banner}>
-                <Text style={styles.upgrade}>Upgrade your</Text>
-                <View style={styles.bannerSecondLine}>
-                    <Text style={{fontSize:26,fontWeight:'bold', }}>social</Text>
-                    <Text style={{fontSize:26,fontWeight:'bold', color:'#fbbc04',marginLeft:10 }}>Network</Text>
+        <View>
+            <Header 
+                backgroundColor='#37cab8'
+                centerComponent={{ text: 'BEE CLOSE', style: { color: '#fff', fontSize:20 } }}
+                rightComponent={<Image source={require('../../assets/AppLogo.png')} style={{width:40, height:40}}/> }
+            />
+            <View style={styles.container}>
+                <View style={styles.banner}>
+                    <Text style={styles.upgrade}>Upgrade your</Text>
+                    <View style={styles.secondline}>
+                        <Text style={styles.upgrade}>social</Text>
+                        <Text style={styles.network}>Network</Text>
+                    </View>
                 </View>
             </View>
-
-            <Text>I am a LandingPage</Text>
-            <TouchableOpacity activeOpacity={0.95} style={styles.button} onPress={()=> navigation.navigate('SignUp')}>
-                <Text style={styles.buttontext}>Get Started</Text>
-            </TouchableOpacity>
-        </ScreenContainer>
+            <View style={styles.welcome}>
+                <Text style={styles.welcomeText}>Welcome to Bee Close App!</Text>
+                <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate('SignUp')}>
+                    <Text style={{color:'#fff', fontSize:18,fontWeight:'bold'}}>Get started</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={{padding:10,marginTop:20,alignItems:'center'}}>
+                <Text>already have an account?</Text>
+                <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate('SignIn')}>
+                    <Text style={{color:'#fff', fontSize:18,fontWeight:'bold'}}>Sign in</Text>
+                </TouchableOpacity>
+            </View>
+        </View>
     )
 }
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "space-between",
-        alignItems: "center",
-        backgroundColor:'#f7f7f7',
-    },
-    
-    banner:{
+
+const styles= StyleSheet.create({
+    container:{
+        width:'100%',
+        height:200,
+        alignSelf:'center',
+        alignItems:'center', 
         justifyContent:'center',
-        width:200,
-        height:100,
-        borderWidth:2,
+        margin:10,
+    },
+    banner:{
+        width: 280,
+        height:100 ,
+        borderWidth:4,
         borderColor:'#37cab8',
-        borderRadius:10
+        borderRadius:10,
+        alignSelf:'flex-start',
+        margin:5,
+        
     },
     upgrade:{
-        fontSize:26,
+        fontSize:34,
         color:'#37cab8',
-        fontWeight:'bold'
+        paddingLeft:10
     },
-    bannerSecondLine:{
+    secondline:{
+        width:280,
         flexDirection:'row',
-        justifyContent:'center'
+        alignSelf:'center',
     },
-    button: {
-        flexDirection: 'row', 
-        height: 50, 
-        backgroundColor: '#37cab8',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 50,
-        width:200,
-        borderRadius:10,
-        marginBottom:100
+    network:{
+        fontSize:34,
+        color:'#fbbc04',
+        fontWeight:'bold',
+        marginLeft:2
     },
-    buttontext:{
+    welcome:{
+        marginTop:80,
+        alignItems:'center'
+    },
+    welcomeText:{
         fontSize:24,
-        color:'#ffffff'
+        color:'#37cab8'
+
+    },
+    button:{
+        width:200,
+        marginTop:10,
+        alignItems: "center",
+        backgroundColor: "#37cab8",
+        borderRadius:10,
+        padding: 10
     }
-});
+})

@@ -1,11 +1,11 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image, Button, TouchableOpacity} from 'react-native'
+import { View, Text, StyleSheet, Image} from 'react-native'
 
 
 export function Header() {
     return (
         <View style={styles.header}>
-                <Image source={require('../../assets/logo.png')} style={styles.image}/>
+                <Image source={require('../../assets/AppLogo.png')} style={styles.image}/>
                 <View style={styles.appName}>
                     <Text style={styles.name}>Bee close</Text>
                 </View>
@@ -14,12 +14,14 @@ export function Header() {
 }
 const styles= StyleSheet.create({
     header:{
-        flex:0.61,
+        flex:0.21,
         flexDirection:'row',
         justifyContent:'space-between',
         width:'100%',
         height:'20%',
         marginTop:20,
+        borderWidth:2,
+        borderColor:'black'
     },
     appName:{
         justifyContent:'center',
@@ -36,8 +38,8 @@ const styles= StyleSheet.create({
         fontWeight:'bold'
     },
     image: {
-        width:100,
-        height:100,
-        marginLeft:20,
+        width:60,
+        height:60,
+        marginLeft:30,
     },
 })

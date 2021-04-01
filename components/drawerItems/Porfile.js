@@ -1,13 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Button, TouchableOpacity} from 'react-native';
-import { Header } from 'react-native-elements'
+import { View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import { Header } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 
+export const Profile = ({navigation}) => {
 
-
-export const Post = ({navigation}) => {
     return (
-        <View style={{ flex:1, width:'100%', justifyContent: 'center' }}>
+        <View >
             <Header 
                     backgroundColor='#37cab8'
                     leftComponent={
@@ -18,9 +17,10 @@ export const Post = ({navigation}) => {
                     centerComponent={{ text: 'BEE CLOSE', style: { color: '#fff', fontSize:20 } }}
                     rightComponent={<Image source={require('../../assets/AppLogo.png')} style={{width:40, height:40}}/> }
             />
-                <View style={styles.container}>
-                    <Text style={{fontSize:24}}>Create a post!</Text>
-                </View>
+            <View style={{justifyContent:'center',alignItems:'center'}}>
+                <Text style={{fontSize:24}}>This is the Profile page</Text>
+                <Text>here you can see and edit your Profile infos</Text>
+            </View>
         </View>
     );
 };
@@ -31,5 +31,5 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor:'#f7f7f7',
     }
-})
-    
+    }
+)

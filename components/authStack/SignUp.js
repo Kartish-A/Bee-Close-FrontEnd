@@ -1,67 +1,63 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Button, TouchableOpacity} from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
-import { ScreenContainer } from 'react-native-screens';
-import { Header } from '../authStack/Header';
+import { View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import { Header,Input } from 'react-native-elements';
+
 
 
 export function SignUp({navigation}) {
     return (
-        <ScreenContainer>
-            <Header/>
-            <View style={styles.container}>
-                <TextInput  style={styles.input} /* onChangeText={onChangeText}  value={text}*/ placeholder='first name'/>
-                <TextInput  style={styles.input} /* onChangeText={onChangeText}  value={text}*/ placeholder='last name'/>
-                <TextInput  style={styles.input} /* onChangeText={onChangeText}  value={text}*/ placeholder='email'/>
-                <TextInput  style={styles.input} /* onChangeText={onChangeText}  value={text}*/ placeholder='password'/>
-                <TextInput  style={styles.input} /* onChangeText={onChangeText}  value={text}*/ placeholder='Country'/>
-                <TextInput  style={styles.input} /* onChangeText={onChangeText}  value={text}*/ placeholder='City'/>
-                <TextInput  style={styles.input} /* onChangeText={onChangeText}  value={text}*/ placeholder='Street Name'/>
-                <TextInput  style={styles.input} /* onChangeText={onChangeText}  value={text}*/ placeholder='Post code'/>
-
-                    <Text>I am Sign up Page</Text>
-                <TouchableOpacity activeOpacity={0.95} style={styles.button} onPress={()=> navigation.navigate('')}>
-                    <Text style={styles.buttontext}>Sign up</Text>
-                </TouchableOpacity>
-
-                <Text>already have account?</Text>
-                <TouchableOpacity activeOpacity={0.95} style={styles.button} onPress={()=> navigation.navigate('SignIn')}>
-                    <Text style={styles.buttontext}>Sign in</Text>
-                </TouchableOpacity>
-
-            </View>
-        </ScreenContainer>
+        <View>
+            <Header 
+                backgroundColor='#37cab8'
+                centerComponent={{ text: 'BEE CLOSE', style: { color: '#fff', fontSize:20 } }}
+                rightComponent={<Image source={require('../../assets/AppLogo.png')} style={{width:40, height:40}}/> }
+            />
+            <View>
+                <Text style={{color:'#37cab8', fontSize:20,fontWeight:'bold', alignSelf:'center',marginTop:10}}>Create your account!</Text>
+                <View style={{flexDirection:'row'}}>
+                    <Input placeholder='first name' containerStyle={{width:170,height:50}}/>
+                    <Input placeholder='last name'  containerStyle={{width:170,height:50}}/>
+                </View>
+                <View>
+                    <Input placeholder='E-mail' containerStyle={{width:200,height:60}}/>
+                    <Input placeholder='create password' containerStyle={{width:200,height:50}}/>
+                    <Input placeholder='confirme password' containerStyle={{width:200,height:50}}/>
+                </View>
+                <View style={{flexDirection:'row'}}>
+                    <Input placeholder='Country' containerStyle={{width:170,height:50}}/>
+                    <Input placeholder='City' containerStyle={{width:170,height:50}}/>
+                </View>
+                <View style={{flexDirection:'row'}}>
+                    <Input placeholder='street' containerStyle={{width:170,height:50}}/>
+                    <Input placeholder='house No.' containerStyle={{width:170,height:50}}/>
+                </View>
+                <View>
+                    <Input placeholder='post code' containerStyle={{width:170,height:50}}/>
+                </View>
+                <View style={{padding:10,marginTop:10,alignItems:'center'}}>
+                    <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate('Confirmation')}>
+                        <Text style={{color:'#fff', fontSize:18,fontWeight:'bold'}}>Sign up</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={{padding:10,marginTop:10,alignItems:'center'}}>
+                    <Text>already have an account?</Text>
+                    <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate('SignIn')}>
+                        <Text style={{color:'#fff', fontSize:18,fontWeight:'bold'}}>Sign in</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>    
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
-    container:{
-        alignItems:'center',
-        justifyContent:'center',
-    },
-    input:{
-        height:40,
-        width:200,
-        padding:10,
-        margin:5,
-        borderColor:'#37cab8',
-        backgroundColor:'white',
-        borderWidth:2,
-        borderRadius:10
-    },
+    
     button: {
-        flexDirection: 'row', 
-        height: 40, 
-        backgroundColor: '#37cab8',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 10,
         width:200,
+        marginTop:10,
+        alignItems: "center",
+        backgroundColor: "#37cab8",
         borderRadius:10,
-        marginBottom:50
-    },
-    buttontext:{
-        fontSize:24,
-        color:'#ffffff',
+        padding: 10
     }
 })
