@@ -1,12 +1,11 @@
 import React, {useContext}from 'react';
-import {AppContext} from '../../App';
+import { AppContext} from '../../App';
 import { logout } from '../../appContextActions';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { StyleSheet, View } from 'react-native';
 import { Title,Caption,Drawer } from 'react-native-paper';
 import { Avatar} from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
-
 
 
 export const CustomDrawerContent=({navigation,props})=>{
@@ -76,6 +75,7 @@ const styles = StyleSheet.create({
     },
     userInfoSection: {
         paddingLeft: 20,
+        marginBottom:20
     },
     title: {
         fontSize: 16,

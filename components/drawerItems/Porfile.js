@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import { Header } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
         backgroundColor:'#f7f7f7',
     }
     }
-)
+) */

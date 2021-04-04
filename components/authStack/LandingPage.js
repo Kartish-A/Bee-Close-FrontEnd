@@ -1,38 +1,40 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image, Button, TouchableOpacity} from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, SafeAreaView} from 'react-native'
 import { Header } from 'react-native-elements';
 
 
 export function LandingPage({navigation}) {
     return (
-        <View>
-            <Header 
-                backgroundColor='#37cab8'
-                centerComponent={{ text: 'BEE CLOSE', style: { color: '#fff', fontSize:20 } }}
-                rightComponent={<Image source={require('../../assets/AppLogo.png')} style={{width:40, height:40}}/> }
-            />
-            <View style={styles.container}>
-                <View style={styles.banner}>
-                    <Text style={styles.upgrade}>Upgrade your</Text>
-                    <View style={styles.secondline}>
-                        <Text style={styles.upgrade}>social</Text>
-                        <Text style={styles.network}>Network</Text>
+        <ScrollView>
+            <SafeAreaView>
+                <Header 
+                    backgroundColor='#37cab8'
+                    centerComponent={{ text: 'BEE CLOSE', style: { color: '#fff', fontSize:20 } }}
+                    rightComponent={<Image source={require('../../assets/AppLogo.png')} style={{width:40, height:40}}/> }
+                />
+                <View style={styles.container}>
+                    <View style={styles.banner}>
+                        <Text style={styles.upgrade}>Upgrade your</Text>
+                        <View style={styles.secondline}>
+                            <Text style={styles.upgrade}>social</Text>
+                            <Text style={styles.network}>Network</Text>
+                        </View>
                     </View>
                 </View>
-            </View>
-            <View style={styles.welcome}>
-                <Text style={styles.welcomeText}>Welcome to Bee Close App!</Text>
-                <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate('SignUp')}>
-                    <Text style={{color:'#fff', fontSize:18,fontWeight:'bold'}}>Get started</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={{padding:10,marginTop:20,alignItems:'center'}}>
-                <Text>already have an account?</Text>
-                <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate('SignIn')}>
-                    <Text style={{color:'#fff', fontSize:18,fontWeight:'bold'}}>Sign in</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
+                <View style={styles.welcome}>
+                    <Text style={styles.welcomeText}>Welcome to Bee Close App!</Text>
+                    <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate('SignUp')}>
+                        <Text style={{color:'#fff', fontSize:18,fontWeight:'bold'}}>Get started</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={{padding:10,marginTop:20,alignItems:'center'}}>
+                    <Text>already have an account?</Text>
+                    <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate('SignIn')}>
+                        <Text style={{color:'#fff', fontSize:18,fontWeight:'bold'}}>Sign in</Text>
+                    </TouchableOpacity>
+                </View>
+            </SafeAreaView>
+        </ScrollView>
     )
 }
 
@@ -81,7 +83,7 @@ const styles= StyleSheet.create({
 
     },
     button:{
-        width:200,
+        width:250,
         marginTop:10,
         alignItems: "center",
         backgroundColor: "#37cab8",
