@@ -1,19 +1,69 @@
 import React, {useState} from 'react';
-import { View, Text, TouchableOpacity, ImageBackground, TextInput, StyleSheet,ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ImageBackground, TextInput, StyleSheet, ScrollView } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { colors } from 'react-native-reanimated';
+import BottomSheet  from 'reanimated-bottom-sheet'
+import Animated, { colors } from 'react-native-reanimated';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const EditProfileScreen = ({navigation}) => {
 
     const {colors} = useTheme();
+
+    let bs = React.createRef();
+    let fall = new Animated.Value(1);
+
+
+    const renderHeader = ()=>(
+        <View style={styles.header}>
+            <View style={styles.panelHeader}>
+                <View style={styles.panelHandle}>
+
+
+                </View>
+            </View>
+        </View>
+    );
+
+    const renderInner = ()=>( 
+        <View style={styles.panel}>
+
+            <View style={{alignItems:'center'}}>
+                <Text style={styles.panelTitle}>Upload photo</Text>
+                <Text style={styles.panelSubtitle}>Chose Your Profile Picture</Text>
+            </View>
+
+            <TouchableOpacity style={styles.panelButton}>
+                <Text style={styles.panelButtonTitle}> Take Photo </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.panelButton}>
+                <Text style={styles.panelButtonTitle}> Choose From Library </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.panelButton} onPress={()=> bs.current.snapTo(1)}>
+                <Text style={styles.panelButtonTitle}> Cancel </Text>
+            </TouchableOpacity>
+
+        </View>
+    );
+
+
     return (
         
     <ScrollView style={styles.container}>
-        <View style={{margin: 20}}>
+        <BottomSheet
+            ref= {bs}
+            snapPoints={[330, 0]}
+            renderContent={renderInner}
+            renderHeader={renderHeader}
+            initialSnap={1}
+            callbackNode={fall}
+            enabledGestureInteraction={true}
+            />
+            {/* adding animation to this View, changing the  View opacity to 0.1 when the user is clicking on "change the picture icon" */}
+        <Animated.View style={{margin: 20, opacity: Animated.add(0.1, Animated.multiply(fall, 1.0))}}>
             <View style={{alignItems: 'center'}}>
-                <TouchableOpacity onPress={() => this.bs.current.snapTo(0)}>
+                <TouchableOpacity onPress={() => bs.current.snapTo(0)}>
                 <View
                     style={{
                     height: 100,
@@ -174,7 +224,10 @@ export const EditProfileScreen = ({navigation}) => {
         <TouchableOpacity style={styles.commandButton} onPress={() => {}}>
             <Text style={styles.panelButtonTitle}>Submit</Text>
         </TouchableOpacity>
-        </View>
+        <TouchableOpacity style={styles.commandButton} onPress={() => {navigation.goBack()}}>
+            <Text style={styles.panelButtonTitle}>Cancel</Text>
+        </TouchableOpacity>
+        </Animated.View>
     </ScrollView>
     );
     };
@@ -234,7 +287,7 @@ export const EditProfileScreen = ({navigation}) => {
     panelButton: {
     padding: 13,
     borderRadius: 10,
-    backgroundColor: '#FF6347',
+    backgroundColor: '#37cab8',
     alignItems: 'center',
     marginVertical: 7,
     },
@@ -247,11 +300,10 @@ export const EditProfileScreen = ({navigation}) => {
 
     action: {
     flexDirection: 'row',
-    marginTop: 10,
-    marginBottom: 10,
+    margin:10,
     borderBottomWidth: 1,
     borderBottomColor: '#f2f2f2',
-    paddingBottom: 5
+    paddingBottom: 5,
     },
 
     actionError: {

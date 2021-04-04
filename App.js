@@ -84,7 +84,8 @@ export default function App() {
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <NavigationContainer>
-      {(state.isLoggedIn)?<AppDrawerScreens /> : <AuthStackScreens />}
+      {/* {(state.isLoggedIn)?<AppDrawerScreens /> : <AuthStackScreens />} */}
+      <AppDrawerScreens/>
       </NavigationContainer>
     </AppContext.Provider>
   );
