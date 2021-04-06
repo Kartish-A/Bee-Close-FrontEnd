@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import BottomSheet  from 'reanimated-bottom-sheet'
 import Animated, { colors } from 'react-native-reanimated';
-import { SafeAreaView } from 'react-native-safe-area-context';
+
 
 export const EditProfileScreen = ({navigation}) => {
 

@@ -8,27 +8,27 @@ import { Ionicons } from '@expo/vector-icons';
 import { appReducer } from './appContextReducer';
 
 // importing AuthStack Screens
-import {LandingPage} from './components/authStack/LandingPage';
-import {SignIn} from './components/authStack/SignIn';
-import {SignUp} from './components/authStack/SignUp';
+import {LandingPage} from './screens/authStack/LandingPage';
+import {SignIn} from './screens/authStack/SignIn';
+import {SignUp} from './screens/authStack/SignUp';
 
 // importing Tab Screens
-import {HiveHome} from './components/userStack/HiveHome';
-import {Post} from './components/userStack/Post';
-import {Events} from './components/userStack/Events'
-import {SellAndBuy} from './components/userStack/SellAndBuy'
+import {HiveHome} from './screens/bottomTabScreens/HiveHome';
+import {CreatePost} from './screens/bottomTabScreens/CreatePost';
+import {Events} from './screens/bottomTabScreens/Events'
+import {SellAndBuy} from './screens/bottomTabScreens/SellAndBuy'
 
 //importing DrawerScreens (and custom functions)
-import { CustomDrawerContent }from './components/drawerItems/CustomDrawerContent';
+import { CustomDrawerContent }from './screens/drawerItems/CustomDrawerContent';
 // import { ProfileScreen }from './components/drawerItems/ProfileStack/ProfileScreen';
-import { SavedItems }from './components/drawerItems/SavedItems';
-import { BeesInMyHive }from './components/drawerItems/BeesInMyHive';
-import { DirectMessages }from './components/drawerItems/DirectMessages';
-import { colors } from 'react-native-elements';
+import { SavedItems }from './screens/drawerItems/SavedItems';
+import { BeesInMyHive }from './screens/drawerItems/BeesInMyHive';
+import { DirectMessages }from './screens/drawerItems/DirectMessages';
+
 
 //importing ProfileStackScreens
-import { ProfileScreen } from './components/drawerItems/ProfileStack/ProfileScreen';
-import { EditProfileScreen } from './components/drawerItems/ProfileStack/EditProfileScreen';
+import { ProfileScreen } from './screens/drawerItems/ProfileStack/ProfileScreen';
+import { EditProfileScreen } from './screens/drawerItems/ProfileStack/EditProfileScreen';
 
 const initialState = {isLoggedIn:false};
 //initialising the App context (central storage)
@@ -55,7 +55,7 @@ const ProfileStackScreens = () =>(
 const TabScreens = ()=>(
   <Tab.Navigator initialRouteName='HeivHome' tabBarOptions={{activeTintColor:'#37cab8'}}>
     <Tab.Screen name='HiveHome' component={HiveHome} options={{title:'Home', tabBarIcon:({focused,color,size})=> <Ionicons name="home" size={size} color={color} focused={focused}/>}}/>
-    <Tab.Screen name='Post' component={Post} options={{ tabBarIcon:({focused,color,size})=> <Ionicons name="add-circle-outline" size={size} color={color} focused={focused} />}}/>
+    <Tab.Screen name='CreatePost' component={CreatePost} options={{ tabBarIcon:({focused,color,size})=> <Ionicons name="add-circle-outline" size={size} color={color} focused={focused} />}}/>
     <Tab.Screen name='Events' component={Events} options={{ tabBarIcon:({focused,color,size})=> <Ionicons name="calendar" size={size} color={color} focused={focused}/>}}/>
     <Tab.Screen name='SellAndBuy' component={SellAndBuy} options={{title:'sell & buy', tabBarIcon:({focused,color,size})=> <Ionicons name="basket" size={size} color={color} focused={focused}/>}}/>
   </Tab.Navigator>
@@ -84,7 +84,8 @@ export default function App() {
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <NavigationContainer>
-      {(state.isLoggedIn)?<AppDrawerScreens /> : <AuthStackScreens />}
+      {/* {(state.isLoggedIn)?<AppDrawerScreens /> : <AuthStackScreens />} */}
+      <AppDrawerScreens/>
       </NavigationContainer>
     </AppContext.Provider>
   );

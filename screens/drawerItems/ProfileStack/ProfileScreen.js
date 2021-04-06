@@ -92,7 +92,7 @@ export const ProfileScreen = ({navigation})=> {
                 <Text style={styles.menuItemText}>Your Posts</Text>
             </View>
             </TouchableRipple>
-            <TouchableRipple onPress={() => {}} >
+            <TouchableRipple onPress={(user) => {}} >
             <View style={styles.menuItem}>
                 <Ionicons name="share-social" color="#37cab8" size={25}/>
                 <Text style={styles.menuItemText}>Tell Your Friends</Text>

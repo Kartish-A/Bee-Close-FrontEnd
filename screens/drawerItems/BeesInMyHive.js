@@ -1,8 +1,7 @@
 import React from 'react';
-import { Text, View,Image } from 'react-native';
+import { Text, View,Image, TouchableOpacity} from 'react-native';
 import { Header } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 export const BeesInMyHive = ({navigation}) => {
