@@ -16,7 +16,7 @@ import { SignUp } from './screens/authStack/SignUp';
 import { HiveHome } from './screens/bottomTabScreens/HiveHome';
 import { CreatePost } from './screens/bottomTabScreens/CreatePost';
 import { Events } from './screens/bottomTabScreens/Events'
-import { SellAndBuy } from './screens/bottomTabScreens/SellAndBuy'
+import { FreeYourStuff } from './screens/bottomTabScreens/FreeYourStuff'
 
 //importing DrawerScreens (and custom functions)
 import { CustomDrawerContent }from './screens/drawerItems/CustomDrawerContent';
@@ -58,7 +58,7 @@ const HiveHomeStackScreens = () =>(
 const PersonalProfileStackScreens = () =>(
   <PersonalProfileStack.Navigator>
     <PersonalProfileStack.Screen name='PersonalProfileScreen' component={PersonalProfileScreen} options={{headerShown:false}}/>
-    <PersonalProfileStack.Screen name='EditPersonalProfileScreen' component={EditPersonalProfileScreen} options={{title:'Edit profile', headerStyle:{backgroundColor:'#37cab8'}}}/>
+    <PersonalProfileStack.Screen name='EditPersonalProfileScreen' component={EditPersonalProfileScreen} options={{title:'Edit profile', headerStyle:{backgroundColor:'#37cab8'},headerTintColor:'#ffffff' }}/>
   </PersonalProfileStack.Navigator>
 )
 
@@ -68,7 +68,7 @@ const TabScreens = ()=>(
     <Tab.Screen name='HiveHomeStack' component={HiveHomeStackScreens} options={{title:'Home', tabBarIcon:({focused,color,size})=> <Ionicons name="home" size={size} color={color} focused={focused}/>}}/>
     <Tab.Screen name='CreatePost' component={CreatePost} options={{ tabBarIcon:({focused,color,size})=> <Ionicons name="add-circle-outline" size={size} color={color} focused={focused} />}}/>
     <Tab.Screen name='Events' component={Events} options={{ tabBarIcon:({focused,color,size})=> <Ionicons name="calendar" size={size} color={color} focused={focused}/>}}/>
-    <Tab.Screen name='SellAndBuy' component={SellAndBuy} options={{title:'sell & buy', tabBarIcon:({focused,color,size})=> <Ionicons name="basket" size={size} color={color} focused={focused}/>}}/>
+    <Tab.Screen name='FreeYourStuff' component={FreeYourStuff} options={{title:'Free your stuff', tabBarIcon:({focused,color,size})=> <Ionicons name="basket" size={size} color={color} focused={focused}/>}}/>
   </Tab.Navigator>
   );
 
@@ -83,7 +83,7 @@ const AppDrawerScreens = ()=>(
   <AppDrawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}  drawerType='slide' >
     <AppDrawer.Screen name='Tab' component={TabScreens} />
     <AppDrawer.Screen name='PersonalPofileScreen' component={PersonalProfileStackScreens} />
-    <AppDrawer.Screen name='DirectMessages' component={DirectMessages}/>
+    <AppDrawer.Screen name='BeesInMyHive' component={BeesInMyHive}/>
     <AppDrawer.Screen name='SavedItems' component={SavedItems}/>
   </AppDrawer.Navigator>
 )

@@ -1,12 +1,13 @@
 import React from 'react';
-import { Text, View,Image, TouchableOpacity} from 'react-native';
+import { Image, ScrollView, TouchableOpacity} from 'react-native';
 import { Header } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
+import {ContactPerson} from '../../components/ContactPerson'
 
 
 export const BeesInMyHive = ({navigation}) => {
     return (
-        <View>
+        <ScrollView>
             <Header 
                 backgroundColor='#37cab8'
                 leftComponent={
@@ -16,10 +17,18 @@ export const BeesInMyHive = ({navigation}) => {
                 }
                 centerComponent={{ text: 'BEE CLOSE', style: { color: '#fff', fontSize:20 } }}
                 rightComponent={<Image source={require('../../assets/AppLogo.png')} style={{width:40, height:40}}/> }
-        />
-        <View>
-            <Text> this is the a page to display hive's bees</Text>
-        </View>
-        </View>
+            />
+            <ContactPerson/>
+            <ContactPerson/>
+            <ContactPerson/>
+            <ContactPerson/>
+            <ContactPerson/>
+            <ContactPerson/>
+            <ContactPerson/>
+            <ContactPerson/>
+            <ContactPerson/>
+            <ContactPerson/>
+        </ScrollView>
     )
 };
+

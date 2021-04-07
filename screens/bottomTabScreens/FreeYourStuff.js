@@ -4,7 +4,7 @@ import { Header } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
 
 
-export const SellAndBuy = ({navigation}) => {
+export const FreeYourStuff = ({navigation}) => {
     return (
         <View style={{ flex:1, width:'100%', justifyContent: 'center' }}>
         <Header 
@@ -18,8 +18,8 @@ export const SellAndBuy = ({navigation}) => {
                 rightComponent={<Image source={require('../../assets/AppLogo.png')} style={{width:40, height:40}}/> }
         />
         <View style={styles.container}>
-            <Text style={{fontSize:24}}>This is the mini market of the hive</Text>
-            <Text>here you can sell & buy and give away your stuff</Text>
+            <Text style={{fontSize:24}}>This is the Hive mini "free things!"</Text>
+            <Text style={{padding:30}}>here you can give away stuff that you don't really need, and you think it might be useful for your neighbors</Text>
         </View>
     </View>
     )
@@ -27,7 +27,7 @@ export const SellAndBuy = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "space-between",
+        justifyContent: "center",
         alignItems: "center",
         backgroundColor:'#f7f7f7',
     }

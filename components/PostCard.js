@@ -19,6 +19,7 @@ import { Container,
 
 
 export const PostCard = () => {
+    //this useNavigation function enable us to use the "navigation props" in deep nested components
     const navigation = useNavigation();
     return (
         <Container>

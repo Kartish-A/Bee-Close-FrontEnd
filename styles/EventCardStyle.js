@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 
+
 export const Container = styled.View`
     flex: 1;
     align-items: center;
@@ -36,18 +37,15 @@ export const UserInfoText = styled.View`
 export const UserName = styled.Text`
     font-size: 14px;
     font-weight: bold;
-    font-family: 'Lato-Regular';
     color: #ffffff
 `;
 
 export const PostTime = styled.Text`
     font-size: 12px;
-    font-family: 'Lato-Regular';
     color: #ffffff;
 `;
 export const PostText = styled.Text`
     font-size: 14px;
-    font-family: 'Lato-Regular';
     padding-left: 15px;
     padding-right: 15px;
     margin-bottom: 15px;
@@ -79,7 +77,6 @@ export const Interaction = styled.TouchableOpacity`
 
 export const InteractionText = styled.Text`
     font-size: 12px;
-    font-family: 'Lato-Regular';
     font-weight: bold;
     color: #ffffff;
     margin-top: 5px;

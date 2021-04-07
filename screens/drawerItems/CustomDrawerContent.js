@@ -39,15 +39,15 @@ export const CustomDrawerContent=({navigation,props})=>{
                     onPress={()=> navigation.navigate('PersonalPofileScreen')}
                     />
                 <DrawerItem 
+                icon={() =>  <Ionicons name="chatbubbles-outline" size={24} color="black" />}
+                label="Bees in my Hive"
+                onPress={()=> navigation.navigate('BeesInMyHive')}
+                />  
+                <DrawerItem 
                     icon={() => <Ionicons name="ios-bookmark-outline" size={24} color="black" />}
                     label="Saved items"
                     onPress={()=> navigation.navigate('SavedItems')}
                     />
-                <DrawerItem 
-                    icon={() =>  <Ionicons name="chatbubbles-outline" size={24} color="black" />}
-                    label="Direct messages"
-                    onPress={()=> navigation.navigate('DirectMessages')}
-                    />  
                 <DrawerItem 
                     icon={() => <Ionicons name="home-outline" size={24} color="black" /> }
                     label="Home"
