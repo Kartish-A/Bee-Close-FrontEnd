@@ -8,15 +8,15 @@ import { Ionicons } from '@expo/vector-icons';
 import { appReducer } from './appContextReducer';
 
 // importing AuthStack Screens
-import {LandingPage} from './screens/authStack/LandingPage';
-import {SignIn} from './screens/authStack/SignIn';
-import {SignUp} from './screens/authStack/SignUp';
+import { LandingPage } from './screens/authStack/LandingPage';
+import { SignIn } from './screens/authStack/SignIn';
+import { SignUp } from './screens/authStack/SignUp';
 
 // importing Tab Screens
-import {HiveHome} from './screens/bottomTabScreens/HiveHome';
-import {CreatePost} from './screens/bottomTabScreens/CreatePost';
-import {Events} from './screens/bottomTabScreens/Events'
-import {SellAndBuy} from './screens/bottomTabScreens/SellAndBuy'
+import { HiveHome } from './screens/bottomTabScreens/HiveHome';
+import { CreatePost } from './screens/bottomTabScreens/CreatePost';
+import { Events } from './screens/bottomTabScreens/Events'
+import { SellAndBuy } from './screens/bottomTabScreens/SellAndBuy'
 
 //importing DrawerScreens (and custom functions)
 import { CustomDrawerContent }from './screens/drawerItems/CustomDrawerContent';
@@ -25,10 +25,11 @@ import { SavedItems }from './screens/drawerItems/SavedItems';
 import { BeesInMyHive }from './screens/drawerItems/BeesInMyHive';
 import { DirectMessages }from './screens/drawerItems/DirectMessages';
 
-
 //importing ProfileStackScreens
-import { ProfileScreen } from './screens/drawerItems/ProfileStack/ProfileScreen';
-import { EditProfileScreen } from './screens/drawerItems/ProfileStack/EditProfileScreen';
+import { PersonalProfileScreen } from './screens/drawerItems/PersonalProfileStack/PersonalProfileScreen';
+import { EditPersonalProfileScreen } from './screens/drawerItems/PersonalProfileStack/EditPersonalProfileScreen';
+
+import { UserProfileScreen } from './screens/UserProfileScreen'
 
 const initialState = {isLoggedIn:false};
 //initialising the App context (central storage)
@@ -41,20 +42,30 @@ const Tab = createBottomTabNavigator();
 //creating the DrawerNavigator
 const AppDrawer = createDrawerNavigator();
 //creating ProfileStack
-const ProfileStack = createStackNavigator();
+const PersonalProfileStack = createStackNavigator();
+//creating a stackNavigator consist of: HiveHome Screen + UserProfile Screen
+const HiveHomeStack = createStackNavigator();
+
+//declaring HiveHomeStackScreens
+const HiveHomeStackScreens = () =>(
+  <HiveHomeStack.Navigator initialRouteName='HiveHome' >
+    <HiveHomeStack.Screen name='HiveHome' component={HiveHome} options={{headerShown:false}}/>
+    <HiveHomeStack.Screen name='UserProfile' component={UserProfileScreen} options={{title:'user profile', headerStyle:{backgroundColor:'#37cab8'}, headerTintColor:'#ffffff' }}/>
+  </HiveHomeStack.Navigator>
+)
 
 //declaring ProfileStackScreens
-const ProfileStackScreens = () =>(
-  <ProfileStack.Navigator>
-    <ProfileStack.Screen name='ProfileScreen' component={ProfileScreen} options={{headerShown:false}}/>
-    <ProfileStack.Screen name='EditProfileScreen' component={EditProfileScreen} options={{title:'Edit profile', headerStyle:{backgroundColor:'#37cab8'}}}/>
-  </ProfileStack.Navigator>
+const PersonalProfileStackScreens = () =>(
+  <PersonalProfileStack.Navigator>
+    <PersonalProfileStack.Screen name='PersonalProfileScreen' component={PersonalProfileScreen} options={{headerShown:false}}/>
+    <PersonalProfileStack.Screen name='EditPersonalProfileScreen' component={EditPersonalProfileScreen} options={{title:'Edit profile', headerStyle:{backgroundColor:'#37cab8'}}}/>
+  </PersonalProfileStack.Navigator>
 )
 
 //declaring TabsNavigatorScreens
 const TabScreens = ()=>(
   <Tab.Navigator initialRouteName='HeivHome' tabBarOptions={{activeTintColor:'#37cab8'}}>
-    <Tab.Screen name='HiveHome' component={HiveHome} options={{title:'Home', tabBarIcon:({focused,color,size})=> <Ionicons name="home" size={size} color={color} focused={focused}/>}}/>
+    <Tab.Screen name='HiveHomeStack' component={HiveHomeStackScreens} options={{title:'Home', tabBarIcon:({focused,color,size})=> <Ionicons name="home" size={size} color={color} focused={focused}/>}}/>
     <Tab.Screen name='CreatePost' component={CreatePost} options={{ tabBarIcon:({focused,color,size})=> <Ionicons name="add-circle-outline" size={size} color={color} focused={focused} />}}/>
     <Tab.Screen name='Events' component={Events} options={{ tabBarIcon:({focused,color,size})=> <Ionicons name="calendar" size={size} color={color} focused={focused}/>}}/>
     <Tab.Screen name='SellAndBuy' component={SellAndBuy} options={{title:'sell & buy', tabBarIcon:({focused,color,size})=> <Ionicons name="basket" size={size} color={color} focused={focused}/>}}/>
@@ -71,11 +82,10 @@ const AuthStackScreens= ()=>(
 const AppDrawerScreens = ()=>(
   <AppDrawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}  drawerType='slide' >
     <AppDrawer.Screen name='Tab' component={TabScreens} />
-    <AppDrawer.Screen name='Pofile' component={ProfileStackScreens} />
+    <AppDrawer.Screen name='PersonalPofileScreen' component={PersonalProfileStackScreens} />
     <AppDrawer.Screen name='DirectMessages' component={DirectMessages}/>
     <AppDrawer.Screen name='SavedItems' component={SavedItems}/>
   </AppDrawer.Navigator>
-
 )
 
 export default function App() {
@@ -84,8 +94,8 @@ export default function App() {
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <NavigationContainer>
-      {/* {(state.isLoggedIn)?<AppDrawerScreens /> : <AuthStackScreens />} */}
-      <AppDrawerScreens/>
+        {/* {(state.isLoggedIn)?<AppDrawerScreens /> : <AuthStackScreens />} */}
+        <AppDrawerScreens/>
       </NavigationContainer>
     </AppContext.Provider>
   );

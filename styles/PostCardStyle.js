@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export const Container = styled.View`
     flex: 1;
@@ -11,7 +12,6 @@ export const Container = styled.View`
 export const Card = styled.View`
     background-color: #f8f8f8;
     width: 100%;
-    margin-bottom: 10px;
     border-radius: 10px;
     border-width: 1px;
     border-color: #37cab8

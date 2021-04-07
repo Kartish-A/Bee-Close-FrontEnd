@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Container, Card, UserInfo, UserImg, UserInfoText, UserName, PostTime, PostText, PostImg, InteractionWrapper, Interaction, InteractionText, Divider } from '../styles/EventCardStyle';
 
@@ -10,11 +10,13 @@ export const EventCard = () => {
         <Container>
             <Card>
                 <UserInfo>
-                    <UserImg source={{uri:'https://picsum.photos/id/447/60/60'}} />    
-                    <UserInfoText>
-                        <UserName> Joachim Sheffer</UserName>
-                        <PostTime> hour ago</PostTime>
-                    </UserInfoText>
+                    <TouchableOpacity style={{flexDirection:'row'}} onPress={()=>{}}>
+                        <UserImg source={{uri:'https://picsum.photos/id/447/60/60'}} />    
+                        <UserInfoText>
+                            <UserName> Joachim Sheffer</UserName>
+                            <PostTime> hour ago</PostTime>
+                        </UserInfoText>
+                    </TouchableOpacity>
                 </UserInfo>
                 <PostText>
                     My dear Neighbors!

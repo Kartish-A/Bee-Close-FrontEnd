@@ -5,7 +5,8 @@ import { View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {Header,Input} from 'react-native-elements';
 import axios from 'axios';
 
-export function SignIn({navigation}) {
+export function SignIn() {
+    console.log(process.env);
     const [userEmail, setuserEmail] = useState('')
     const [password, setpassword] = useState('')
     const {dispatch} = useContext(AppContext)

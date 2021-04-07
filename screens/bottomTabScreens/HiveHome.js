@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Image, TouchableOpacity, ScrollView} from 'react-native';
+import { Image, TouchableOpacity, ScrollView} from 'react-native';
 import { Header } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
 import { PostCard } from '../../components/PostCard'
@@ -18,6 +18,7 @@ export const HiveHome = ({navigation}) => {
                     centerComponent={{ text: 'BEE CLOSE', style: { color: '#fff', fontSize:20 } }}
                     rightComponent={<Image source={require('../../assets/AppLogo.png')} style={{width:40, height:40}}/> }
             />
+            <PostCard/>
             <PostCard/>
         </ScrollView>
     );

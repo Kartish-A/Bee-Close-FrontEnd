@@ -9,7 +9,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { Ionicons,MaterialCommunityIcons } from '@expo/vector-icons';
 
 
-export const ProfileScreen = ({navigation})=> {
+export const PersonalProfileScreen = ({navigation})=> {
     return (
     <ScrollView>
         <SafeAreaView style={styles.container}>
@@ -28,7 +28,7 @@ export const ProfileScreen = ({navigation})=> {
                             size={30}
                             backgroundColor='black'
                             color='white'
-                            onPress={() => navigation.navigate('EditProfileScreen')}
+                            onPress={() => navigation.navigate('EditPersonalProfileScreen')}
                         />
                     </View> }
             />
