@@ -22,7 +22,7 @@ export const CustomDrawerContent=({navigation,props})=>{
                             rounded
                             source={{
                             uri:
-                                'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg'
+                                'https://iso.500px.com/wp-content/uploads/2016/03/stock-photo-142984111.jpg'
                             }}
                             />
                             <View style={{marginLeft:15, flexDirection:'column'}}>

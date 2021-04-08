@@ -5,16 +5,16 @@ import { View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {Header,Input} from 'react-native-elements';
 import axios from 'axios';
 
-export function SignIn() {
-    console.log(process.env);
-    const [userEmail, setuserEmail] = useState('')
-    const [password, setpassword] = useState('')
+export function SignIn({route}) {
+    const [userEmail, setuserEmail] = useState(route.params?.email ?? '')
+    const [password, setpassword] = useState(route.params?.password ?? '')
     const {dispatch} = useContext(AppContext)
 
 const handleSubmit= ()=>{
-    axios.post(`https://bee-close.herokuapp.com/api/users/signup `, {
+    axios.post(`https://bee-close.herokuapp.com/api/users/login`, {
         email: userEmail,
-        password:password
+        password:password,
+        
     })
     .then(function (response) {
         dispatch(login())
