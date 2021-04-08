@@ -22,7 +22,7 @@ export const CustomDrawerContent=({navigation,props})=>{
                             rounded
                             source={{
                             uri:
-                                'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg'
+                                'https://iso.500px.com/wp-content/uploads/2016/03/stock-photo-142984111.jpg'
                             }}
                             />
                             <View style={{marginLeft:15, flexDirection:'column'}}>
@@ -36,18 +36,18 @@ export const CustomDrawerContent=({navigation,props})=>{
                 <DrawerItem 
                     icon={() => <Ionicons name="ios-person-circle-outline" size={24} color="black" /> }
                     label="Profile"
-                    onPress={()=> navigation.navigate('Pofile')}
+                    onPress={()=> navigation.navigate('PersonalPofileScreen')}
                     />
+                <DrawerItem 
+                icon={() =>  <Ionicons name="chatbubbles-outline" size={24} color="black" />}
+                label="Bees in my Hive"
+                onPress={()=> navigation.navigate('BeesInMyHive')}
+                />  
                 <DrawerItem 
                     icon={() => <Ionicons name="ios-bookmark-outline" size={24} color="black" />}
                     label="Saved items"
                     onPress={()=> navigation.navigate('SavedItems')}
                     />
-                <DrawerItem 
-                    icon={() =>  <Ionicons name="chatbubbles-outline" size={24} color="black" />}
-                    label="Direct messages"
-                    onPress={()=> navigation.navigate('DirectMessages')}
-                    />  
                 <DrawerItem 
                     icon={() => <Ionicons name="home-outline" size={24} color="black" /> }
                     label="Home"

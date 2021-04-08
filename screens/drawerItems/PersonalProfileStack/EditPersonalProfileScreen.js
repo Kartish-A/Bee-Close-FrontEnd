@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity, ImageBackground, TextInput, StyleSheet, ScrollView } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import BottomSheet  from 'reanimated-bottom-sheet'
-import Animated, { colors } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 
 
-export const EditProfileScreen = ({navigation}) => {
+export const EditPersonalProfileScreen = ({navigation}) => {
 
     const {colors} = useTheme();
 
@@ -19,7 +19,6 @@ export const EditProfileScreen = ({navigation}) => {
         <View style={styles.header}>
             <View style={styles.panelHeader}>
                 <View style={styles.panelHandle}>
-
 
                 </View>
             </View>

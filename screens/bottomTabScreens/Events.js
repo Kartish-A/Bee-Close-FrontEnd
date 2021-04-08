@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Image, TouchableOpacity, ScrollView} from 'react-native';
+import { Image, TouchableOpacity, ScrollView} from 'react-native';
 import { Header } from 'react-native-elements'
 import { EventCard } from '../../components/EventCard'
 import { Ionicons } from '@expo/vector-icons';
@@ -19,14 +19,8 @@ export const Events = ({navigation}) => {
                     rightComponent={<Image source={require('../../assets/AppLogo.png')} style={{width:40, height:40}}/> }
             />
             <EventCard/>
+            <EventCard/>
         </ScrollView>
     )
 }
-const styles = StyleSheet.create({
-    container: {
-        flex:1,
-        backgroundColor: '#f7f7f7',
-        alignItems: 'center',
-        justifyContent: 'center',
-    }
-});
+

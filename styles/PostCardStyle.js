@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/native';
 
+
 export const Container = styled.View`
     flex: 1;
     align-items: center;
@@ -11,7 +12,6 @@ export const Container = styled.View`
 export const Card = styled.View`
     background-color: #f8f8f8;
     width: 100%;
-    margin-bottom: 10px;
     border-radius: 10px;
     border-width: 1px;
     border-color: #37cab8
@@ -37,17 +37,14 @@ export const UserInfoText = styled.View`
 export const UserName = styled.Text`
     font-size: 14px;
     font-weight: bold;
-    font-family: 'Lato-Regular';
 `;
 
 export const PostTime = styled.Text`
     font-size: 12px;
-    font-family: 'Lato-Regular';
     color: #666;
 `;
 export const PostText = styled.Text`
     font-size: 14px;
-    font-family: 'Lato-Regular';
     padding-left: 15px;
     padding-right: 15px;
     margin-bottom: 15px;
@@ -84,7 +81,6 @@ export const Interaction = styled.TouchableOpacity`
 
 export const InteractionText = styled.Text`
     font-size: 12px;
-    font-family: 'Lato-Regular';
     font-weight: bold;
     color: #495057;
     margin-top: 5px;

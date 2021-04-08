@@ -1,8 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Button, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import { Header } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
-
 
 
 export const CreatePost = ({navigation}) => {
@@ -32,4 +31,3 @@ const styles = StyleSheet.create({
         backgroundColor:'#f7f7f7',
     }
 })
-    
