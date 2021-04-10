@@ -177,6 +177,7 @@ const AppDrawerScreens = () => (
 
 export default function App() {
   const [state, dispatch] = useReducer(appReducer, initialState);
+
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <NavigationContainer>
