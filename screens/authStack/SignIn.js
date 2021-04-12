@@ -1,14 +1,26 @@
 import React, { useState, useContext } from "react";
 import { AppContext } from "../../App";
+import { setToken, setUsername } from "../../appContextActions";
 import { login } from "../../appContextActions";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Platform,
+  KeyboardAvoidingView,
+  ScrollView,
+  SafeAreaView,
+} from "react-native";
 import { Header, Input } from "react-native-elements";
 import axios from "axios";
 
-export function SignIn({ route }) {
+export function SignIn({ navigation, route }) {
   const [userEmail, setuserEmail] = useState(route.params?.email ?? "");
   const [password, setpassword] = useState(route.params?.password ?? "");
-  const { dispatch, setUser } = useContext(AppContext);
+
+  const { dispatch } = useContext(AppContext);
 
   const handleSubmit = () => {
     axios
@@ -17,8 +29,16 @@ export function SignIn({ route }) {
         password: password,
       })
       .then(function (response) {
-        dispatch(login());
-        // dispatch(logout())
+        if (response.status === 200) {
+          let token = response.headers["x-auth"];
+          dispatch(setToken(token));
+          dispatch(login());
+          dispatch(
+            setUsername(response.user.firstName + " " + response.user.lastName)
+          );
+          console.log(token);
+        }
+
         console.log(response);
       })
       .catch(function (error) {
@@ -26,51 +46,66 @@ export function SignIn({ route }) {
       });
   };
   return (
-    <View>
-      <Header
-        backgroundColor="#37cab8"
-        centerComponent={{
-          text: "BEE CLOSE",
-          style: { color: "#fff", fontSize: 20 },
-        }}
-        rightComponent={
+    <SafeAreaView>
+      <KeyboardAvoidingView
+        behavior={Platform.Os == "ios" ? "padding" : "height"}
+        enabled>
+        <ScrollView>
+          <Header
+            backgroundColor="#37cab8"
+            centerComponent={{
+              text: "BEE CLOSE",
+              style: { color: "#fff", fontSize: 20 },
+            }}
+            rightComponent={
+              <Image
+                source={require("../../assets/logo(1).png")}
+                style={{ width: 40, height: 40 }}
+              />
+            }
+          />
           <Image
             source={require("../../assets/AppLogo.png")}
-            style={{ width: 40, height: 40 }}
+            style={{ marginTop: 10 }}
           />
-        }
-      />
-      <View style={styles.container}>
-        <View style={{ marginTop: 100 }}>
-          <Input
-            placeholder="E-mail"
-            containerStyle={{ width: 200, height: 60 }}
-            onChangeText={(text) => setuserEmail(text)}
-            defaultValue={userEmail}
-          />
-          <Input
-            placeholder="password"
-            containerStyle={{ width: 200, height: 50 }}
-            onChangeText={(text) => setpassword(text)}
-            defaultValue={password}
-            secureTextEntry={true}
-          />
-        </View>
-
-        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-          <Text style={{ color: "#fff", fontSize: 18, fontWeight: "bold" }}>
-            Sign in
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+          <View style={{ justifyContent: "center", alignItems: "center" }}>
+            <Text
+              style={{ fontSize: 46, color: "#37cab8", fontWeight: "bold" }}>
+              Hello!
+            </Text>
+          </View>
+          <View style={styles.container}>
+            <View style={{ marginTop: 60 }}>
+              <Input
+                placeholder="E-mail"
+                containerStyle={{ width: 200, height: 60 }}
+                onChangeText={(text) => setuserEmail(text)}
+                defaultValue={userEmail}
+                keyboardType="email-address"
+              />
+              <Input
+                placeholder="password"
+                containerStyle={{ width: 200, height: 50 }}
+                onChangeText={(text) => setpassword(text)}
+                defaultValue={password}
+                secureTextEntry={true}
+              />
+            </View>
+            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+              <Text style={{ color: "#fff", fontSize: 18, fontWeight: "bold" }}>
+                Sign in
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: 200,
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
@@ -78,7 +113,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 250,
-    marginTop: 10,
+    marginTop: 30,
     alignItems: "center",
     backgroundColor: "#37cab8",
     borderRadius: 10,

@@ -15,7 +15,7 @@ export const DirectMessages = ({navigation}) => {
                         </TouchableOpacity>
                     }
                     centerComponent={{ text: 'BEE CLOSE', style: { color: '#fff', fontSize:20 } }}
-                    rightComponent={<Image source={require('../../assets/AppLogo.png')} style={{width:40, height:40}}/> }
+                    rightComponent={<Image source={require('../../assets/logo(1).png')} style={{width:40, height:40}}/> }
             />
             <Text style={{fontSize:24}}>Direct Messages</Text>
         </View>

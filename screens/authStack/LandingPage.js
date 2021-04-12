@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, SafeAreaView} from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native'
 import { Header } from 'react-native-elements';
 
 
@@ -10,7 +10,7 @@ export function LandingPage({navigation}) {
                 <Header 
                     backgroundColor='#37cab8'
                     centerComponent={{ text: 'BEE CLOSE', style: { color: '#fff', fontSize:20 } }}
-                    rightComponent={<Image source={require('../../assets/AppLogo.png')} style={{width:40, height:40}}/> }
+                    rightComponent={<Image source={require('../../assets/logo(1).png')} style={{width:40, height:40}}/> }
                 />
                 <View style={styles.container}>
                     <View style={styles.banner}>
@@ -40,6 +40,7 @@ export function LandingPage({navigation}) {
 
 const styles= StyleSheet.create({
     container:{
+        flex:1,
         width:'100%',
         height:200,
         alignSelf:'center',
