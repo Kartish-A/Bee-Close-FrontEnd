@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, {useState}from 'react';
 import { StyleSheet, Text, View,  SafeAreaView, TouchableOpacity,ScrollView} from 'react-native';
 import { Title,Caption,TouchableRipple } from 'react-native-paper';
 import { Avatar, Header} from 'react-native-elements'
@@ -10,6 +10,7 @@ import { Ionicons,MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 export const PersonalProfileScreen = ({navigation})=> {
+    
     return (
     <ScrollView>
         <SafeAreaView style={styles.container}>
@@ -28,7 +29,7 @@ export const PersonalProfileScreen = ({navigation})=> {
                             size={30}
                             backgroundColor='black'
                             color='white'
-                            onPress={() => navigation.navigate('EditPersonalProfileScreen')}
+                            onPress={() => navigation.navigate('EditPersonalProfileScreen',)}
                         />
                     </View> }
             />
@@ -41,7 +42,7 @@ export const PersonalProfileScreen = ({navigation})=> {
                         <Title style={[styles.title, {
                         marginTop:15,
                         marginBottom: 5,
-                        }]}>John Doe</Title>
+                        }]}>john_doe</Title>
                         <Caption style={styles.caption}>@j_doe</Caption>
                     </View>
                 </View>

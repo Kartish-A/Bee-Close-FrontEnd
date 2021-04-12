@@ -10,3 +10,17 @@ export function logout() {
         type: 'LOGOUT'
     }
 }
+
+export function setToken(token) {
+    return {
+        type: 'SET_TOKEN',
+        payload: token
+    }
+}
+
+export function setUsername(username) {
+    return {
+        type: 'SETUSERNAME',
+        payload: username
+    }
+}

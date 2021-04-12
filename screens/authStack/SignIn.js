@@ -1,24 +1,32 @@
 import React, {useState, useContext} from 'react';
 import { AppContext} from '../../App'
+import {setToken, setUsername} from '../../appContextActions'
 import { login } from '../../appContextActions'
-import { View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Platform, KeyboardAvoidingView, ScrollView, SafeAreaView} from 'react-native';
 import {Header,Input} from 'react-native-elements';
 import axios from 'axios';
 
-export function SignIn({route}) {
+
+export function SignIn({navigation,route}) {
     const [userEmail, setuserEmail] = useState(route.params?.email ?? '')
     const [password, setpassword] = useState(route.params?.password ?? '')
+    
     const {dispatch} = useContext(AppContext)
-
-const handleSubmit= ()=>{
-    axios.post(`https://bee-close.herokuapp.com/api/users/login`, {
-        email: userEmail,
-        password:password,
+    
+    const handleSubmit= ()=>{
+        axios.post(`https://bee-close.herokuapp.com/api/users/login`, {
+            email: userEmail,
+            password:password,
+        })
+        .then(function (response) {
+            if(response.status=== 200){
+                let token = response.headers["x-auth"]
+                dispatch(setToken(token))
+                dispatch(login())
+                dispatch(setUsername(response.user.firstName +' '+ response.user.lastName))
+                console.log(token);
+        }
         
-    })
-    .then(function (response) {
-        dispatch(login())
-        // dispatch(logout())
     console.log(response);
     })
     .catch(function (error) {
@@ -26,19 +34,25 @@ const handleSubmit= ()=>{
     });
 }
     return (
-        <View>
+        <SafeAreaView>
+        <KeyboardAvoidingView  behavior={Platform.Os == "ios" ? "padding" : "height" } enabled > 
+        <ScrollView>
             <Header 
-                    backgroundColor='#37cab8'
-                    centerComponent={{ text: 'BEE CLOSE', style: { color: '#fff', fontSize:20 } }}
-                    rightComponent={<Image source={require('../../assets/AppLogo.png')} style={{width:40, height:40}}/> }
-                />
+                backgroundColor='#37cab8'
+                centerComponent={{ text: 'BEE CLOSE', style: { color: '#fff', fontSize:20 } }}
+                rightComponent={<Image source={require('../../assets/logo(1).png')} style={{width:40, height:40}}/> }
+            />
+            <Image source={require('../../assets/AppLogo.png')} style={{marginTop:10}} />
+            <View style={{justifyContent:'center',alignItems:'center'}}>
+                <Text style={{fontSize:46, color:'#37cab8', fontWeight:'bold'}}>Hello!</Text>
+            </View>
             <View style={styles.container}>
-
-                <View style={{marginTop:100}}>
+                <View style={{marginTop:60}}>
                     <Input 
                         placeholder='E-mail' containerStyle={{width:200,height:60}}
                         onChangeText={(text)=> setuserEmail(text)}
                         defaultValue={userEmail}
+                        keyboardType='email-address'
                     />
                     <Input 
                         placeholder='password' containerStyle={{width:200,height:50}}
@@ -47,19 +61,19 @@ const handleSubmit= ()=>{
                         secureTextEntry={true}
                     />
                 </View>
-
                 <TouchableOpacity style={styles.button} onPress={handleSubmit}>
                     <Text style={{color:'#fff', fontSize:18,fontWeight:'bold'}}>Sign in</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </ScrollView>
+        </KeyboardAvoidingView>
+        </SafeAreaView>
     )   
 }
 
 const styles = StyleSheet.create({
     container:{
         width:'100%',
-        height:200,
         alignSelf:'center',
         alignItems:'center', 
         justifyContent:'center',
@@ -67,7 +81,7 @@ const styles = StyleSheet.create({
     },
     button: {
         width:250,
-        marginTop:10,
+        marginTop:30,
         alignItems: "center",
         backgroundColor: "#37cab8",
         borderRadius:10,

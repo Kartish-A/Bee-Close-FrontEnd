@@ -11,6 +11,16 @@ export const appReducer = (state, action) => {
                 ...state,
                 isLoggedIn: false
             }
+        case 'SET_TOKEN':
+            return {
+                ...state,
+                token: action.payload
+            }
+        case 'SETUSERNAME':
+            return{
+                ...state,
+                username: action.payload
+            }
         default:
             return state;
     }

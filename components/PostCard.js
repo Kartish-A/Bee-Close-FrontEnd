@@ -1,43 +1,42 @@
-import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
-import { Container,
-            Card,
-            UserInfo,
-            UserImg,
-            UserInfoText,
-            UserName,
-            PostTime,
-            PostText,
-            PostImg,
-            InteractionWrapper,
-            Interaction,
-            InteractionText,
-            Divider } from '../styles/PostCardStyle';
+import { Container, Card, UserInfo, UserImg, UserInfoText, UserName, PostTime, PostText, PostImg, InteractionWrapper,Interaction,InteractionText,Divider } from '../styles/PostCardStyle';
 
 
-
-export const PostCard = () => {
+export const PostCard = (props) => {
     //this useNavigation function enable us to use the "navigation props" in deep nested components
     const navigation = useNavigation();
+    const [post, setpost] = useState(props.postObj)
     return (
         <Container>
             <Card>
-                <UserInfo>
-                    <TouchableOpacity style={{flexDirection:'row'}} onPress={()=> navigation.navigate('UserProfile')}>
-                        <UserImg source={{uri:'https://picsum.photos/id/1027/200/300'}} />    
-                        <UserInfoText>
-                            <UserName> Nicole Abraham</UserName>
-                            <PostTime> hour ago</PostTime>
-                        </UserInfoText>
+                <View style={{flexDirection:'row',width:'100%',justifyContent:'space-between'}}>
+                    <UserInfo>
+                        <TouchableOpacity style={{flexDirection:'row'}} onPress={()=> navigation.navigate('UserProfile')}>
+                            <UserImg source={{uri:'https://picsum.photos/id/1027/200/300'}} />    
+                            <UserInfoText>
+                                <UserName> {post.username}</UserName>
+                                <PostTime>{post.postTime}</PostTime>
+                            </UserInfoText>
+                        </TouchableOpacity>
+                    </UserInfo>
+                    <TouchableOpacity style={{margin:10}}>
+                        <Ionicons name='options' size={24} color={'#37cab8'}/>
                     </TouchableOpacity>
-                </UserInfo>
+                </View>
+                { post.postText?
                 <PostText>
-                    hello my beautiful Neighbors!
-                    I am going in vacation for 3 weeks, and I was woundring if anyone can take care of my flowers!
+                    {post.postText}
                 </PostText>
-                <PostImg source={{uri:'https://picsum.photos/id/163/400/300'}}/>
+                :<PostText></PostText>
+                }
+                { post.postImg?
+                <PostImg source={post.postImg}/>
+                :
+                <PostText></PostText>
+                }
                 <Divider/>
                 <InteractionWrapper>
                     <Interaction>

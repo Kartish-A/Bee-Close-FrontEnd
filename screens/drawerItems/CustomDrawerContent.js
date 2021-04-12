@@ -1,4 +1,4 @@
-import React, {useContext}from 'react';
+import React, {useContext, useEffect, useState}from 'react';
 import { AppContext} from '../../App';
 import { logout } from '../../appContextActions';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
@@ -6,11 +6,24 @@ import { StyleSheet, View } from 'react-native';
 import { Title,Caption,Drawer } from 'react-native-paper';
 import { Avatar} from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
+import axios from 'axios';
 
 
 export const CustomDrawerContent=({navigation,props})=>{
 
-    const {dispatch} = useContext(AppContext)
+    const [user, setUser] = useState({})
+    const {dispatch, state} = useContext(AppContext)
+
+    useEffect(() => {
+        axios.get('', {headers:{
+            'Authorization':`Bearer ${state.token}`
+        }})
+        .then(res=> {
+            if(res.data.success){
+                setUser(res.data.user)
+        }
+        })
+    }, [])
 
     return (
         <View style={{flex:1}}>
@@ -26,8 +39,8 @@ export const CustomDrawerContent=({navigation,props})=>{
                             }}
                             />
                             <View style={{marginLeft:15, flexDirection:'column'}}>
-                                <Title style={styles.title}>John Doe</Title>
-                                <Caption style={styles.caption}>@j_doe</Caption>
+                                <Title style={styles.title}>{state.username}</Title>
+                                <Caption style={styles.caption}>{user.email}</Caption>
                             </View>
                         </View>
                     </View>

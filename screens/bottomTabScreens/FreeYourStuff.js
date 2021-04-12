@@ -15,7 +15,7 @@ export const FreeYourStuff = ({navigation}) => {
                     </TouchableOpacity>
                 }
                 centerComponent={{ text: 'BEE CLOSE', style: { color: '#fff', fontSize:20 } }}
-                rightComponent={<Image source={require('../../assets/AppLogo.png')} style={{width:40, height:40}}/> }
+                rightComponent={<Image source={require('../../assets/logo(1).png')} style={{width:40, height:40}}/> }
         />
         <View style={styles.container}>
             <Text style={{fontSize:24}}>This is the Hive mini "free things!"</Text>

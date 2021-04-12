@@ -2,38 +2,30 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import { Header,Input } from 'react-native-elements';
 import axios from 'axios';
+import { Ionicons } from '@expo/vector-icons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
 
 export function SignUp({navigation}) {
-const [userFirstName, setuserFirstName] = useState('')
-const [userLastName, setuserLastName] = useState('')
-const [userEmail, setuserEmail] = useState('');
-const [userPassword, setuserPassword] = useState('');
+    const [user, setUser] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        country: '',
+        city: '',
+        street: '',
+        houseNumber: '',
+        postCode: ''
+    })
 const [userConfirmePassword, setuserConfirmePassword] = useState('');
-const [userCountry, setuserCountry] = useState('');
-const [userCity, setuserCity] = useState('');
-const [userStreet, setuserStreet] = useState('');
-const [userHouseNo, setuserHousNo] = useState('');
-const [userPostCode, setuserPostcode] = useState('');
-
 
 const handleSubmit= ()=>{
 
-    axios.post(`https://bee-close.herokuapp.com/api/users/signup`, {
-        
-    firstName: userFirstName,
-    lastName: userLastName,
-    email: userEmail,
-    password: userPassword,
-    country: userCountry,
-    city: userCity,
-    street: userStreet,
-    streetNumber: userHouseNo,
-    postCode: userPostCode
-
-    })
+    axios.post(`https://bee-close.herokuapp.com/api/users/signup`, user)
     .then(function (response) {
-        navigation.navigate('SignIn',{email: userEmail,
-        password: userPassword,})
+        navigation.navigate('SignIn',{email: user.email,
+        password: user.password})
         console.log(response);
     })
     .catch(function (error) {
@@ -48,58 +40,79 @@ return (
                 <Header 
                     backgroundColor='#37cab8'
                     centerComponent={{ text: 'BEE CLOSE', style: { color: '#fff', fontSize:20 } }}
-                    rightComponent={<Image source={require('../../assets/AppLogo.png')} style={{width:40, height:40}}/> }
+                    rightComponent={<Image source={require('../../assets/logo(1).png')} style={{width:40, height:40}}/> }
                 />
                 <SafeAreaView style={styles.wrapper} >
                     <View style={styles.infoBoxWrapper}>
-                        <Text style={{color:'#37cab8', fontSize:20,fontWeight:'bold', alignSelf:'center',marginTop:10}}>Create your account!</Text>
+                        <Text style={styles.infoBoxText}>Create your account!</Text>
                     </View>
-                    <View style={{flexDirection:'row', marginTop:20}}>
-                        <Input placeholder='first name' containerStyle={{width:170,height:50}}
-                        onChangeText={(text)=>setuserFirstName(text)}
+                    <View style={styles.inputWrapper}>
+                        <Ionicons name='person-outline' size={20} color='black'/>
+                        <Input placeholder='first name' containerStyle={{width:140,height:40}}
+                        onChangeText={(text)=>setUser({...user,firstName:text})}
                         defaultValue={userFirstName}/>
-                        <Input placeholder='last name'  containerStyle={{width:170,height:50}}
-                        onChangeText={(text)=> setuserLastName(text)}
+                        <Input placeholder='last name'  containerStyle={{width:140,height:40}}
+                        onChangeText={(text)=> setUser({...user,lastName:text})}
                         defaultValue={userLastName}/>
                     </View>
                     <View>
-                        <Input placeholder='E-mail' keyboardType='email-address' containerStyle={{width:200,height:60}}
-                        onChangeText={(text)=> setuserEmail(text)}
-                        defaultValue={userEmail}/>
-                        <Input placeholder='create password'  minLength='8' containerStyle={{width:200,height:50}}
-                        onChangeText={(text)=> setuserPassword(text)}  
-                        defaultValue={userPassword}
-                        secureTextEntry={true}/>
-                        <Input placeholder='confirme password' containerStyle={{width:200,height:50}}
-                        onChangeText={(text)=> setuserConfirmePassword(text)}  
-                        defaultValue={userConfirmePassword}
-                        secureTextEntry={true}/>
+                        <View style={styles.inputWrapper}>
+                            <Ionicons name='mail-outline' size={20} />
+                            <Input placeholder='E-mail' keyboardType='email-address' containerStyle={{width:250,height:40}}
+                            onChangeText={(text)=> setUser({...user,email:text})}
+                            defaultValue={userEmail}/>
+                        </View>
+                        <View style={styles.inputWrapper}>
+                            <Ionicons name='lock-closed-outline' size={20}/>
+                            <Input placeholder='password' minLength='8' containerStyle={{width:140,height:40}}
+                            onChangeText={(text)=> setUser({...user,password:text})}  
+                            defaultValue={userPassword}
+                            secureTextEntry={true}/>
+                            <Input placeholder='confirmation' containerStyle={{width:140,height:40}}
+                            onChangeText={(text)=> setuserConfirmePassword(text)}  
+                            defaultValue={userConfirmePassword}
+                            secureTextEntry={true}/>
+                        </View>
                     </View>
-                    <View style={{flexDirection:'row'}}>
-                        <Input placeholder='Country' keyboardType='' containerStyle={{width:170,height:50}}
-                        onChangeText={(text)=> setuserCountry(text)  }
-                        defaultValue={userCountry}/>
-                        <Input placeholder='City' containerStyle={{width:170,height:50}}
-                        onChangeText={(text)=> setuserCity(text)}
-                        defaultValue={userCity}/>
+                    <View style={styles.inputWrapper}>
+                        <View style={styles.inputWrapper}>
+                            <Ionicons name='globe-outline' size={20}/>
+                            <Input placeholder='Country' containerStyle={{width:120,height:40}}
+                            onChangeText={(text)=> setUser({...user,country:text})  }
+                            defaultValue={userCountry}/>
+                        </View>
+                        <View style={styles.inputWrapper}>
+                            <Ionicons name='location-outline' size={20}/>
+                            <Input placeholder='City' containerStyle={{width:120,height:40}}
+                            onChangeText={(text)=> setUser({...user,city:text})}
+                            defaultValue={userCity}/>
+                        </View>
                     </View>
-                    <View style={{flexDirection:'row'}}>
-                        <Input placeholder='street' containerStyle={{width:170,height:50}}
-                        onChangeText={(text)=> setuserStreet(text)}
-                        defaultValue={userStreet}/>
-                        <Input placeholder='house No.' containerStyle={{width:170,height:50}}
-                        onChangeText={(text)=> setuserHousNo(text)}
-                        defaultValue={userHouseNo}/>
+                    <View style={styles.inputWrapper}>
+                        <View style={styles.inputWrapper}>
+                            <FontAwesome name='street-view' size={20}/>
+                            <Input placeholder='street' containerStyle={{width:120,height:40}}
+                            onChangeText={(text)=> setUser({...user,street:text})}
+                            defaultValue={userStreet}/>
+                        </View>
+                        <View style={styles.inputWrapper}>
+                            <FontAwesome name='building-o' size={20}/>
+                            <Input placeholder='house No.' containerStyle={{width:100,height:40}}
+                            onChangeText={(text)=> setUser({...user,houseNumber:text})}
+                            defaultValue={userHouseNo}/>
+                        </View>
                     </View>
-                    <View>
-                        <Input placeholder='post code' containerStyle={{width:170,height:50}}
-                        onChangeText={(text)=> setuserPostcode(text)}
-                        defaultValue={userPostCode}/>
+                    <View style={styles.inputWrapper}>
+                        <View style={styles.inputWrapper}>
+                            <FontAwesome name='map-pin' size={20}/>
+                            <Input placeholder='post code' containerStyle={{width:100,height:40}}
+                            onChangeText={(text)=> setUser({...user,postCode:text})}
+                            defaultValue={userPostCode}/>
+                        </View>
                     </View>
                 </SafeAreaView> 
-                    <View style={{padding:10,marginTop:30,alignItems:'center'}}>
+                    <View style={{padding:10,alignItems:'center'}}>
                         <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-
                             <Text style={{color:'#fff', fontSize:18,fontWeight:'bold'}}>Sign up</Text>
                         </TouchableOpacity>
                     </View>
@@ -117,26 +130,39 @@ return (
 
 const styles = StyleSheet.create({
     wrapper:{
-        padding:7,
-        paddingBottom:20,
-        margin:8,
+        paddingBottom:10,
+        marginHorizontal:10,
+        marginTop:40,
         borderColor:'#37cab8',
         borderWidth:2,
         borderRadius:10
     },
-        infoBoxWrapper: {
-        borderBottomColor: '#ccc',
-        borderBottomWidth: 1,
-        flexDirection: 'row',
+    infoBoxWrapper: {
         height: 60,
-        justifyContent:'center'
+        justifyContent:'center',
+        alignItems:'center',
+        borderTopLeftRadius:8,
+        borderTopRightRadius:8,
+        backgroundColor:'#37cab8'
+    },
+    infoBoxText:{
+        color:'#ffffff', 
+        fontSize:20,
+        fontWeight:'bold',
+        alignSelf:'center',    
     },
     button: {
         width:250,
-        marginTop:10,
         alignItems: "center",
         backgroundColor: "#37cab8",
         borderRadius:10,
-        padding: 10
+        padding: 10,
+        marginTop:10
+    },
+    inputWrapper:{
+        flexDirection:'row',
+        justifyContent:'flex-start',
+        alignItems:'baseline',
+        padding:5
     }
 })

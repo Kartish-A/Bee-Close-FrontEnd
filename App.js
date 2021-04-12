@@ -1,11 +1,11 @@
-import 'react-native-gesture-handler';
-import React, {createContext, useReducer} from 'react';
+import React, { createContext, useReducer, useState } from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { appReducer } from './appContextReducer';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 // importing AuthStack Screens
 import { LandingPage } from './screens/authStack/LandingPage';
@@ -31,7 +31,9 @@ import { EditPersonalProfileScreen } from './screens/drawerItems/PersonalProfile
 
 import { UserProfileScreen } from './screens/UserProfileScreen'
 
-const initialState = {isLoggedIn:false};
+// const [isLoggedIn, setisLoggedIn] = useState(false)
+const initialState = {isLoggedIn:false, token: AsyncStorage.getItem('token'), username:''};
+
 //initialising the App context (central storage)
 export const AppContext = createContext();
 
@@ -91,11 +93,11 @@ const AppDrawerScreens = ()=>(
 export default function App() {
 
   const [state, dispatch] = useReducer(appReducer, initialState);
+
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <NavigationContainer>
         {(state.isLoggedIn)?<AppDrawerScreens /> : <AuthStackScreens />}
-        {/* <AppDrawerScreens/> */}
       </NavigationContainer>
     </AppContext.Provider>
   );
