@@ -1,22 +1,11 @@
-<<<<<<< HEAD
-import "react-native-gesture-handler";
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { appReducer } from "./appContextReducer";
-=======
-import React, { createContext, useReducer, useState } from 'react';
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
-import { appReducer } from './appContextReducer';
-import AsyncStorage from '@react-native-async-storage/async-storage'
->>>>>>> main
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // importing AuthStack Screens
 import { LandingPage } from "./screens/authStack/LandingPage";
@@ -42,13 +31,13 @@ import { EditPersonalProfileScreen } from "./screens/drawerItems/PersonalProfile
 
 import { UserProfileScreen } from "./screens/UserProfileScreen";
 
-<<<<<<< HEAD
-const initialState = { isLoggedIn: false };
-=======
 // const [isLoggedIn, setisLoggedIn] = useState(false)
-const initialState = {isLoggedIn:false, token: AsyncStorage.getItem('token'), username:''};
+const initialState = {
+  isLoggedIn: false,
+  token: AsyncStorage.getItem("token"),
+  username: "",
+};
 
->>>>>>> main
 //initialising the App context (central storage)
 export const AppContext = createContext();
 
@@ -198,12 +187,7 @@ export default function App() {
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <NavigationContainer>
-<<<<<<< HEAD
         {state.isLoggedIn ? <AppDrawerScreens /> : <AuthStackScreens />}
-        {/* <AppDrawerScreens/> */}
-=======
-        {(state.isLoggedIn)?<AppDrawerScreens /> : <AuthStackScreens />}
->>>>>>> main
       </NavigationContainer>
     </AppContext.Provider>
   );

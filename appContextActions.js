@@ -4,28 +4,21 @@ export function login() {
   };
 }
 export function logout() {
-<<<<<<< HEAD
   return {
     type: "LOGOUT",
   };
 }
-=======
-    return {
-        type: 'LOGOUT'
-    }
-}
 
 export function setToken(token) {
-    return {
-        type: 'SET_TOKEN',
-        payload: token
-    }
+  return {
+    type: "SET_TOKEN",
+    payload: token,
+  };
 }
 
 export function setUsername(username) {
-    return {
-        type: 'SETUSERNAME',
-        payload: username
-    }
+  return {
+    type: "SETUSERNAME",
+    payload: username,
+  };
 }
->>>>>>> main
