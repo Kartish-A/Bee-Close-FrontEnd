@@ -34,7 +34,9 @@ export function SignIn({ navigation, route }) {
           dispatch(setToken(token));
           dispatch(login());
           dispatch(
-            setUsername(response.user.firstName + " " + response.user.lastName)
+            setUsername(
+              response.data.user.firstName + " " + response.data.user.lastName
+            )
           );
           console.log(token);
         }
