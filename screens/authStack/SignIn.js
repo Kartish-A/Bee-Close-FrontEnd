@@ -1,20 +1,9 @@
-import React, { useState, useContext } from "react";
-import { AppContext } from "../../App";
-import { setToken, setUsername } from "../../appContextActions";
-import { login } from "../../appContextActions";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  Platform,
-  KeyboardAvoidingView,
-  ScrollView,
-  SafeAreaView,
-} from "react-native";
-import { Header, Input } from "react-native-elements";
-import axios from "axios";
+import React, { useState, useContext } from 'react';
+import { AppContext} from '../../App'
+import { setToken, setUsername, login } from '../../appContextActions'
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, SafeAreaView} from 'react-native';
+import { Header,Input } from 'react-native-elements';
+import axios from 'axios';
 
 export function SignIn({ navigation, route }) {
   const [userEmail, setuserEmail] = useState(route.params?.email ?? "");

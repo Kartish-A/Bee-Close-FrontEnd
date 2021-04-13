@@ -8,7 +8,7 @@ import ActionButton from 'react-native-action-button';
 import axios from 'axios';
 
 
-export const CreatePost = ({navigation,route}) => {
+export const CreatePost = ({navigation}) => {
 
     const [checked, setChecked] = useState({
         regular: true,
@@ -20,7 +20,7 @@ export const CreatePost = ({navigation,route}) => {
 
     const handleSubmitPost=()=>{
         //request to create a new post
-        axios.post(`https://bee-close.herokuapp.com/api/post/newpost/`,{
+        axios.post(`https://bee-close.herokuapp.com/api/posts/newpost/`,{
             text:text,
             category: Object.keys(checked).find(key=>checked[key]===true)
         
@@ -49,11 +49,15 @@ export const CreatePost = ({navigation,route}) => {
                     rightComponent={<Image source={require('../../assets/logo(1).png')} style={{width:40, height:40}}/> }
             />
             <View style={{flex:1,margin:20,alignItems:'baseline'}}> 
-                <Text style={{fontSize:14}}>please choose category</Text>
-                <View style={{flexDirection:'row',width:250}}>
+                <View style={{marginLeft:10}}>
+                    <Text style={{fontSize:14}}>please choose category</Text>
+                </View>
+                <View style={{flexDirection:'row',width:250,justifyContent:'space-between'}}>
                     <CheckBox center
                         title='regular'
                         textStyle={{color:'#37cab8' }}
+                        containerStyle={{backgroundColor:'transparent',borderWidth:0}}
+                        checkedColor='#37cab8'
                         size={10}
                         checked={checked.regular}
                         onPress={()=> setChecked({regular:true,event:false,giveaway:false})}
@@ -61,6 +65,8 @@ export const CreatePost = ({navigation,route}) => {
                     <CheckBox center
                         title='event'
                         textStyle={{color:'#37cab8' }}
+                        containerStyle={{backgroundColor:'transparent',borderWidth:0}}
+                        checkedColor='#37cab8'
                         size={10}
                         checked={checked.event}
                         onPress={()=> setChecked({regular:false,event:true,giveaway:false})}
@@ -68,6 +74,8 @@ export const CreatePost = ({navigation,route}) => {
                     <CheckBox center
                         title='giveaway'
                         textStyle={{color:'#37cab8' }}
+                        containerStyle={{backgroundColor:'transparent',borderWidth:0}}
+                        checkedColor='#37cab8'
                         size={10}
                         checked={checked.giveaway}
                         onPress={()=> setChecked({regular:false,event:false,giveaway:true})}
