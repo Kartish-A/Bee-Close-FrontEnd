@@ -50,27 +50,27 @@ return (
                         <Ionicons name='person-outline' size={20} color='black'/>
                         <Input placeholder='first name' containerStyle={{width:140,height:40}}
                         onChangeText={(text)=>setUser({...user,firstName:text})}
-                        defaultValue={userFirstName}/>
+                        defaultValue=''/>
                         <Input placeholder='last name'  containerStyle={{width:140,height:40}}
                         onChangeText={(text)=> setUser({...user,lastName:text})}
-                        defaultValue={userLastName}/>
+                        defaultValue=''/>
                     </View>
                     <View>
                         <View style={styles.inputWrapper}>
                             <Ionicons name='mail-outline' size={20} />
                             <Input placeholder='E-mail' keyboardType='email-address' containerStyle={{width:250,height:40}}
                             onChangeText={(text)=> setUser({...user,email:text})}
-                            defaultValue={userEmail}/>
+                            defaultValue=''/>
                         </View>
                         <View style={styles.inputWrapper}>
                             <Ionicons name='lock-closed-outline' size={20}/>
                             <Input placeholder='password' minLength='8' containerStyle={{width:140,height:40}}
                             onChangeText={(text)=> setUser({...user,password:text})}  
-                            defaultValue={userPassword}
+                            defaultValue=''
                             secureTextEntry={true}/>
                             <Input placeholder='confirmation' containerStyle={{width:140,height:40}}
                             onChangeText={(text)=> setuserConfirmePassword(text)}  
-                            defaultValue={userConfirmePassword}
+                            defaultValue=''
                             secureTextEntry={true}/>
                         </View>
                     </View>
@@ -79,13 +79,13 @@ return (
                             <Ionicons name='globe-outline' size={20}/>
                             <Input placeholder='Country' containerStyle={{width:120,height:40}}
                             onChangeText={(text)=> setUser({...user,country:text})  }
-                            defaultValue={userCountry}/>
+                            defaultValue=''/>
                         </View>
                         <View style={styles.inputWrapper}>
                             <Ionicons name='location-outline' size={20}/>
                             <Input placeholder='City' containerStyle={{width:120,height:40}}
                             onChangeText={(text)=> setUser({...user,city:text})}
-                            defaultValue={userCity}/>
+                            defaultValue=''/>
                         </View>
                     </View>
                     <View style={styles.inputWrapper}>
@@ -93,13 +93,13 @@ return (
                             <FontAwesome name='street-view' size={20}/>
                             <Input placeholder='street' containerStyle={{width:120,height:40}}
                             onChangeText={(text)=> setUser({...user,street:text})}
-                            defaultValue={userStreet}/>
+                            defaultValue=''/>
                         </View>
                         <View style={styles.inputWrapper}>
                             <FontAwesome name='building-o' size={20}/>
                             <Input placeholder='house No.' containerStyle={{width:100,height:40}}
                             onChangeText={(text)=> setUser({...user,houseNumber:text})}
-                            defaultValue={userHouseNo}/>
+                            defaultValue=''/>
                         </View>
                     </View>
                     <View style={styles.inputWrapper}>
@@ -107,7 +107,7 @@ return (
                             <FontAwesome name='map-pin' size={20}/>
                             <Input placeholder='post code' containerStyle={{width:100,height:40}}
                             onChangeText={(text)=> setUser({...user,postCode:text})}
-                            defaultValue={userPostCode}/>
+                            defaultValue=''/>
                         </View>
                     </View>
                 </SafeAreaView> 
