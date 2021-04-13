@@ -30,7 +30,7 @@ export function SignIn({ navigation, route }) {
       })
       .then(function (response) {
         if (response.status === 200) {
-          let token = response.headers["x-auth"];
+          let token = response.data.token;
           dispatch(setToken(token));
           dispatch(login());
           dispatch(

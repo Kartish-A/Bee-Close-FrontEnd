@@ -1,3 +1,5 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 export function login() {
   return {
     type: "LOGIN",
@@ -10,6 +12,7 @@ export function logout() {
 }
 
 export function setToken(token) {
+  AsyncStorage.setItem("token", token);
   return {
     type: "SET_TOKEN",
     payload: token,
