@@ -1,13 +1,34 @@
-import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet,Image} from 'react-native'
+import React, {useState, useEffect, useContext} from 'react'
+import { View, Text, TouchableOpacity, StyleSheet,Image, FlatList, ScrollView} from 'react-native'
 import { Header } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
+import {EventCard} from '../../components/EventCard';
+import {AppContext} from '../../App';
+import {useIsFocused} from '@react-navigation/native';
+import axios from 'axios'
 
 
 export const FreeYourStuff = ({navigation}) => {
+
+    const [posts, setPosts] = useState([])
+    const {state} = useContext(AppContext)
+    // const isFoucsed = useIsFocused()
+    useEffect(() => {
+        axios.get(`https://bee-close.herokuapp.com/api/posts/giveaway`,{headers:{
+            'Authorization':`Bearer ${state.token}`
+        }})
+        .then(res=> {
+            console.log(res);
+            if(res.data.success){
+                setPosts(res.data.allPosts)
+
+            }
+        })
+    }, [])
+
     return (
-        <View style={{ flex:1, width:'100%', justifyContent: 'center' }}>
-        <Header 
+        <View>
+            <Header 
                 backgroundColor='#37cab8'
                 leftComponent={
                     <TouchableOpacity onPress={()=>navigation.openDrawer()} >
@@ -15,13 +36,28 @@ export const FreeYourStuff = ({navigation}) => {
                     </TouchableOpacity>
                 }
                 centerComponent={{ text: 'BEE CLOSE', style: { color: '#fff', fontSize:20 } }}
-                rightComponent={<Image source={require('../../assets/logo(1).png')} style={{width:40, height:40}}/> }
-        />
-        <View style={styles.container}>
-            <Text style={{fontSize:24}}>This is the Hive mini "free things!"</Text>
-            <Text style={{padding:30}}>here you can give away stuff that you don't really need, and you think it might be useful for your neighbors</Text>
+                rightComponent={<Image source={require('../../assets/logo(1).png')} style={{width:40, height:40}}/> 
+                }
+            />
+            
+            {(posts.length)?
+                <FlatList
+                    data={posts}
+                    renderItem={({item})=> (<EventCard postObj={{
+                        username: item.user.firstName+ ' '+item.user.lastName,
+                        postText: item.text,
+                        postImg:  item.image,
+                        postTime: item.timestamp
+                }}/>)}
+                keyExtractor={post => post._id}
+                />
+                : 
+            <View style={styles.container}>
+                <Text style={{fontSize:24}}>sorry no items to be shown</Text>
+            </View>
+            }
+            
         </View>
-    </View>
     )
 }
 const styles = StyleSheet.create({

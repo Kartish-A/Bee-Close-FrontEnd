@@ -1,33 +1,44 @@
-import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import React, {useState} from 'react';
+import { TouchableOpacity, View, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { Container, Card, UserInfo, UserImg, UserInfoText, UserName, PostTime, PostText, PostImg, InteractionWrapper, Interaction, InteractionText } from '../styles/EventCardStyle';
 
 
-export const EventCard = () => {
+export const EventCard = (props) => {
+
+    const navigation = useNavigation();
+    const [post, setpost] = useState(props.postObj)
+
     return (
         <Container>
             <Card>
             <View style={{flexDirection:'row',width:'100%',justifyContent:'space-between'}}>
                 <UserInfo>
-                    <TouchableOpacity style={{flexDirection:'row'}} onPress={()=>{}}>
+                    <TouchableOpacity style={{flexDirection:'row'}} onPress={()=>navigation.navigate('UserProfile')}>
                         <UserImg source={{uri:'https://picsum.photos/id/447/60/60'}} />    
                         <UserInfoText>
-                            <UserName> Joachim Sheffer</UserName>
-                            <PostTime> hour ago</PostTime>
+                            <UserName>{post.userName}</UserName>
+                            <PostTime>{post.postTime}</PostTime>
                         </UserInfoText>
                     </TouchableOpacity>
                 </UserInfo>
                 <TouchableOpacity style={{margin:10}}>
                         <Ionicons name='options' size={24} color={'#fff'}/>
                     </TouchableOpacity>
-            </View>       
+            </View>
+            { post.postText ?       
                 <PostText>
-                    My dear Neighbors!
-                    I am graduating on 22th of April and I really would like to celebrate this beautiful event, so for this I am making a party to which I invited all my friends and I thought that it would be even better if I invited my Neighbors as well! 
-                        We may stay a bit late!
+                    {post.postText}
                 </PostText>
-                <PostImg source={{uri:'https://picsum.photos/id/452/400/300'}}/>
+                :
+                <PostText></PostText>
+            }
+            { post.postImg ?
+                <PostImg source={post.postImg} />
+                :
+                <PostText></PostText>
+            }    
                 <InteractionWrapper>
                     <Interaction>
                         <Ionicons name='add-sharp' size={20} color={'#ffffff'}/>

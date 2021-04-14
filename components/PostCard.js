@@ -17,7 +17,7 @@ export const PostCard = (props) => {
                         <TouchableOpacity style={{flexDirection:'row'}} onPress={()=> navigation.navigate('UserProfile')}>
                             <UserImg source={{uri:'https://picsum.photos/id/1027/200/300'}} />    
                             <UserInfoText>
-                                <UserName> {post.username}</UserName>
+                                <UserName>{post.userName}</UserName>
                                 <PostTime>{post.postTime}</PostTime>
                             </UserInfoText>
                         </TouchableOpacity>
@@ -54,7 +54,6 @@ export const PostCard = (props) => {
                         <InteractionText>save</InteractionText>
                     </Interaction>
                 </InteractionWrapper>
-
             </Card>
         </Container>
 

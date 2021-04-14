@@ -1,40 +1,33 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { Image, TouchableOpacity, ScrollView,Text, FlatList} from 'react-native';
+import { Image, TouchableOpacity, View, FlatList} from 'react-native';
 import { Header } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
 import { PostCard } from '../../components/PostCard'
 import axios from 'axios'
 import { AppContext } from '../../App';
+import {useIsFocused} from '@react-navigation/native'
 
 
 export const HiveHome = ({navigation}) => {
 
     const [posts, setPosts] = useState([])
     const {state} = useContext(AppContext)
-
+    // const isFoucsed = useIsFocused()
     useEffect(() => {
         axios.get(`https://bee-close.herokuapp.com/api/posts/regular`,{headers:{
             'Authorization':`Bearer ${state.token}`
         }})
         .then(res=> {
+            console.log(res);
             if(res.data.success){
                 setPosts(res.data.allPosts)
-                console.log(data);
             }
         })
     }, [])
-
-    const renderPost = ({post}) => {
-        <PostCard postObj={{
-            username: post.user.firstName+' '+post.user.lastName,
-            postText: post.text,
-            postImg: post.image,
-            postTime: post.timestamp
-        }}/>
-    }
+    
 
     return (
-        <ScrollView>
+        <View>
             <Header 
                 backgroundColor='#37cab8'
                 leftComponent={
@@ -47,9 +40,14 @@ export const HiveHome = ({navigation}) => {
             />
             <FlatList
                 data={posts}
-                renderItem={renderPost}
+                renderItem={({item})=> (<PostCard postObj={{
+                    userName: item.user.firstname + ' '+item.user.lastname,
+                    postText: item.text,
+                    postImg:  item.image,
+                    postTime: item.timestamp
+                }}/>)}
                 keyExtractor={post => post._id}
             />
-        </ScrollView>
+        </View>
     );
 };

@@ -6,29 +6,42 @@ import { PhotoPicker } from '../../components/PhotoPicker'
 import { AppContext } from '../../App'
 import ActionButton from 'react-native-action-button';
 import axios from 'axios';
+import { PostText } from '../../styles/PostCardStyle';
 
 
 export const CreatePost = ({navigation}) => {
 
     const [checked, setChecked] = useState({
-        regular: true,
-        event: false,
-        giveaway: false
+        regular: true, //navigatin.navigate('HiveHome')
+        event: false, // navigation.navigate('Events')
+        giveaway: false //navigation.navigate('Free your Stuff')
     })
     const [text, setText] = useState('')
     const {state}= useContext(AppContext)
 
     const handleSubmitPost=()=>{
+        const chosen = Object.keys(checked).find(key=>checked[key]===true)
         //request to create a new post
-        axios.post(`https://bee-close.herokuapp.com/api/posts/newpost/`,{
+        axios.post(`https://bee-close.herokuapp.com/api/posts/newpost`,{
             text:text,
-            category: Object.keys(checked).find(key=>checked[key]===true)
+            category: chosen
         
         },{headers:{'Authorization':`Bearer ${state.token}`}})
         //how to handle the response from the backend
         .then(res=> {
             if(res.data.success){
-                console.log(data);
+                switch (chosen){
+                    case 'regular': 
+                    default:
+                    navigation.navigate('HiveHome',{post:PostText});
+                    break;
+                    case 'event':
+                    navigation.navigate('Events',{post:PostText});
+                    break;
+                    case 'giveaway':
+                    navigation.navigate('FreeYourStuff',{post:PostText});
+                    
+                }
             }
         })
         .catch(err=>{

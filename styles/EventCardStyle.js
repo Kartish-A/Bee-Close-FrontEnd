@@ -26,7 +26,8 @@ export const UserImg = styled.Image`
     height: 50px;
     border-radius: 25px;
     border-color: #ffffff;
-    border-width: 1px
+    border-width: 1px;
+    
 `;
 export const UserInfoText = styled.View`
     flex-direction: column;
@@ -49,7 +50,7 @@ export const PostText = styled.Text`
     padding-left: 15px;
     padding-right: 15px;
     margin-bottom: 15px;
-    color: #ffffff
+    color: #ffffff;
 `;
 
 export const PostImg = styled.Image`
@@ -57,7 +58,8 @@ export const PostImg = styled.Image`
     height: 250px;
     margin-top: 10px;
     border-color: #ffffff;
-    border-width: 1px
+    border-width: 1px;
+    
 `;
 
 export const InteractionWrapper = styled.View`

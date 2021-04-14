@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
-import { Header } from 'react-native-elements';
-import { Ionicons } from '@expo/vector-icons';
+
 
 export const UserProfileScreen = ({navigation}) => {
     return (
