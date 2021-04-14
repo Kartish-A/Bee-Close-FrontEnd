@@ -13,8 +13,9 @@ import { PhotoPicker } from "../../components/PhotoPicker";
 import { AppContext } from "../../App";
 import ActionButton from "react-native-action-button";
 import axios from "axios";
+import { PersonalProfileScreen } from "../drawerItems/PersonalProfileStack/PersonalProfileScreen";
 
-export const CreatePost = ({ navigation, route }) => {
+export const CreatePost = ({ navigation }) => {
   const [checked, setChecked] = useState({
     regular: true,
     event: false,
@@ -37,7 +38,7 @@ export const CreatePost = ({ navigation, route }) => {
       //how to handle the response from the backend
       .then((res) => {
         if (res.data.success) {
-          console.log(data);
+          navigation.navigate("HiveHome");
         }
       })
       .catch((err) => {

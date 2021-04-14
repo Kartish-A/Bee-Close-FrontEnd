@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState}from 'react';
+import React, { useContext, useEffect, useState }from 'react';
 import { AppContext} from '../../App';
 import { logout } from '../../appContextActions';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
@@ -12,7 +12,7 @@ import axios from 'axios';
 export const CustomDrawerContent=({navigation,props})=>{
 
     const [user, setUser] = useState({})
-    const {dispatch, state} = useContext(AppContext)
+    const {state,dispatch} = useContext(AppContext)
 
     useEffect(() => {
         axios.get('', {headers:{
@@ -50,7 +50,7 @@ export const CustomDrawerContent=({navigation,props})=>{
                     icon={() => <Ionicons name="ios-person-circle-outline" size={24} color="black" /> }
                     label="Profile"
                     onPress={()=> navigation.navigate('PersonalPofileScreen')}
-                    />
+                />
                 <DrawerItem 
                 icon={() =>  <Ionicons name="chatbubbles-outline" size={24} color="black" />}
                 label="Bees in my Hive"

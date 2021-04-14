@@ -1,15 +1,12 @@
 import React, { useState, useContext } from "react";
 import { AppContext } from "../../App";
-import { setToken, setUsername } from "../../appContextActions";
-import { login } from "../../appContextActions";
+import { setToken, setUsername, login } from "../../appContextActions";
 import {
   View,
   Text,
   StyleSheet,
   Image,
   TouchableOpacity,
-  Platform,
-  KeyboardAvoidingView,
   ScrollView,
   SafeAreaView,
 } from "react-native";
@@ -49,58 +46,53 @@ export function SignIn({ navigation, route }) {
   };
   return (
     <SafeAreaView>
-      <KeyboardAvoidingView
-        behavior={Platform.Os == "ios" ? "padding" : "height"}
-        enabled>
-        <ScrollView>
-          <Header
-            backgroundColor="#37cab8"
-            centerComponent={{
-              text: "BEE CLOSE",
-              style: { color: "#fff", fontSize: 20 },
-            }}
-            rightComponent={
-              <Image
-                source={require("../../assets/logo(1).png")}
-                style={{ width: 40, height: 40 }}
-              />
-            }
-          />
-          <Image
-            source={require("../../assets/AppLogo.png")}
-            style={{ marginTop: 10 }}
-          />
-          <View style={{ justifyContent: "center", alignItems: "center" }}>
-            <Text
-              style={{ fontSize: 46, color: "#37cab8", fontWeight: "bold" }}>
-              Hello!
+      <ScrollView>
+        <Header
+          backgroundColor="#37cab8"
+          centerComponent={{
+            text: "BEE CLOSE",
+            style: { color: "#fff", fontSize: 20 },
+          }}
+          rightComponent={
+            <Image
+              source={require("../../assets/logo(1).png")}
+              style={{ width: 40, height: 40 }}
+            />
+          }
+        />
+        <Image
+          source={require("../../assets/AppLogo.png")}
+          style={{ marginTop: 10 }}
+        />
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <Text style={{ fontSize: 46, color: "#37cab8", fontWeight: "bold" }}>
+            Hello!
+          </Text>
+        </View>
+        <View style={styles.container}>
+          <View style={{ marginTop: 60 }}>
+            <Input
+              placeholder="E-mail"
+              containerStyle={{ width: 200, height: 60 }}
+              onChangeText={(text) => setuserEmail(text)}
+              defaultValue={userEmail}
+              keyboardType="email-address"
+            />
+            <Input
+              placeholder="password"
+              containerStyle={{ width: 200, height: 50 }}
+              onChangeText={(text) => setpassword(text)}
+              defaultValue={password}
+              secureTextEntry={true}
+            />
+          </View>
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+            <Text style={{ color: "#fff", fontSize: 18, fontWeight: "bold" }}>
+              Sign in
             </Text>
-          </View>
-          <View style={styles.container}>
-            <View style={{ marginTop: 60 }}>
-              <Input
-                placeholder="E-mail"
-                containerStyle={{ width: 200, height: 60 }}
-                onChangeText={(text) => setuserEmail(text)}
-                defaultValue={userEmail}
-                keyboardType="email-address"
-              />
-              <Input
-                placeholder="password"
-                containerStyle={{ width: 200, height: 50 }}
-                onChangeText={(text) => setpassword(text)}
-                defaultValue={password}
-                secureTextEntry={true}
-              />
-            </View>
-            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-              <Text style={{ color: "#fff", fontSize: 18, fontWeight: "bold" }}>
-                Sign in
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
