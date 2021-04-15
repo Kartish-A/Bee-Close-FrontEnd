@@ -28,6 +28,7 @@ export const HiveHome = ({ navigation }) => {
       .then((res) => {
         if (res.data.success) {
           setPosts(res.data.allPosts);
+          console.log(res.data.allPosts);
         }
       });
   }, [isFocused]);
