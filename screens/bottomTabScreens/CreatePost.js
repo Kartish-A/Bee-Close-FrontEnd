@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useContext, useState } from "react";
 import {
   View,
@@ -14,6 +15,17 @@ import { AppContext } from "../../App";
 import ActionButton from "react-native-action-button";
 import axios from "axios";
 import { PersonalProfileScreen } from "../drawerItems/PersonalProfileStack/PersonalProfileScreen";
+=======
+import React, {useContext, useState} from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native';
+import { Header,CheckBox } from 'react-native-elements'
+import { Ionicons } from '@expo/vector-icons';
+import { PhotoPicker } from '../../components/PhotoPicker'
+import { AppContext } from '../../App'
+import ActionButton from 'react-native-action-button';
+import axios from 'axios';
+import { PostText } from '../../styles/PostCardStyle';
+>>>>>>> main
 
 export const CreatePost = ({ navigation }) => {
   const [checked, setChecked] = useState({
@@ -46,6 +58,7 @@ export const CreatePost = ({ navigation }) => {
       });
   };
 
+<<<<<<< HEAD
   return (
     <View style={{ flex: 1 }}>
       <Header
@@ -77,6 +90,39 @@ export const CreatePost = ({ navigation }) => {
             checked={checked.regular}
             onPress={() =>
               setChecked({ regular: true, event: false, giveaway: false })
+=======
+    const [checked, setChecked] = useState({
+        regular: true, //navigatin.navigate('HiveHome')
+        event: false, // navigation.navigate('Events')
+        giveaway: false //navigation.navigate('Free your Stuff')
+    })
+    const [text, setText] = useState('')
+    const {state}= useContext(AppContext)
+
+    const handleSubmitPost=()=>{
+        const chosen = Object.keys(checked).find(key=>checked[key]===true)
+        //request to create a new post
+        axios.post(`https://bee-close.herokuapp.com/api/posts/newpost`,{
+            text:text,
+            category: chosen
+        
+        },{headers:{'Authorization':`Bearer ${state.token}`}})
+        //how to handle the response from the backend
+        .then(res=> {
+            if(res.data.success){
+                switch (chosen){
+                    case 'regular': 
+                    default:
+                    navigation.navigate('HiveHome');
+                    break;
+                    case 'event':
+                    navigation.navigate('Events');
+                    break;
+                    case 'giveaway':
+                    navigation.navigate('FreeYourStuff');
+                    
+                }
+>>>>>>> main
             }
           />
           <CheckBox

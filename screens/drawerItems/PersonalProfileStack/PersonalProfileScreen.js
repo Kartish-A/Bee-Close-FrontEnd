@@ -1,16 +1,33 @@
 import 'react-native-gesture-handler';
-import React, {useState}from 'react';
-import { StyleSheet, Text, View,  SafeAreaView, TouchableOpacity,ScrollView} from 'react-native';
+import React, { useContext, useEffect, useState }from 'react';
+import { StyleSheet, Text, View,  SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
 import { Title,Caption,TouchableRipple } from 'react-native-paper';
-import { Avatar, Header} from 'react-native-elements'
-
-// import { Header } from 'react-native-elements'
+import { Avatar, Header} from 'react-native-elements';
+import { AppContext } from '../../../App';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { Ionicons,MaterialCommunityIcons } from '@expo/vector-icons';
+import {useIsFocused} from '@react-navigation/native'
+import axios from 'axios'
 
 
 export const PersonalProfileScreen = ({navigation})=> {
-    
+
+    const {state} = useContext(AppContext)
+    const [user, setUser] = useState({})
+    const isFocused =useIsFocused()
+    useEffect(() => {
+        axios.get(`https://bee-close.herokuapp.com/api/users/singlebee`,{headers:{
+            'Authorization':`Bearer ${state.token}`
+        }})
+        .then(res=> {
+            console.log(res);
+            if(res.data.success){
+                setUser(res.data.user)
+                console.log(res.data.user);
+            }
+        })
+    }, [isFocused])
+
     return (
     <ScrollView>
         <SafeAreaView style={styles.container}>
@@ -42,8 +59,8 @@ export const PersonalProfileScreen = ({navigation})=> {
                         <Title style={[styles.title, {
                         marginTop:15,
                         marginBottom: 5,
-                        }]}>john_doe</Title>
-                        <Caption style={styles.caption}>@j_doe</Caption>
+                        }]}>{state.username}</Title>
+                        <Caption style={styles.caption}>{user.email}</Caption>
                     </View>
                 </View>
             </View>
@@ -51,7 +68,7 @@ export const PersonalProfileScreen = ({navigation})=> {
             <View style={styles.userInfoSection}>
                 <View style={styles.row}>
                     <Ionicons name="location-outline" color="#777777" size={20}/>
-                    <Text style={{color:"#777777", marginLeft: 20}}>Berlin, Germany</Text>
+                    <Text style={{color:"#777777", marginLeft: 20}}>{user.country}</Text>
                 </View>
                 <View style={styles.row}>
                     <Ionicons name="ios-phone-portrait-outline" size={20} color="black" />
@@ -59,16 +76,16 @@ export const PersonalProfileScreen = ({navigation})=> {
                 </View>
                 <View style={styles.row}>
                     <Ionicons name="mail-outline" color="#777777" size={20}/>
-                    <Text style={{color:"#777777", marginLeft: 20}}>john_doe@email.com</Text>
+                    <Text style={{color:"#777777", marginLeft: 20}}>{user.email}</Text>
                 </View>
                 <View style={styles.row}>
                     <View>
                         <FontAwesome name="map-signs" color="#777777" size={15}/>
-                        <Text style={{color:"#777777", marginLeft: 20}}>Street name</Text>
+                        <Text style={{color:"#777777", marginLeft: 20}}>{user.street}</Text>
                     </View>
                     <View style={{marginLeft:70}}>
                         <FontAwesome name="building-o" color="#777777" size={15}/>
-                        <Text style={{color:"#777777", marginLeft: 20}}>building No.</Text>
+                        <Text style={{color:"#777777", marginLeft: 20}}>{user.houseNumber}</Text>
                     </View>
                 </View>
             </View>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useContext, useEffect } from "react";
 import {
   View,
@@ -12,6 +13,11 @@ import { Header } from "react-native-elements";
 import { Ionicons } from "@expo/vector-icons";
 import { AppContext } from "../App";
 import { useIsFocused } from "@react-navigation/native";
+=======
+import React from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+
+>>>>>>> main
 
 export const UserProfileScreen = ({ navigation }) => {
   const { state } = useContext(AppContext);

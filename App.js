@@ -95,7 +95,7 @@ const PersonalProfileStackScreens = () => (
 //declaring TabsNavigatorScreens
 const TabScreens = () => (
   <Tab.Navigator
-    initialRouteName="HeivHome"
+    initialRouteName="HiveHome"
     tabBarOptions={{ activeTintColor: "#37cab8" }}>
     <Tab.Screen
       name="HiveHomeStack"
@@ -103,7 +103,7 @@ const TabScreens = () => (
       options={{
         title: "Home",
         tabBarIcon: ({ focused, color, size }) => (
-          <Ionicons name="home" size={size} color={color} focused={focused} />
+          <Ionicons name="home" size={size}  color={color} focused={focused} />
         ),
       }}
     />
