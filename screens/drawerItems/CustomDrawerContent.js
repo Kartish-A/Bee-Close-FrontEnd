@@ -49,7 +49,7 @@ export const CustomDrawerContent=({navigation,props})=>{
                 <DrawerItem 
                     icon={() => <Ionicons name="ios-person-circle-outline" size={24} color="black" /> }
                     label="Profile"
-                    onPress={()=> navigation.navigate('PersonalPofileScreen')}
+                    onPress={()=> navigation.navigate('PersonalPofileScreen',{user:state.user})}
                 />
                 <DrawerItem 
                 icon={() =>  <Ionicons name="chatbubbles-outline" size={24} color="black" />}

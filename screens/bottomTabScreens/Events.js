@@ -4,7 +4,7 @@ import { Header } from 'react-native-elements'
 import { EventCard } from '../../components/EventCard'
 import { Ionicons } from '@expo/vector-icons';
 import {AppContext} from '../../App';
-// import {useIsFocused} from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
 import axios from 'axios'
 
 
@@ -12,7 +12,7 @@ export const Events = ({navigation}) => {
 
     const [posts, setPosts] = useState([])
     const {state} = useContext(AppContext)
-    // const isFoucsed = useIsFocused()
+    const isFocused = useIsFocused()
     useEffect(() => {
         axios.get(`https://bee-close.herokuapp.com/api/posts/event`,{headers:{
             'Authorization':`Bearer ${state.token}`
@@ -23,7 +23,7 @@ export const Events = ({navigation}) => {
                 setPosts(res.data.allPosts)
             }
         })
-    }, [])
+    }, [isFocused])
     
 
     return (
@@ -42,7 +42,7 @@ export const Events = ({navigation}) => {
             <FlatList
                 data={posts}
                 renderItem={({item})=> (<EventCard postObj={{
-                    username: item.user.firstName+ ' '+item.user.lastName,
+                    username: item.user.firstName + ' '+ item.user.lastName,
                     postText: item.text,
                     postImg:  item.image,
                     postTime: item.timestamp

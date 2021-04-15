@@ -33,13 +33,13 @@ export const CreatePost = ({navigation}) => {
                 switch (chosen){
                     case 'regular': 
                     default:
-                    navigation.navigate('HiveHome',{post:PostText});
+                    navigation.navigate('HiveHome');
                     break;
                     case 'event':
-                    navigation.navigate('Events',{post:PostText});
+                    navigation.navigate('Events');
                     break;
                     case 'giveaway':
-                    navigation.navigate('FreeYourStuff',{post:PostText});
+                    navigation.navigate('FreeYourStuff');
                     
                 }
             }

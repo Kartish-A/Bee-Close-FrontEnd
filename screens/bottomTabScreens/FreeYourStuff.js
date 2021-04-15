@@ -12,7 +12,7 @@ export const FreeYourStuff = ({navigation}) => {
 
     const [posts, setPosts] = useState([])
     const {state} = useContext(AppContext)
-    // const isFoucsed = useIsFocused()
+    const isFocused = useIsFocused()
     useEffect(() => {
         axios.get(`https://bee-close.herokuapp.com/api/posts/giveaway`,{headers:{
             'Authorization':`Bearer ${state.token}`
@@ -24,7 +24,7 @@ export const FreeYourStuff = ({navigation}) => {
 
             }
         })
-    }, [])
+    }, [isFocused])
 
     return (
         <View>
