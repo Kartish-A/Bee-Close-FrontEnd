@@ -27,7 +27,7 @@ export const FreeYourStuff = ({navigation}) => {
     }, [isFocused])
 
     return (
-        <View>
+        <ScrollView>
             <Header 
                 backgroundColor='#37cab8'
                 leftComponent={
@@ -57,7 +57,7 @@ export const FreeYourStuff = ({navigation}) => {
             </View>
             }
             
-        </View>
+        </ScrollView>
     )
 }
 const styles = StyleSheet.create({

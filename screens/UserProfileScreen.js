@@ -5,11 +5,7 @@ import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, SafeAreaVi
 export const UserProfileScreen = ({navigation}) => {
     return (
         <SafeAreaView style={{flex:1, backgroundColor: '#ffffff'}}>
-            <ScrollView style={styles.container}
-                contentContainerStyle={{justifyContent:'center', alignItems:'center'}}
-                showsVerticalScrollIndicator={false}
-            >
-                
+            <ScrollView >    
                 <Image style={styles.userImg}
                     source={{uri:'https://picsum.photos/id/1027/200/300'}}
                 />

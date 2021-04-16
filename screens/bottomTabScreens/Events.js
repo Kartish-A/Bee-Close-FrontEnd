@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react';
-import { Image, TouchableOpacity, ScrollView, FlatList, View, Text} from 'react-native';
+import { Image, TouchableOpacity, ScrollView, FlatList, View, Text, StyleSheet} from 'react-native';
 import { Header } from 'react-native-elements'
 import { EventCard } from '../../components/EventCard'
 import { Ionicons } from '@expo/vector-icons';
@@ -27,7 +27,7 @@ export const Events = ({navigation}) => {
     
 
     return (
-        <View>
+        <ScrollView contentContainerStyle={styles.contentContainer} centerContent={true}>
             <Header 
                 backgroundColor='#37cab8'
                 leftComponent={
@@ -46,16 +46,24 @@ export const Events = ({navigation}) => {
                     postText: item.text,
                     postImg:  item.image,
                     postTime: item.timestamp
-            }}/>)}
-            keyExtractor={post => post._id}
+                }}/>)}
+                keyExtractor={post => post._id}
+                // (item: object, index: number) => string;
+                horizontal={true}
             />
             : 
             <View>
                 <Text>sorry no Events posts</Text>
             </View>
-            }
-        
-        </View>
+            } 
+        </ScrollView>
     )
-}
+};
+
+const styles= new StyleSheet.create({
+    contentContainer: {
+        alignContent:'center',
+        paddingVertical:10
+    }
+})
 

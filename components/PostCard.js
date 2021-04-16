@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View, Text, StyleSheet, TextInput, Modal, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { Container, Card, UserInfo, UserImg, UserInfoText, UserName, PostTime, PostText, PostImg, InteractionWrapper,Interaction,InteractionText,Divider } from '../styles/PostCardStyle';
@@ -9,6 +9,11 @@ export const PostCard = (props) => {
     //this useNavigation function enable us to use the "navigation props" in deep nested components
     const navigation = useNavigation();
     const [post, setpost] = useState(props.postObj)
+
+    //controlling the comment Modal
+    const [comment, setComment] = useState('');
+    const [modalOpen, setModalOpen] = useState(false);
+
     return (
         <Container>
             <Card>
@@ -44,10 +49,36 @@ export const PostCard = (props) => {
                         <InteractionText>like</InteractionText>
                     </Interaction>
 
-                    <Interaction>
+                    <Interaction onPress={()=>setModalOpen(!modalOpen)}>
                         <Ionicons name="md-chatbubble-outline" size={20} color={'#37cab8'}/>
-                        <InteractionText>Comment</InteractionText>
+                        <InteractionText>Comment</InteractionText>      
                     </Interaction>
+
+                    <Modal 
+                        animationType={'slide'}
+                        visible={modalOpen}
+                        transparent={true}
+                        >
+                        <ScrollView>
+                            <View style={styles.comment}>
+                                <TextInput
+                                    style={styles.commentInput}
+                                    placeholder="write a comment!"
+                                    multiline
+                                    numberOfLines={5}
+                                    onChangeText={(comment)=> setComment(comment)}
+                                />
+                                <View >
+                                    <TouchableOpacity style={styles.commentBtn} onPress={ ()=> {} }>
+                                        <Text style={{color:'#fff'}}>comment</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.cancelBtn} onPress={()=> setModalOpen(!modalOpen)}>
+                                        <Text style={{color:'#000'}}>Cancel</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </ScrollView>
+                    </Modal>
                     
                     <Interaction>
                         <Ionicons name='bookmark-outline' size={20} color={'#37cab8'}/>
@@ -58,4 +89,41 @@ export const PostCard = (props) => {
         </Container>
 
     )
-} 
+};
+const styles= new StyleSheet.create({
+    comment:{
+        width:'80%',
+        height:230,
+        padding:5,
+        alignSelf:'center',
+        marginTop:300,
+        borderWidth:1,
+        borderColor:'#37cab8',
+        borderRadius:20,
+        backgroundColor:'#f7f7f7',
+        justifyContent:'space-between'
+    },
+    commentInput: {
+        borderWidth:1,
+        borderColor:'#ccc',
+        borderRadius:20,
+        height:'60%',
+        paddingHorizontal:10,
+        margin:5
+
+    },
+    commentBtn: {
+        backgroundColor: '#37cab8',
+        borderRadius: 5,
+        padding:5,
+        alignItems:'center',
+        margin:5
+    },
+    cancelBtn:{
+        backgroundColor: '#ccc',
+        borderRadius: 5,
+        padding:5,
+        alignItems:'center',
+        margin:5
+    }
+}) 

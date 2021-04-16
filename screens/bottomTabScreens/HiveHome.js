@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { Image, TouchableOpacity, View, FlatList, SafeAreaView} from 'react-native';
+import { Image, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import { Header } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
 import { PostCard } from '../../components/PostCard'
@@ -10,9 +10,10 @@ import {useIsFocused} from '@react-navigation/native'
 
 export const HiveHome = ({navigation}) => {
 
-    const [posts, setPosts] = useState([])
-    const {state} = useContext(AppContext)
-    const isFocused = useIsFocused()
+    const [posts, setPosts] = useState([]);
+    const {state} = useContext(AppContext);
+    const isFocused = useIsFocused();
+
     useEffect(() => {
         axios.get(`https://bee-close.herokuapp.com/api/posts/regular`,{headers:{
             'Authorization':`Bearer ${state.token}`
@@ -28,7 +29,7 @@ export const HiveHome = ({navigation}) => {
     
 
     return (
-        <SafeAreaView>
+        <ScrollView>
             <Header 
                 backgroundColor='#37cab8'
                 leftComponent={
@@ -46,9 +47,11 @@ export const HiveHome = ({navigation}) => {
                     postText: item.text,
                     postImg:  item.image,
                     postTime: item.timestamp
-                }}/>)}
+                    }}
+                    />
+                )}
                 keyExtractor={post => post._id}
             />
-        </SafeAreaView>
+        </ScrollView>
     );
 };

@@ -6,7 +6,7 @@ import { PhotoPicker } from '../../components/PhotoPicker'
 import { AppContext } from '../../App'
 import ActionButton from 'react-native-action-button';
 import axios from 'axios';
-import { PostText } from '../../styles/PostCardStyle';
+
 
 
 export const CreatePost = ({navigation}) => {
@@ -39,14 +39,14 @@ export const CreatePost = ({navigation}) => {
                     navigation.navigate('Events');
                     break;
                     case 'giveaway':
-                    navigation.navigate('FreeYourStuff');
-                    
+                    navigation.navigate('FreeYourStuff'); 
                 }
             }
         })
         .catch(err=>{
             console.log(err);
         })
+        setText({text:''})
     }
 
     return (
@@ -100,6 +100,7 @@ export const CreatePost = ({navigation}) => {
                         multiline
                         numberOfLines={5}
                         onChangeText={(text)=> setText(text)}
+                    
                     />
                 </View>
                 <View style={{flexDirection:'row'}}>
