@@ -5,7 +5,7 @@ import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, SafeAreaVi
 export const UserProfileScreen = ({navigation}) => {
     return (
         <SafeAreaView style={{flex:1, backgroundColor: '#ffffff'}}>
-            <ScrollView >    
+            <View style={styles.container} >    
                 <Image style={styles.userImg}
                     source={{uri:'https://picsum.photos/id/1027/200/300'}}
                 />
@@ -20,13 +20,14 @@ export const UserProfileScreen = ({navigation}) => {
                     </TouchableOpacity>
                 </View>
 
-            </ScrollView>
+            </View>
         </SafeAreaView>
     )
 };
 const styles = StyleSheet.create({
     container:{
         flex: 1,
+        alignItems:'center',
         backgroundColor: '#fff',
         padding: 20,
     },

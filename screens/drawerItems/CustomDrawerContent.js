@@ -74,7 +74,7 @@ export const CustomDrawerContent=({navigation,props})=>{
                     label="Sign out"
                     onPress= { ()=> {
                         dispatch(logout())
-                        navigation.navigate('AuthStackScreens', { screen: 'SignIn'})
+                        navigation.navigate('SignIn')
                     }}
                 />
             </Drawer.Section>

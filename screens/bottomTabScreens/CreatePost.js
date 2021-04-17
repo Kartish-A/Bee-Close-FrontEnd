@@ -39,7 +39,7 @@ export const CreatePost = ({navigation}) => {
                     navigation.navigate('Events');
                     break;
                     case 'giveaway':
-                    navigation.navigate('FreeYourStuff'); 
+                    navigation.navigate('BeeThere'); 
                 }
             }
         })
