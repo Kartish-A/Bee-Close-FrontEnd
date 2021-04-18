@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components/native';
 
 
@@ -13,7 +12,7 @@ export const Card = styled.View`
     width: 100%;
     border-radius: 10px;
     border-width: 1px;
-    border-color: #37cab8
+    border-color: #37cab8;
 `;
 
 export const UserInfo = styled.View`

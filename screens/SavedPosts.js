@@ -8,6 +8,7 @@ export const SavedPosts = ({navigation}) => {
     return (
         <View>
             <Header 
+                    containerStyle={{height:50}}
                     backgroundColor='#ffffff'
                     leftComponent={
                         <TouchableOpacity onPress={()=>navigation.openDrawer()} >

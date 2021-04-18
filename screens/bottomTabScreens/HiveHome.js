@@ -1,17 +1,19 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { Image, TouchableOpacity, FlatList, ScrollView, SafeAreaView } from 'react-native';
+import { Image, View, Text, TouchableOpacity, FlatList, ScrollView, SafeAreaView } from 'react-native';
 import { Header } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
 import { PostCard } from '../../components/PostCard'
-import axios from 'axios'
 import { AppContext } from '../../App';
-import {useIsFocused} from '@react-navigation/native'
+import { useIsFocused } from '@react-navigation/native'
+import axios from 'axios'
 
 
 export const HiveHome = ({navigation}) => {
 
     const [posts, setPosts] = useState([]);
+
     const {state} = useContext(AppContext);
+
     const isFocused = useIsFocused();
 
     useEffect(() => {
@@ -19,10 +21,8 @@ export const HiveHome = ({navigation}) => {
             'Authorization':`Bearer ${state.token}`
         }})
         .then(res=> {
-            console.log(res);
             if(res.data.success){
-                setPosts(res.data.allPosts)
-                console.log(res.data.allPosts);
+                setPosts(res.data.allPosts.reverse())
             }
         })
     }, [isFocused])
@@ -41,18 +41,25 @@ export const HiveHome = ({navigation}) => {
                     centerComponent={{ text: 'BEE CLOSE', style: { color: '#fff', fontSize:20 } }}
                     rightComponent={<Image source={require('../../assets/logo(1).png')} style={{width:40, height:40}}/> }
                 />
+                {(posts.length)?
                 <FlatList
                     data={posts}
                     renderItem={({item})=> (<PostCard postObj={{
                         username: item.user.firstName + ' '+ item.user.lastName,
                         postText: item.text,
                         postImg:  item.image,
-                        postTime: item.timestamp
-                        }}
-                        />
+                        postTime: item.timestamp,
+                        postId:   item._id
+                    }}
+                    />
                     )}
                     keyExtractor={post => post._id}
                 />
+                :
+                <View>
+                    <Text>sorry no regular posts</Text>
+                </View>
+                } 
             </ScrollView>
         </SafeAreaView>
     );

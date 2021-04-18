@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
 
 
 export const UserProfileScreen = ({navigation}) => {
     return (
-        <SafeAreaView style={{flex:1, backgroundColor: '#ffffff'}}>
+        <SafeAreaView style={{flex:1, backgroundColor: '#f8f8f8'}}>
             <View style={styles.container} >    
                 <Image style={styles.userImg}
                     source={{uri:'https://picsum.photos/id/1027/200/300'}}
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         alignItems:'center',
-        backgroundColor: '#fff',
+        backgroundColor: '#f8f8f8',
         padding: 20,
     },
     userImg:{

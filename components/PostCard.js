@@ -2,17 +2,23 @@ import React, { useState } from 'react';
 import { TouchableOpacity, View, Text, StyleSheet, TextInput, Modal, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
-import { Container, Card, UserInfo, UserImg, UserInfoText, UserName, PostTime, PostText, PostImg, InteractionWrapper,Interaction,InteractionText,Divider } from '../styles/PostCardStyle';
+import { Container, Card, UserInfo, UserImg, UserInfoText, UserName, PostTime, PostText, PostImg,  
+        InteractionWrapper,Interaction,InteractionText,Divider } from '../styles/PostCardStyle';
+import  { PostOptions }  from './PostOptions';
+
 
 
 export const PostCard = (props) => {
     //this useNavigation function enable us to use the "navigation props" in deep nested components
     const navigation = useNavigation();
+    //with this following useState, we enabling the postCard component to read the post-props coming from the parent Component
     const [post, setpost] = useState(props.postObj)
 
     //controlling the comment Modal
     const [comment, setComment] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
+    //controlling the post options icon
+    const [showOptions, setShowOptions] = useState(false)
 
     return (
         <Container>
@@ -27,9 +33,18 @@ export const PostCard = (props) => {
                             </UserInfoText>
                         </TouchableOpacity>
                     </UserInfo>
-                    <TouchableOpacity style={{margin:10}}>
+                    <TouchableOpacity style={{margin:10}} onPress={ ()=> setShowOptions(!showOptions) }>
                         <Ionicons name='options' size={24} color={'#37cab8'}/>
                     </TouchableOpacity>
+                    {showOptions?
+                    <View>
+                    <PostOptions postId={post.postId}/>
+                    </View>
+                    :
+                    <View>
+                        <Text></Text>
+                    </View>
+                    }
                 </View>
                 { post.postText?
                 <PostText>
@@ -59,6 +74,7 @@ export const PostCard = (props) => {
                         visible={modalOpen}
                         transparent={true}
                         >
+                        <View>
                         <ScrollView>
                             <View style={styles.comment}>
                                 <TextInput
@@ -78,6 +94,7 @@ export const PostCard = (props) => {
                                 </View>
                             </View>
                         </ScrollView>
+                        </View>    
                     </Modal>
                     
                     <Interaction>

@@ -7,7 +7,8 @@ import { Ionicons } from '@expo/vector-icons';
 export const SavedBeeThere = ({navigation}) => {
     return (
         <View>
-            <Header 
+            <Header
+                    containerStyle={{height:50}}
                     backgroundColor='#ffffff'
                     leftComponent={
                         <TouchableOpacity onPress={()=>navigation.openDrawer()} >

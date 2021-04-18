@@ -84,7 +84,7 @@ const AuthStackScreens = () => (
 const TabScreens = () => (
   <Tab.Navigator
     initialRouteName="HiveHome"
-    tabBarOptions={{ activeTintColor: "#37cab8" }}>
+    tabBarOptions={{ activeTintColor: "#37cab8",tabStyle:{borderTopColor:'#37cab8',borderTopWidth:1} }}>
     <Tab.Screen
       name="HiveHomeStack"
       component={HiveHomeStackScreens}
@@ -142,10 +142,7 @@ const AppDrawerScreens = () => (
     drawerContent={(props) => <CustomDrawerContent {...props} />}
     drawerType="slide">
     <AppDrawer.Screen name="Tab" component={TabScreens} />
-    <AppDrawer.Screen
-      name="PersonalPofileScreen"
-      component={PersonalProfileStackScreens}
-    />
+    <AppDrawer.Screen name="PersonalPofileScreen" component={PersonalProfileStackScreens}/>
     <AppDrawer.Screen name="BeesInMyHive" component={BeesInMyHive} />
     <AppDrawer.Screen name="SavedItems" component={TopTabScreens} />
   </AppDrawer.Navigator>
@@ -153,10 +150,13 @@ const AppDrawerScreens = () => (
 
 //declaring TopTabNavigatorScreens
 const TopTabScreens = ()=> (
-  <TopTab.Navigator  tabBarOptions={{activeTintColor:'#fff' , labelStyle:{fontSize:16} , indicatorStyle:{borderWidth:2, borderColor:'#ffffff' }, style:{backgroundColor:'#37cab8',marginTop:10} }}>
-    <TopTab.Screen name='SavedPosts' component={SavedPosts} title='saved posts'/>
-    <TopTab.Screen name='SavedEvents' component={SavedEvents} title='saved events'/>
-    <TopTab.Screen name='SavedBeeThere' component={SavedBeeThere} title='saved bee'/>
+  <TopTab.Navigator  
+    tabBarOptions={{activeTintColor:'#fff' , labelStyle:{fontSize:14,fontWeight:'bold'}, 
+      indicatorStyle:{borderWidth:2, borderColor:'#ffffff' }, style:{backgroundColor:'#37cab8', marginTop:10, height:60} }}
+      >
+    <TopTab.Screen name='SavedPosts' component={SavedPosts} options={{title:'saved posts'}} />
+    <TopTab.Screen name='SavedEvents' component={SavedEvents} options={{title:'saved events'}}/>
+    <TopTab.Screen name='SavedBeeThere' component={SavedBeeThere} options={{title:'bee there '}}/>
   </TopTab.Navigator>
 )
 
@@ -172,7 +172,7 @@ const HiveHomeStackScreens = () => (
       name="UserProfile"
       component={UserProfileScreen}
       options={{
-        title: "user profile",
+        title: "Bee profile",
         headerStyle: { backgroundColor: "#37cab8" },
         headerTintColor: "#ffffff",
       }}

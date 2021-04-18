@@ -1,26 +1,28 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Image, TouchableOpacity, ScrollView, FlatList, View, Text, StyleSheet, SafeAreaView} from 'react-native';
 import { Header } from 'react-native-elements'
 import { EventCard } from '../../components/EventCard'
 import { Ionicons } from '@expo/vector-icons';
-import {AppContext} from '../../App';
-import {useIsFocused} from '@react-navigation/native';
+import { AppContext } from '../../App';
+import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios'
 
 
 export const Events = ({navigation}) => {
 
-    const [posts, setPosts] = useState([])
-    const {state} = useContext(AppContext)
-    const isFocused = useIsFocused()
+    const [posts, setPosts] = useState([]);
+
+    const {state} = useContext(AppContext);
+
+    const isFocused = useIsFocused();
+
     useEffect(() => {
         axios.get(`https://bee-close.herokuapp.com/api/posts/event`,{headers:{
             'Authorization':`Bearer ${state.token}`
         }})
         .then(res=> {
-            console.log(res);
             if(res.data.success){
-                setPosts(res.data.allPosts)
+                setPosts(res.data.allPosts.reverse())
             }
         })
     }, [isFocused])
@@ -46,8 +48,11 @@ export const Events = ({navigation}) => {
                         username: item.user.firstName + ' '+ item.user.lastName,
                         postText: item.text,
                         postImg:  item.image,
-                        postTime: item.timestamp
-                    }}/>)}
+                        postTime: item.timestamp,
+                        postId:   item._id
+                    }}
+                    />
+                    )}
                     keyExtractor={post => post._id}
                     // (item: object, index: number) => string;
                 />
