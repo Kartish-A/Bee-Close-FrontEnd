@@ -1,29 +1,34 @@
-import React, { createContext, useReducer, useState } from "react";
+import React, { createContext, useReducer } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { appReducer } from "./appContextReducer";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons } from "@expo/vector-icons";
-import { appReducer } from "./appContextReducer";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 // importing AuthStack Screens
 import { LandingPage } from "./screens/authStack/LandingPage";
 import { SignIn } from "./screens/authStack/SignIn";
 import { SignUp } from "./screens/authStack/SignUp";
 
-// importing Tab Screens
+// importing BottomTab Screens
 import { HiveHome } from "./screens/bottomTabScreens/HiveHome";
 import { CreatePost } from "./screens/bottomTabScreens/CreatePost";
 import { Events } from "./screens/bottomTabScreens/Events";
-import { FreeYourStuff } from "./screens/bottomTabScreens/FreeYourStuff";
+import { BeeThere } from "./screens/bottomTabScreens/BeeThere";
 
 //importing DrawerScreens (and custom functions)
 import { CustomDrawerContent } from "./screens/drawerItems/CustomDrawerContent";
+
 // import { ProfileScreen }from './components/drawerItems/ProfileStack/ProfileScreen';
-import { SavedItems } from "./screens/drawerItems/SavedItems";
 import { BeesInMyHive } from "./screens/drawerItems/BeesInMyHive";
-import { DirectMessages } from "./screens/drawerItems/DirectMessages";
+
+// import TopTab Screens
+import { SavedPosts } from './screens/SavedPosts';
+import { SavedEvents } from './screens/SavedEvents';
+import { SavedBeeThere } from './screens/SavedBeeThere';
 
 //importing ProfileStackScreens
 import { PersonalProfileScreen } from "./screens/drawerItems/PersonalProfileStack/PersonalProfileScreen";
@@ -47,56 +52,39 @@ const AuthStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 //creating the DrawerNavigator
 const AppDrawer = createDrawerNavigator();
+// creating the TopTabNavigator
+const TopTab = createMaterialTopTabNavigator();
 //creating ProfileStack
 const PersonalProfileStack = createStackNavigator();
 //creating a stackNavigator consist of: HiveHome Screen + UserProfile Screen
 const HiveHomeStack = createStackNavigator();
 
-//declaring HiveHomeStackScreens
-const HiveHomeStackScreens = () => (
-  <HiveHomeStack.Navigator initialRouteName="HiveHome">
-    <HiveHomeStack.Screen
-      name="HiveHome"
-      component={HiveHome}
-      options={{ headerShown: false }}
+//declaring AuthStackScreens
+const AuthStackScreens = () => (
+  <AuthStack.Navigator initialRouteName="LandingPage" headerMode="false">
+    <AuthStack.Screen
+      name="LandingPage"
+      component={LandingPage}
+      options={{ title: "Welcome" }}
     />
-    <HiveHomeStack.Screen
-      name="UserProfile"
-      component={UserProfileScreen}
-      options={{
-        title: "user profile",
-        headerStyle: { backgroundColor: "#37cab8" },
-        headerTintColor: "#ffffff",
-      }}
+    <AuthStack.Screen
+      name="SignUp"
+      component={SignUp}
+      options={{ title: "Sign up" }}
     />
-  </HiveHomeStack.Navigator>
-);
-
-//declaring ProfileStackScreens
-const PersonalProfileStackScreens = () => (
-  <PersonalProfileStack.Navigator>
-    <PersonalProfileStack.Screen
-      name="PersonalProfileScreen"
-      component={PersonalProfileScreen}
-      options={{ headerShown: false }}
+    <AuthStack.Screen
+      name="SignIn"
+      component={SignIn}
+      options={{ title: "Sign In" }}
     />
-    <PersonalProfileStack.Screen
-      name="EditPersonalProfileScreen"
-      component={EditPersonalProfileScreen}
-      options={{
-        title: "Edit profile",
-        headerStyle: { backgroundColor: "#37cab8" },
-        headerTintColor: "#ffffff",
-      }}
-    />
-  </PersonalProfileStack.Navigator>
+  </AuthStack.Navigator>
 );
 
 //declaring TabsNavigatorScreens
 const TabScreens = () => (
   <Tab.Navigator
     initialRouteName="HiveHome"
-    tabBarOptions={{ activeTintColor: "#37cab8" }}>
+    tabBarOptions={{ activeTintColor: "#37cab8",tabStyle:{borderTopColor:'#37cab8',borderTopWidth:1} }}>
     <Tab.Screen
       name="HiveHomeStack"
       component={HiveHomeStackScreens}
@@ -136,50 +124,82 @@ const TabScreens = () => (
       }}
     />
     <Tab.Screen
-      name="FreeYourStuff"
-      component={FreeYourStuff}
+      name="BeeThere"
+      component={BeeThere}
       options={{
-        title: "Free your stuff",
+        title: "bee there!",
         tabBarIcon: ({ focused, color, size }) => (
-          <Ionicons name="basket" size={size} color={color} focused={focused} />
+          <MaterialCommunityIcons name="bee-flower" size={size} color={color} focused={focused} />
         ),
       }}
     />
   </Tab.Navigator>
 );
 
-const AuthStackScreens = () => (
-  <AuthStack.Navigator initialRouteName="LandingPage" headerMode="false">
-    <AuthStack.Screen
-      name="LandingPage"
-      component={LandingPage}
-      options={{ title: "Welcome" }}
-    />
-    <AuthStack.Screen
-      name="SignUp"
-      component={SignUp}
-      options={{ title: "Sign up" }}
-    />
-    <AuthStack.Screen
-      name="SignIn"
-      component={SignIn}
-      options={{ title: "Sign In" }}
-    />
-  </AuthStack.Navigator>
-);
+//declaring AppDrawerScreens
 const AppDrawerScreens = () => (
   <AppDrawer.Navigator
     drawerContent={(props) => <CustomDrawerContent {...props} />}
     drawerType="slide">
     <AppDrawer.Screen name="Tab" component={TabScreens} />
-    <AppDrawer.Screen
-      name="PersonalPofileScreen"
-      component={PersonalProfileStackScreens}
-    />
+    <AppDrawer.Screen name="PersonalPofileScreen" component={PersonalProfileStackScreens}/>
     <AppDrawer.Screen name="BeesInMyHive" component={BeesInMyHive} />
-    <AppDrawer.Screen name="SavedItems" component={SavedItems} />
+    <AppDrawer.Screen name="SavedItems" component={TopTabScreens} />
   </AppDrawer.Navigator>
 );
+
+//declaring TopTabNavigatorScreens
+const TopTabScreens = ()=> (
+  <TopTab.Navigator  
+    tabBarOptions={{activeTintColor:'#fff' , labelStyle:{fontSize:14,fontWeight:'bold'}, 
+      indicatorStyle:{borderWidth:2, borderColor:'#ffffff' }, style:{backgroundColor:'#37cab8', marginTop:10, height:60} }}
+      >
+    <TopTab.Screen name='SavedPosts' component={SavedPosts} options={{title:'saved posts'}} />
+    <TopTab.Screen name='SavedEvents' component={SavedEvents} options={{title:'saved events'}}/>
+    <TopTab.Screen name='SavedBeeThere' component={SavedBeeThere} options={{title:'bee there '}}/>
+  </TopTab.Navigator>
+)
+
+//declaring HiveHomeStackScreens
+const HiveHomeStackScreens = () => (
+  <HiveHomeStack.Navigator initialRouteName="HiveHome">
+    <HiveHomeStack.Screen
+      name="HiveHome"
+      component={HiveHome}
+      options={{ headerShown: false }}
+    />
+    <HiveHomeStack.Screen
+      name="UserProfile"
+      component={UserProfileScreen}
+      options={{
+        title: "Bee profile",
+        headerStyle: { backgroundColor: "#37cab8" },
+        headerTintColor: "#ffffff",
+      }}
+    />
+  </HiveHomeStack.Navigator>
+);
+
+//declaring ProfileStackScreens
+const PersonalProfileStackScreens = () => (
+  <PersonalProfileStack.Navigator>
+    <PersonalProfileStack.Screen
+      name="PersonalProfileScreen"
+      component={PersonalProfileScreen}
+      options={{ headerShown: false }}
+    />
+    <PersonalProfileStack.Screen
+      name="EditPersonalProfileScreen"
+      component={EditPersonalProfileScreen}
+      options={{
+        title: "Edit profile",
+        headerStyle: { backgroundColor: "#37cab8" },
+        headerTintColor: "#ffffff",
+      }}
+    />
+  </PersonalProfileStack.Navigator>
+);
+
 
 export default function App() {
   const [state, dispatch] = useReducer(appReducer, initialState);

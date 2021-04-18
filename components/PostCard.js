@@ -80,7 +80,15 @@ export const PostCard = (props) => {
 =======
     //this useNavigation function enable us to use the "navigation props" in deep nested components
     const navigation = useNavigation();
+    //with this following useState, we enabling the postCard component to read the post-props coming from the parent Component
     const [post, setpost] = useState(props.postObj)
+
+    //controlling the comment Modal
+    const [comment, setComment] = useState('');
+    const [modalOpen, setModalOpen] = useState(false);
+    //controlling the post options icon
+    const [showOptions, setShowOptions] = useState(false)
+
     return (
         <Container>
             <Card>
@@ -94,9 +102,18 @@ export const PostCard = (props) => {
                             </UserInfoText>
                         </TouchableOpacity>
                     </UserInfo>
-                    <TouchableOpacity style={{margin:10}}>
+                    <TouchableOpacity style={{margin:10}} onPress={ ()=> setShowOptions(!showOptions) }>
                         <Ionicons name='options' size={24} color={'#37cab8'}/>
                     </TouchableOpacity>
+                    {showOptions?
+                    <View>
+                    <PostOptions postId={post.postId}/>
+                    </View>
+                    :
+                    <View>
+                        <Text></Text>
+                    </View>
+                    }
                 </View>
                 { post.postText?
                 <PostText>
@@ -116,10 +133,38 @@ export const PostCard = (props) => {
                         <InteractionText>like</InteractionText>
                     </Interaction>
 
-                    <Interaction>
+                    <Interaction onPress={()=>setModalOpen(!modalOpen)}>
                         <Ionicons name="md-chatbubble-outline" size={20} color={'#37cab8'}/>
-                        <InteractionText>Comment</InteractionText>
+                        <InteractionText>Comment</InteractionText>      
                     </Interaction>
+
+                    <Modal 
+                        animationType={'slide'}
+                        visible={modalOpen}
+                        transparent={true}
+                        >
+                        <View>
+                        <ScrollView>
+                            <View style={styles.comment}>
+                                <TextInput
+                                    style={styles.commentInput}
+                                    placeholder="write a comment!"
+                                    multiline
+                                    numberOfLines={5}
+                                    onChangeText={(comment)=> setComment(comment)}
+                                />
+                                <View >
+                                    <TouchableOpacity style={styles.commentBtn} onPress={ ()=> {} }>
+                                        <Text style={{color:'#fff'}}>comment</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.cancelBtn} onPress={()=> setModalOpen(!modalOpen)}>
+                                        <Text style={{color:'#000'}}>Cancel</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </ScrollView>
+                        </View>    
+                    </Modal>
                     
                     <Interaction>
                         <Ionicons name='bookmark-outline' size={20} color={'#37cab8'}/>

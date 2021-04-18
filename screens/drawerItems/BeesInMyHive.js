@@ -24,8 +24,7 @@ export const BeesInMyHive = ({navigation}) => {
         })
     }, [isFocused])
     return (
-        <ScrollView>
-            <SafeAreaView>
+        <SafeAreaView>
             <Header 
                 backgroundColor='#37cab8'
                 leftComponent={
@@ -44,8 +43,7 @@ export const BeesInMyHive = ({navigation}) => {
                 }}/>)}
                 keyExtractor={user => user._id}
             />
-            </SafeAreaView>
-        </ScrollView>
+        </SafeAreaView>
     )
 };
 
