@@ -8,7 +8,9 @@ import {
   SafeAreaView,
 } from "react-native";
 
-export const UserProfileScreen = ({ navigation }) => {
+export const UserProfileScreen = ({ props, route }) => {
+  const { username } = route.params;
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#f8f8f8" }}>
       <View style={styles.container}>
@@ -16,7 +18,7 @@ export const UserProfileScreen = ({ navigation }) => {
           style={styles.userImg}
           source={{ uri: "https://picsum.photos/id/1027/200/300" }}
         />
-        <Text style={styles.userName}> Nicole Abraham </Text>
+        <Text style={styles.userName}> {JSON.stringify(username)} </Text>
         <Text style={styles.aboutUser}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad

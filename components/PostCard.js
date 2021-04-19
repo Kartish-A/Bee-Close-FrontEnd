@@ -66,7 +66,9 @@ export const PostCard = (props) => {
           <UserInfo>
             <TouchableOpacity
               style={{ flexDirection: "row" }}
-              onPress={() => navigation.navigate("UserProfile")}>
+              onPress={() =>
+                navigation.navigate("UserProfile", { username: post.username })
+              }>
               <UserImg
                 source={{ uri: "https://picsum.photos/id/1027/200/300" }}
               />
