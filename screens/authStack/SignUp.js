@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  SafeAreaView,
-  ScrollView,
-} from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView, ScrollView } from "react-native";
 import { Header, Input } from "react-native-elements";
 import axios from "axios";
 import { Ionicons } from "@expo/vector-icons";
@@ -36,7 +28,6 @@ export function SignUp({ navigation }) {
         if (response.data.success) {
           setUserId(response.data.user._id);
         }
-
         console.log(response);
       })
       .catch(function (error) {

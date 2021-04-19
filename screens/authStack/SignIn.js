@@ -1,6 +1,11 @@
 import React, { useState, useContext } from "react";
 import { AppContext } from "../../App";
-import { setToken, setUsername, login } from "../../appContextActions";
+import {
+  setToken,
+  setUsername,
+  login,
+  setUserId,
+} from "../../appContextActions";
 import {
   View,
   Text,
@@ -35,9 +40,10 @@ export function SignIn({ navigation, route }) {
               response.data.user.firstName + " " + response.data.user.lastName
             )
           );
+          dispatch(setUserId(response.data.user._id));
           console.log(token);
+          console.log(response.data.user._id);
         }
-
         console.log(response);
       })
       .catch(function (error) {

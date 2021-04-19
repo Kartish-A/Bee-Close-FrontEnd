@@ -25,3 +25,10 @@ export function setUsername(username) {
     payload: username,
   };
 }
+
+export function setUserId(userId) {
+  return {
+    type: "SETUSERID",
+    payload: userId,
+  };
+}

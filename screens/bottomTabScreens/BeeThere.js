@@ -1,23 +1,23 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Image, TouchableOpacity, StyleSheet, ScrollView, FlatList, View, Text, SafeAreaView } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react'
+import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList, ScrollView, SafeAreaView } from 'react-native'
 import { Header } from 'react-native-elements'
-import { EventCard } from '../../components/EventCard'
+import { EventCard } from '../../components/EventCard';
 import { Ionicons } from '@expo/vector-icons';
 import { AppContext } from '../../App';
 import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios'
 
 
-export const Events = ({ navigation }) => {
+export const BeeThere = ({ navigation }) => {
 
-    const { state } = useContext(AppContext);
+    const { state } = useContext(AppContext)
 
-    const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState([])
 
-    const isFocused = useIsFocused();
+    const isFocused = useIsFocused()
 
     useEffect(() => {
-        axios.get(`https://bee-close.herokuapp.com/api/posts/event`, {
+        axios.get(`https://bee-close.herokuapp.com/api/posts/giveaway`, {
             headers: {
                 'Authorization': `Bearer ${state.token}`
             }
@@ -31,7 +31,7 @@ export const Events = ({ navigation }) => {
 
     return (
         <SafeAreaView style={{ flex: 1, width: '100%' }}>
-            <ScrollView >
+            <ScrollView>
                 <Header
                     backgroundColor='#37cab8'
                     leftComponent={
@@ -60,7 +60,7 @@ export const Events = ({ navigation }) => {
                     />
                     :
                     <View style={styles.container}>
-                        <Text style={{ fontSize: 24 }}>sorry no Events posts</Text>
+                        <Text style={{ fontSize: 24 }}>sorry no items to be shown</Text>
                     </View>
                 }
             </ScrollView>
@@ -75,3 +75,4 @@ const styles = StyleSheet.create({
         backgroundColor: '#f7f7f7',
     }
 })
+

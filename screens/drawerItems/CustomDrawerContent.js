@@ -35,7 +35,7 @@ export const CustomDrawerContent=({navigation,props})=>{
                             rounded
                             source={{
                             uri:
-                                'https://iso.500px.com/wp-content/uploads/2016/03/stock-photo-142984111.jpg'
+                                'https://picsum.photos/200/300'
                             }}
                             />
                             <View style={{marginLeft:15, flexDirection:'column'}}>
@@ -49,7 +49,7 @@ export const CustomDrawerContent=({navigation,props})=>{
                 <DrawerItem 
                     icon={() => <Ionicons name="ios-person-circle-outline" size={24} color="black" /> }
                     label="Profile"
-                    onPress={()=> navigation.navigate('PersonalPofileScreen')}
+                    onPress={()=> navigation.navigate('PersonalPofileScreen',{user:state.user})}
                 />
                 <DrawerItem 
                 icon={() =>  <Ionicons name="chatbubbles-outline" size={24} color="black" />}
@@ -74,7 +74,6 @@ export const CustomDrawerContent=({navigation,props})=>{
                     label="Sign out"
                     onPress= { ()=> {
                         dispatch(logout())
-                        navigation.navigate('AuthStackScreens', { screen: 'SignIn'})
                     }}
                 />
             </Drawer.Section>
