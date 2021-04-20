@@ -40,7 +40,8 @@ import { UserProfileScreen } from "./screens/UserProfileScreen";
 const initialState = {
   isLoggedIn: false,
   token: AsyncStorage.getItem("token"),
-  username: "",
+  username: '',
+  userId: ''
 };
 
 //initialising the App context (central storage)
@@ -84,14 +85,14 @@ const AuthStackScreens = () => (
 const TabScreens = () => (
   <Tab.Navigator
     initialRouteName="HiveHome"
-    tabBarOptions={{ activeTintColor: "#37cab8",tabStyle:{borderTopColor:'#37cab8',borderTopWidth:1} }}>
+    tabBarOptions={{ activeTintColor: "#37cab8", tabStyle: { borderTopColor: '#37cab8', borderTopWidth: 1 } }}>
     <Tab.Screen
       name="HiveHomeStack"
       component={HiveHomeStackScreens}
       options={{
         title: "Home",
         tabBarIcon: ({ focused, color, size }) => (
-          <Ionicons name="home" size={size}  color={color} focused={focused} />
+          <Ionicons name="home" size={size} color={color} focused={focused} />
         ),
       }}
     />
@@ -142,21 +143,23 @@ const AppDrawerScreens = () => (
     drawerContent={(props) => <CustomDrawerContent {...props} />}
     drawerType="slide">
     <AppDrawer.Screen name="Tab" component={TabScreens} />
-    <AppDrawer.Screen name="PersonalPofileScreen" component={PersonalProfileStackScreens}/>
+    <AppDrawer.Screen name="PersonalPofileScreen" component={PersonalProfileStackScreens} />
     <AppDrawer.Screen name="BeesInMyHive" component={BeesInMyHive} />
     <AppDrawer.Screen name="SavedItems" component={TopTabScreens} />
   </AppDrawer.Navigator>
 );
 
 //declaring TopTabNavigatorScreens
-const TopTabScreens = ()=> (
-  <TopTab.Navigator  
-    tabBarOptions={{activeTintColor:'#fff' , labelStyle:{fontSize:14,fontWeight:'bold'}, 
-      indicatorStyle:{borderWidth:2, borderColor:'#ffffff' }, style:{backgroundColor:'#37cab8', marginTop:10, height:60} }}
-      >
-    <TopTab.Screen name='SavedPosts' component={SavedPosts} options={{title:'saved posts'}} />
-    <TopTab.Screen name='SavedEvents' component={SavedEvents} options={{title:'saved events'}}/>
-    <TopTab.Screen name='SavedBeeThere' component={SavedBeeThere} options={{title:'bee there '}}/>
+const TopTabScreens = () => (
+  <TopTab.Navigator
+    tabBarOptions={{
+      activeTintColor: '#fff', labelStyle: { fontSize: 14, fontWeight: 'bold' },
+      indicatorStyle: { borderWidth: 2, borderColor: '#ffffff' }, style: { backgroundColor: '#37cab8', marginTop: 10, height: 60 }
+    }}
+  >
+    <TopTab.Screen name='SavedPosts' component={SavedPosts} options={{ title: 'saved posts' }} />
+    <TopTab.Screen name='SavedEvents' component={SavedEvents} options={{ title: 'saved events' }} />
+    <TopTab.Screen name='SavedBeeThere' component={SavedBeeThere} options={{ title: 'bee there ' }} />
   </TopTab.Navigator>
 )
 
