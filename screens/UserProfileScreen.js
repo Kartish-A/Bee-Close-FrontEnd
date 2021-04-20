@@ -3,18 +3,18 @@ import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView } from 'r
 
 
 export const UserProfileScreen = ({ props, route }) => {
-    const { username, email } = route.params;
+    const { username, email, userImg } = route.params;
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#f8f8f8' }}>
             <View style={styles.container} >
                 <Image style={styles.userImg}
-                    source={{ uri: 'https://picsum.photos/id/1027/200/300' }}
+                    source={{ uri: {userImg} }}
                 />
           <Text style={styles.userName}> {JSON.stringify(username)} </Text>
           <Text style={styles.userName}> {JSON.stringify(email)} </Text>
                 <Text style={styles.aboutUser}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqui
+                    This is {username} who lives in your Hive.
                 </Text>
 
                 <View style={styles.userBtnWrapper}>

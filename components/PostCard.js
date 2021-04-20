@@ -8,6 +8,7 @@ import {
     InteractionWrapper, Interaction, InteractionText, Divider
 } from '../styles/PostCardStyle';
 import { PostOptions } from './PostOptions';
+import axios from 'axios';
 
 
 
@@ -32,6 +33,23 @@ export const PostCard = (props) => {
     const screenDate = date.toLocaleDateString('de-DE', options)
     const hours = date.getHours();
     const minutes = date.getMinutes()
+    const handelComment = () => {
+        axios.put(`https://bee-close.herokuapp.com/api/updatePosts/${post.postId}`, {
+            author: post.username,
+            text: comment,
+            replies: [{}],
+        }, {
+            headers: {
+                Authorization: `Bearer ${state.token}`,
+            },
+        })
+            .then(res => {
+                if (res.data.success) {
+                    console.log(res.data)
+                    setModalOpen(false)
+                }
+        })
+    }
 
     return (
         <Container>
@@ -39,7 +57,7 @@ export const PostCard = (props) => {
                 <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
                     <UserInfo>
                         <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => navigation.navigate('UserProfile', { username: post.username })}>
-                            <UserImg source={{ uri: 'https://picsum.photos/id/1027/200/300' }} />
+                            <UserImg source={post.userImg} />
                             <UserInfoText>
                                 <UserName>{post.username}</UserName>
                                 <PostTime>{`${screenDate}    ${hours}:${minutes}`}</PostTime>
@@ -98,6 +116,21 @@ export const PostCard = (props) => {
                     >
                         <View>
                             <ScrollView>
+
+                                {
+                                    post.comments ? post.comments.map(x => <View>
+                                        <Text>
+                                            {x.author}
+                                        </Text>
+                                    </View>) : <View>
+                                        <Text>
+
+                                        </Text>
+                                    </View>
+                        
+                                }
+
+
                                 <View style={styles.comment}>
                                     <TextInput
                                         style={styles.commentInput}
@@ -107,7 +140,7 @@ export const PostCard = (props) => {
                                         onChangeText={(comment) => setComment(comment)}
                                     />
                                     <View >
-                                        <TouchableOpacity style={styles.commentBtn} onPress={() => { }}>
+                                        <TouchableOpacity style={styles.commentBtn} onPress={handelComment}>
                                             <Text style={{ color: '#fff' }}>comment</Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity style={styles.cancelBtn} onPress={() => setModalOpen(!modalOpen)}>

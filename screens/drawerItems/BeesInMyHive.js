@@ -39,7 +39,8 @@ export const BeesInMyHive = ({navigation}) => {
                 data={users}
                 renderItem={({item})=> (<ContactPerson usersObj={{
                     username: item.firstName + ' ' + item.lastName,
-                    email: item.email, 
+                    email: item.email,
+                    userImg: item.photo
                     // postImg:  item.image,
                 }}/>)}
                 keyExtractor={user => user._id}

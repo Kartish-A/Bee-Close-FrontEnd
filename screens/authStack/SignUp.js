@@ -191,7 +191,7 @@ export function SignUp({ navigation }) {
             </View>
           ) : (
             <View>
-              <Text>test</Text>
+              <Text></Text>
             </View>
           )}
         </View>
