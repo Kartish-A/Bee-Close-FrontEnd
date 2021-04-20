@@ -8,6 +8,7 @@ import {
   TextInput,
   Modal,
   ScrollView,
+  FlatList,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
@@ -27,6 +28,7 @@ import {
   Divider,
 } from "../styles/PostCardStyle";
 import { PostOptions } from "./PostOptions";
+import axios from "axios";
 
 export const PostCard = (props) => {
   const { state, dispatch } = useContext(AppContext);
@@ -53,6 +55,28 @@ export const PostCard = (props) => {
   const screenDate = date.toLocaleDateString("de-DE", options);
   const hours = date.getHours();
   const minutes = date.getMinutes();
+  const handelComment = () => {
+    axios
+      .put(
+        `https://bee-close.herokuapp.com/api/updatePosts/${post.postId}`,
+        {
+          author: comment.username,
+          text: comment,
+          replies: [{}],
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        }
+      )
+      .then((res) => {
+        if (res.data.success) {
+          console.log(res.data);
+          setModalOpen(false);
+        }
+      });
+  };
 
   return (
     <Container>
@@ -69,9 +93,7 @@ export const PostCard = (props) => {
               onPress={() =>
                 navigation.navigate("UserProfile", { username: post.username })
               }>
-              <UserImg
-                source={{ uri: "https://picsum.photos/id/1027/200/300" }}
-              />
+              <UserImg source={post.userImg} />
               <UserInfoText>
                 <UserName>{post.username}</UserName>
                 <PostTime>{`${screenDate}    ${hours}:${minutes}`}</PostTime>
@@ -129,6 +151,18 @@ export const PostCard = (props) => {
           <Modal animationType={"slide"} visible={modalOpen} transparent={true}>
             <View>
               <ScrollView>
+                {post.comments ? (
+                  post.comments.map((item) => (
+                    <View>
+                      <Text>{item.text}</Text>
+                    </View>
+                  ))
+                ) : (
+                  <View>
+                    <Text></Text>
+                  </View>
+                )}
+
                 <View style={styles.comment}>
                   <TextInput
                     style={styles.commentInput}
@@ -140,7 +174,7 @@ export const PostCard = (props) => {
                   <View>
                     <TouchableOpacity
                       style={styles.commentBtn}
-                      onPress={() => {}}>
+                      onPress={handelComment}>
                       <Text style={{ color: "#fff" }}>comment</Text>
                     </TouchableOpacity>
                     <TouchableOpacity

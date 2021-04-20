@@ -65,10 +65,11 @@ export const HiveHome = ({ navigation }) => {
                 postObj={{
                   username: item.user.firstName + " " + item.user.lastName,
                   postText: item.text,
-                  postImg: item.image,
+                  postImg: item.photo,
                   postTime: item.timestamp,
                   postId: item._id,
                   userId: item.user._id,
+                  comments: item.comments,
                 }}
               />
             )}
