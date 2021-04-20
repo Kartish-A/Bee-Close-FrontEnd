@@ -153,7 +153,7 @@ export const CreatePost = ({ navigation, route }) => {
     setText({ text: "" });
   };
 
-<<<<<<< HEAD
+
   return (
     <View style={{ flex: 1 }}>
       <Header

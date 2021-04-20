@@ -15,7 +15,7 @@ export const ContactPerson = (props)=> {
                 </UserImgWrapper>
                 <UserInfoText>
                     <UserName>{user.username}</UserName> 
-                    <Interaction onPress={()=> navigation.navigate('UserProfile')}>
+                    <Interaction onPress={()=> navigation.navigate('UserProfile', { username: user.username, email: user.email })}>
                         <ProfileBtn> see profile </ProfileBtn>  
                     </Interaction> 
                 </UserInfoText> 

@@ -38,7 +38,8 @@ export const BeesInMyHive = ({navigation}) => {
             <FlatList
                 data={users}
                 renderItem={({item})=> (<ContactPerson usersObj={{
-                    username: item.firstName + ' '+ item.lastName,
+                    username: item.firstName + ' ' + item.lastName,
+                    email: item.email, 
                     // postImg:  item.image,
                 }}/>)}
                 keyExtractor={user => user._id}
