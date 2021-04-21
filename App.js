@@ -36,6 +36,8 @@ import { EditPersonalProfileScreen } from "./screens/drawerItems/PersonalProfile
 
 import { UserProfileScreen } from "./screens/UserProfileScreen";
 
+import { ChatScreen } from './screens/ChatScreen'
+
 // const [isLoggedIn, setisLoggedIn] = useState(false)
 const initialState = {
   isLoggedIn: false,
@@ -153,8 +155,8 @@ const AppDrawerScreens = () => (
 const TopTabScreens = () => (
   <TopTab.Navigator
     tabBarOptions={{
-      activeTintColor: '#fff', labelStyle: { fontSize: 14, fontWeight: 'bold' },
-      indicatorStyle: { borderWidth: 2, borderColor: '#ffffff' }, style: { backgroundColor: '#37cab8', marginTop: 10, height: 60 }
+      activeTintColor: '#fff', labelStyle: { fontSize: 14 },
+      indicatorStyle: { borderWidth: 3, borderColor: '#ffffff' }, style: { backgroundColor: '#37cab8', marginTop: 15, height: 60 }
     }}
   >
     <TopTab.Screen name='SavedPosts' component={SavedPosts} options={{ title: 'saved posts' }} />
@@ -179,6 +181,15 @@ const HiveHomeStackScreens = () => (
         headerStyle: { backgroundColor: "#37cab8" },
         headerTintColor: "#ffffff",
       }}
+    />
+    <HiveHomeStack.Screen
+      name="ChatScreen"
+      component={ChatScreen}
+      options={({ route }) => ({
+        title: route.params.username,
+        headerStyle: { backgroundColor: '#37cab8' }
+      })}
+
     />
   </HiveHomeStack.Navigator>
 );

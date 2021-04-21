@@ -2,22 +2,24 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
 
 
-export const UserProfileScreen = ({ props, route }) => {
+
+export const UserProfileScreen = ({ navigation, route }) => {
     const { username } = route.params;
+
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#f8f8f8' }}>
             <View style={styles.container} >
                 <Image style={styles.userImg}
-                    source={{ uri: 'https://picsum.photos/id/1027/200/300' }}
+                    source={{ uri: 'https://picsum.photos/id/338/200/300' }}
                 />
-                <Text style={styles.userName}> {JSON.stringify(username)} </Text>
+                <Text style={styles.userName}> {username} </Text>
                 <Text style={styles.aboutUser}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqui
                 </Text>
 
                 <View style={styles.userBtnWrapper}>
-                    <TouchableOpacity style={styles.userBtn} onPress={() => { }}>
+                    <TouchableOpacity style={styles.userBtn} onPress={() => navigation.navigate('ChatScreen', { username: username })}>
                         <Text style={styles.userBtnTxt}>Message</Text>
                     </TouchableOpacity>
                 </View>

@@ -8,11 +8,13 @@ import { useIsFocused } from '@react-navigation/native'
 import axios from 'axios'
 
 
-export const HiveHome = ({ navigation }) => {
-
-    const [posts, setPosts] = useState([]);
+export const HiveHome = ({ navigation, route }) => {
 
     const { state } = useContext(AppContext);
+
+    const [refreshPage, setRefreshPage] = useState(route.params?.refresh ?? '')
+
+    const [posts, setPosts] = useState([]);
 
     const isFocused = useIsFocused();
 
@@ -27,43 +29,43 @@ export const HiveHome = ({ navigation }) => {
                     setPosts(res.data.allPosts.reverse())
                 }
             })
-    }, [isFocused])
+    }, [isFocused, refreshPage])
 
 
     return (
         <SafeAreaView style={{ flex: 1, width: '100%' }}>
-            <ScrollView>
-                <Header
-                    backgroundColor='#37cab8'
-                    leftComponent={
-                        <TouchableOpacity onPress={() => navigation.openDrawer()} >
-                            <Ionicons name="menu" size={30} color='#fff' />
-                        </TouchableOpacity>
-                    }
-                    centerComponent={{ text: 'BEE CLOSE', style: { color: '#fff', fontSize: 20 } }}
-                    rightComponent={<Image source={require('../../assets/logo(1).png')} style={{ width: 40, height: 40 }} />}
-                />
-                {(posts.length) ?
-                    <FlatList
-                        data={posts}
-                        renderItem={({ item }) => (<PostCard postObj={{
-                            username: item.user.firstName + ' ' + item.user.lastName,
-                            postText: item.text,
-                            postImg: item.image,
-                            postTime: item.timestamp,
-                            postId: item._id,
-                            userId: item.user._id
-                        }}
-                        />
-                        )}
-                        keyExtractor={post => post._id}
-                    />
-                    :
-                    <View>
-                        <Text>sorry no regular posts</Text>
-                    </View>
+
+            <Header
+                backgroundColor='#37cab8'
+                leftComponent={
+                    <TouchableOpacity onPress={() => navigation.openDrawer()} >
+                        <Ionicons name="menu" size={30} color='#fff' />
+                    </TouchableOpacity>
                 }
-            </ScrollView>
+                centerComponent={{ text: 'BEE CLOSE', style: { color: '#fff', fontSize: 20 } }}
+                rightComponent={<Image source={require('../../assets/logo(1).png')} style={{ width: 40, height: 40 }} />}
+            />
+            {(posts.length) ?
+                <FlatList
+                    data={posts}
+                    renderItem={({ item }) => (<PostCard postObj={{
+                        username: item.user.firstName + ' ' + item.user.lastName,
+                        postText: item.text,
+                        postImg: item.image,
+                        postTime: item.timestamp,
+                        postId: item._id,
+                        userId: item.user._id
+                    }}
+                    />
+                    )}
+                    keyExtractor={post => post._id}
+                />
+                :
+                <View>
+                    <Text>sorry no regular posts</Text>
+                </View>
+            }
+
         </SafeAreaView>
     );
 };

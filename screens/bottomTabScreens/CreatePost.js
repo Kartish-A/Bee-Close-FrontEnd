@@ -12,9 +12,12 @@ import { Ionicons } from "@expo/vector-icons";
 import { PhotoPicker } from "../../components/PhotoPicker";
 import { AppContext } from "../../App";
 import ActionButton from "react-native-action-button";
+import { useIsFocused } from '@react-navigation/native'
 import axios from "axios";
 
-export const CreatePost = ({ navigation, route }) => {
+export const CreatePost = ({ navigation, route, props }) => {
+
+    const isFocused = useIsFocused();
 
     const { state } = useContext(AppContext);
 
@@ -71,10 +74,11 @@ export const CreatePost = ({ navigation, route }) => {
                     }
                 });
         }
-    }, []);
+    }, [postId, isFocused]);
 
     const handleEditPost = () => {
         const chosen = Object.keys(checked).find((key) => checked[key] === true);
+        console.log('this is the text:', text);
         //request to update a specified single post
         axios.put(`https://bee-close.herokuapp.com/api/posts/${postId}`,
             {
@@ -90,10 +94,11 @@ export const CreatePost = ({ navigation, route }) => {
 
             .then((res) => {
                 if (res.data.success) {
+                    console.log(res.data);
                     switch (chosen) {
                         case "regular":
                         default:
-                            navigation.navigate("HiveHome");
+                            navigation.navigate("HiveHome", { refresh: 1 });
                             break;
                         case "event":
                             navigation.navigate("Events");
@@ -101,14 +106,14 @@ export const CreatePost = ({ navigation, route }) => {
                         case "giveaway":
                             navigation.navigate("BeeThere");
                     }
+                    setText('')
+                    setPostId('')
                 }
             })
             .catch((err) => {
                 console.log(err);
             });
-        setText({
-            text: "",
-        });
+
     };
 
     const handleSubmitPost = () => {
@@ -144,7 +149,7 @@ export const CreatePost = ({ navigation, route }) => {
             .catch((err) => {
                 console.log(err);
             });
-        setText({ text: "" });
+        setText("");
     };
 
     return (
@@ -255,7 +260,7 @@ export const CreatePost = ({ navigation, route }) => {
                 <ActionButton.Item
                     buttonColor="#3498db"
                     title="Choose Photo"
-                    onPress={() => { PhotoPicker }} >
+                    onPress={(props) => { PhotoPicker }} >
                     <Ionicons name="folder-open" style={styles.actionButtonIcon} />
                 </ActionButton.Item>
             </ActionButton>

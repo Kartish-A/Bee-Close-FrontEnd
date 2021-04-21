@@ -39,7 +39,7 @@ export const PostCard = (props) => {
                 <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
                     <UserInfo>
                         <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => navigation.navigate('UserProfile', { username: post.username })}>
-                            <UserImg source={{ uri: 'https://picsum.photos/id/1027/200/300' }} />
+                            <UserImg source={{ uri: 'https://picsum.photos/id/338/200/300' }} />
                             <UserInfoText>
                                 <UserName>{post.username}</UserName>
                                 <PostTime>{`${screenDate}    ${hours}:${minutes}`}</PostTime>
