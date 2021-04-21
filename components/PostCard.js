@@ -61,7 +61,7 @@ export const PostCard = (props) => {
       .put(
         `https://bee-close.herokuapp.com/api/updatePosts/${post.postId}`,
         {
-          author: comment.username,
+          author: state.username,
           text: comment,
           replies: [{}],
         },
