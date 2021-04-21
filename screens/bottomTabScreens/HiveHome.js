@@ -1,8 +1,8 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { Image, View, Text, TouchableOpacity, FlatList, ScrollView, SafeAreaView } from 'react-native';
-import { Header } from 'react-native-elements'
+import { Image, View, Text, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
+import { Header } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
-import { PostCard } from '../../components/PostCard'
+import { PostCard } from '../../components/PostCard';
 import { AppContext } from '../../App';
 import { useIsFocused } from '@react-navigation/native'
 import axios from 'axios'
@@ -26,6 +26,7 @@ export const HiveHome = ({ navigation, route }) => {
         })
             .then(res => {
                 if (res.data.success) {
+                    console.log(res.data);
                     setPosts(res.data.allPosts.reverse())
                 }
             })
@@ -46,20 +47,22 @@ export const HiveHome = ({ navigation, route }) => {
                 rightComponent={<Image source={require('../../assets/logo(1).png')} style={{ width: 40, height: 40 }} />}
             />
             {(posts.length) ?
-                <FlatList
-                    data={posts}
-                    renderItem={({ item }) => (<PostCard postObj={{
-                        username: item.user.firstName + ' ' + item.user.lastName,
-                        postText: item.text,
-                        postImg: item.image,
-                        postTime: item.timestamp,
-                        postId: item._id,
-                        userId: item.user._id
-                    }}
+                <View>
+                    <FlatList
+                        data={posts}
+                        renderItem={({ item }) => (<PostCard postObj={{
+                            username: item.user.firstName + ' ' + item.user.lastName,
+                            postText: item.text,
+                            postImg: item.image,
+                            postTime: item.timestamp,
+                            postId: item._id,
+                            userId: item.user._id
+                        }}
+                        />
+                        )}
+                        keyExtractor={post => post._id}
                     />
-                    )}
-                    keyExtractor={post => post._id}
-                />
+                </View>
                 :
                 <View>
                     <Text>sorry no regular posts</Text>
