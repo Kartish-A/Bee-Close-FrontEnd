@@ -33,7 +33,7 @@ export const EventCard = (props) => {
             <Card>
                 <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
                     <UserInfo>
-                        <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => navigation.navigate('UserProfile')}>
+                        <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => navigation.navigate('UserProfile', { username: post.username })}>
                             <UserImg source={{ uri: 'https://picsum.photos/id/447/60/60' }} />
                             <UserInfoText>
                                 <UserName>{post.username}</UserName>

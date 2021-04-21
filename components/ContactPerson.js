@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
-import { Container, Card, UserImgWrapper, UserImg, UserInfoText, UserName, Interaction, ProfileBtn} from '../styles/ContactPersonStyle';
+import React, { useState, useContext } from 'react';
+import { Container, Card, UserImgWrapper, UserImg, UserInfoText, UserName, Interaction, ProfileBtn } from '../styles/ContactPersonStyle';
 import { useNavigation } from '@react-navigation/native';
 
 
-export const ContactPerson = (props)=> {
-    
+export const ContactPerson = (props) => {
+
     const navigation = useNavigation();
+
     const [user, setUser] = useState(props.usersObj)
-    return(
+    return (
         <Container>
             <Card>
                 <UserImgWrapper>

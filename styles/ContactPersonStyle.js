@@ -11,7 +11,7 @@ export const Container = styled.View`
 
 export const Card = styled.View`
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     background-color: #37cab8;
     border-radius:15px;
     margin-bottom:10px;
@@ -34,14 +34,14 @@ export const UserImg = styled.Image`
 
 export const UserInfoText = styled.View`
     flex-direction: row;
-    width:250px;
+    width:230px;
     padding-right:10px;
     justify-content: space-around;
     align-items:center;
 `;
 
 export const UserName = styled.Text`
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color:#ffffff
 `;

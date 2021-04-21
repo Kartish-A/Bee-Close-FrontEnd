@@ -18,7 +18,7 @@ export const UserProfileScreen = ({ props, route }) => {
                 </Text>
 
                 <View style={styles.userBtnWrapper}>
-                    <TouchableOpacity style={styles.userBtn} onPress={() => { }}>
+                    <TouchableOpacity style={styles.userBtn} onPress={() => navigation.navigate('ChatScreen', { username: username })}>
                         <Text style={styles.userBtnTxt}>Message</Text>
                     </TouchableOpacity>
                 </View>
