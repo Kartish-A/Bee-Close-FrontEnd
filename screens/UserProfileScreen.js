@@ -3,13 +3,13 @@ import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView } from 'r
 
 
 export const UserProfileScreen = ({ props, route }) => {
-    const { username, email, userImg } = route.params;
+    const { username, email, photo } = route.params;
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#f8f8f8' }}>
             <View style={styles.container} >
                 <Image style={styles.userImg}
-                    source={userImg}
+                    source={photo}
                 />
           <Text style={styles.userName}> {JSON.stringify(username)} </Text>
           <Text style={styles.userName}> {JSON.stringify(email)} </Text>

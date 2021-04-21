@@ -53,7 +53,7 @@ export const PersonalProfileScreen = ({navigation})=> {
             <View style={styles.userInfoSection}>
                 <View style={{flexDirection: 'row', marginTop: 15}}>
                     <Avatar 
-                        source={{ uri: 'https://picsum.photos/200/300' }} size={80} rounded={true}
+                        source={user.photo} size={80} rounded={true}
                     />
                     <View style={{marginLeft: 20}}>
                         <Title style={[styles.title, {

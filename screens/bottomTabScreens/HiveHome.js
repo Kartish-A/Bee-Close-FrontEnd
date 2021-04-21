@@ -63,7 +63,7 @@ export const HiveHome = ({ navigation }) => {
             renderItem={({ item }) => (
               <PostCard
                 postObj={{
-                  userphoto:item.photo,
+                  userphoto:item.user.photo,
                   username: item.user.firstName + " " + item.user.lastName,
                   postText: item.text,
                   postImg: item.photo,

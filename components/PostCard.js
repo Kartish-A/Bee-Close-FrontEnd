@@ -37,6 +37,7 @@ export const PostCard = (props) => {
         axios.put(`https://bee-close.herokuapp.com/api/updatePosts/${post.postId}`, {
             author: post.username,
             text: comment,
+            photo: post.userphoto,
             replies: [{}],
         }, {
             headers: {
@@ -57,7 +58,7 @@ export const PostCard = (props) => {
             <Card>
                 <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
                     <UserInfo>
-                        <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => navigation.navigate('UserProfile', { username: post.username, userphoto: post.userphoto })}>
+                        <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => navigation.navigate('UserProfile', { username: post.username, photo: post.userphoto })}>
                             <UserImg source={post.userphoto} />
                             <UserInfoText>
                                 <UserName>{post.username}</UserName>
