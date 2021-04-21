@@ -3,8 +3,10 @@ import { AppContext } from '../App';
 import { TouchableOpacity, View, Text, StyleSheet, TextInput, Modal, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
-import { Container, Card, UserInfo, UserImg, UserInfoText, UserName, PostTime, PostText, PostImg, InteractionWrapper, Interaction, InteractionText } from '../styles/EventCardStyle';
+import { Container, Card, UserInfo, UserImg, UserInfoText, UserName, PostTime, PostText, PostImg, Divider, InteractionWrapper, Interaction, InteractionText } from '../styles/EventCardStyle';
 import { PostOptions } from './PostOptions';
+import { CommentCard2 } from '../components/CommentCard2'
+import axios from 'axios'
 
 
 export const EventCard = (props) => {
@@ -26,7 +28,30 @@ export const EventCard = (props) => {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const screenDate = date.toLocaleDateString('de-DE', options)
     const hours = date.getHours();
-    const minutes = date.getMinutes()
+    const minutes = date.getMinutes();
+
+    const handleComment = () => {
+        axios
+            .put(
+                `https://bee-close.herokuapp.com/api/updatePosts/${post.postId}`,
+                {
+                    author: state.username,
+                    text: comment,
+                    replies: [{}],
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${state.token}`,
+                    },
+                }
+            )
+            .then((res) => {
+                if (res.data.success) {
+                    console.log(res.data);
+                    setModalOpen(false);
+                }
+            });
+    };
 
     return (
         <Container>
@@ -34,46 +59,47 @@ export const EventCard = (props) => {
                 <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
                     <UserInfo>
                         <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => navigation.navigate('UserProfile', { username: post.username })}>
-                            <UserImg source={{ uri: 'https://picsum.photos/id/447/60/60' }} />
+                            <UserImg source={post.userImg} />
                             <UserInfoText>
                                 <UserName>{post.username}</UserName>
                                 <PostTime>{`${screenDate}    ${hours}:${minutes}`}</PostTime>
                             </UserInfoText>
                         </TouchableOpacity>
                     </UserInfo>
-                    {state.userId == post.userId ?
+                    {state.userId == post.userId ? (
                         <TouchableOpacity style={{ margin: 10 }}
                             onPress={() => setShowOptions(!showOptions)}
                         >
                             <Ionicons name='options' size={24} color={'#fff'} />
                         </TouchableOpacity>
-                        :
+                    ) : (
                         <View>
                             <Text></Text>
                         </View>
-                    }
-                    {showOptions ?
+                    )}
+                    {showOptions ? (
                         <View>
                             <PostOptions postId={post.postId} />
                         </View>
-                        :
+                    ) : (
                         <View>
                             <Text></Text>
                         </View>
-                    }
+                    )}
                 </View>
-                {post.postText ?
+                {post.postText ? (
                     <PostText>
                         {post.postText}
                     </PostText>
-                    :
+                ) : (
                     <PostText></PostText>
-                }
-                {post.postImg ?
+                )}
+                {post.postImg ? (
                     <PostImg source={post.postImg} />
-                    :
+                ) : (
                     <PostText></PostText>
-                }
+                )}
+                <Divider />
                 <InteractionWrapper>
                     <Interaction>
                         <Ionicons name='add-sharp' size={20} color={'#ffffff'} />
@@ -96,16 +122,28 @@ export const EventCard = (props) => {
                     >
                         <View>
                             <ScrollView>
+                                {/* {post.comments ? (
+                                    post.comments.map((item) => (
+                                        <View>
+                                            <Text>{item.text}</Text>
+                                        </View>
+                                    ))
+                                ) : (
+                                    <View>
+                                        <Text></Text>
+                                    </View>
+                                )} */}
+
                                 <View style={styles.comment}>
                                     <TextInput
                                         style={styles.commentInput}
                                         placeholder="write a comment!"
                                         multiline
                                         numberOfLines={5}
-                                        onChangeText={(comment) => setComment(comment)}
+                                        onChangeText={(text) => setComment(text)}
                                     />
                                     <View >
-                                        <TouchableOpacity style={styles.commentBtn} onPress={() => { }}>
+                                        <TouchableOpacity style={styles.commentBtn} onPress={handleComment}>
                                             <Text style={{ color: '#fff' }}>comment</Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity style={styles.cancelBtn} onPress={() => setModalOpen(!modalOpen)}>
@@ -122,7 +160,8 @@ export const EventCard = (props) => {
                         <InteractionText>remind me</InteractionText>
                     </Interaction>
                 </InteractionWrapper>
-
+                <Divider />
+                <CommentCard2 postId={post.postId} />
             </Card>
         </Container>
     )

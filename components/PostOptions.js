@@ -32,7 +32,7 @@ export const PostOptions = (props) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.firstOption}
-                onPress={props.handleEdit}
+                onPress={handleEdit}
             >
                 <Text style={styles.optionText}>Edit post</Text>
             </TouchableOpacity>

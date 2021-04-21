@@ -3,19 +3,22 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
     align-items: center;
-    background-color: #fff;
-    padding: 20px;
-
+    background-color: #37cab8;
+    border-width: 1px;
+    border-color: #37cab8;
+    border-radius: 10px;
+    padding: 7px;
+    
 `;
 
 export const Card = styled.View`
     background-color: #f7f7f7;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 10px;
     border-width: 1px;
-    border-color: #ccc;
+    border-color: #37cab8;
     margin-top:5px;
-    margin-bottom:5px;
+    flex-grow:1
 `;
 
 export const UserInfo = styled.View`

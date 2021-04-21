@@ -8,6 +8,7 @@ import { useIsFocused } from '@react-navigation/native'
 import axios from 'axios'
 
 
+
 export const HiveHome = ({ navigation, route }) => {
 
     const { state } = useContext(AppContext);
@@ -47,22 +48,23 @@ export const HiveHome = ({ navigation, route }) => {
                 rightComponent={<Image source={require('../../assets/logo(1).png')} style={{ width: 40, height: 40 }} />}
             />
             {(posts.length) ?
-                <View>
-                    <FlatList
-                        data={posts}
-                        renderItem={({ item }) => (<PostCard postObj={{
-                            username: item.user.firstName + ' ' + item.user.lastName,
-                            postText: item.text,
-                            postImg: item.image,
-                            postTime: item.timestamp,
-                            postId: item._id,
-                            userId: item.user._id
-                        }}
-                        />
-                        )}
-                        keyExtractor={post => post._id}
+
+                <FlatList
+                    data={posts}
+                    renderItem={({ item }) => (<PostCard postObj={{
+                        username: item.user.firstName + ' ' + item.user.lastName,
+                        postText: item.text,
+                        postImg: item.image,
+                        postTime: item.timestamp,
+                        postId: item._id,
+                        userId: item.user._id,
+                        userImg: item.user.photo
+                    }}
                     />
-                </View>
+                    )}
+                    keyExtractor={post => post._id}
+                />
+
                 :
                 <View>
                     <Text>sorry no regular posts</Text>

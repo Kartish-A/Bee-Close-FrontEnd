@@ -60,6 +60,13 @@ export const PostImg = styled.Image`
     border-width: 1px;
     
 `;
+export const Divider = styled.View`
+    border-bottom-color: #ffffff;
+    border-bottom-width: 1px;
+    width: 97%;
+    align-self: center;
+    margin-top: 5px;
+`;
 
 export const InteractionWrapper = styled.View`
     flex-direction: row;

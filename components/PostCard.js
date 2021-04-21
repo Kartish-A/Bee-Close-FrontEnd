@@ -1,11 +1,7 @@
 import React, { useState, useContext } from "react";
 import { AppContext } from "../App";
 import {
-    TouchableOpacity,
-    View,
-    Text,
-    StyleSheet,
-    TextInput,
+    TouchableOpacity, View, Text, StyleSheet, TextInput,
     Modal,
     ScrollView,
     FlatList,
@@ -13,11 +9,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import {
-    Container,
-    Card,
-    UserInfo,
-    UserImg,
-    UserInfoText,
+    Container, Card, UserInfo, UserImg, UserInfoText,
     UserName,
     PostTime,
     PostText,
@@ -153,7 +145,7 @@ export const PostCard = (props) => {
                     <Modal animationType={"slide"} visible={modalOpen} transparent={true}>
                         <View>
                             <ScrollView>
-                                {post.comments ? (
+                                {/* {post.comments ? (
                                     post.comments.map((item) => (
                                         <View>
                                             <Text>{item.text}</Text>
@@ -163,7 +155,7 @@ export const PostCard = (props) => {
                                     <View>
                                         <Text></Text>
                                     </View>
-                                )}
+                                )} */}
 
                                 <View style={styles.comment}>
                                     <TextInput

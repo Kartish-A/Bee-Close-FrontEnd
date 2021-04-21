@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../App';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { Container, Card, UserInfo, UserInfoText, UserName, CommentTime, CommentText } from '../styles/CommentCardStyle';
+import { Container, Card, UserInfo, UserInfoText, UserName, CommentTime, CommentText } from '../styles/CommentCard2Style';
 import axios from 'axios';
 import { useIsFocused } from '@react-navigation/native'
 
 
 
-export const CommentCard = (props) => {
+export const CommentCard2 = (props) => {
 
     const { state } = useContext(AppContext);
 
@@ -63,7 +63,7 @@ const styles = new StyleSheet.create({
     seeComments: {
         padding: 5,
         paddingLeft: 5,
-        color: '#37cab8',
+        color: '#ffffff',
         fontSize: 16
     }
 })
