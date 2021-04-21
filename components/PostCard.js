@@ -40,6 +40,7 @@ export const PostCard = (props) => {
             replies: [{}],
         }, {
             headers: {
+
                 Authorization: `Bearer ${state.token}`,
             },
         })
@@ -56,8 +57,8 @@ export const PostCard = (props) => {
             <Card>
                 <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
                     <UserInfo>
-                        <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => navigation.navigate('UserProfile', { username: post.username })}>
-                            <UserImg source={post.userImg} />
+                        <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => navigation.navigate('UserProfile', { username: post.username, userphoto: post.userphoto })}>
+                            <UserImg source={post.userphoto} />
                             <UserInfoText>
                                 <UserName>{post.username}</UserName>
                                 <PostTime>{`${screenDate}    ${hours}:${minutes}`}</PostTime>
@@ -116,20 +117,16 @@ export const PostCard = (props) => {
                     >
                         <View>
                             <ScrollView>
-
+                          
                                 {
-                                    post.comments ? post.comments.map(x => <View>
-                                        <Text>
-                                            {x.author}
-                                        </Text>
-                                    </View>) : <View>
-                                        <Text>
-
-                                        </Text>
-                                    </View>
-                        
-                                }
-
+                                    post.comments ?( post.comments.map((item) => {
+                                     
+                                            <View><Text>{item.text}</Text></View>
+                                           })
+                                    )
+                                        :( <View><Text>"nothing"</Text></View>)
+                                    }
+                                   
 
                                 <View style={styles.comment}>
                                     <TextInput

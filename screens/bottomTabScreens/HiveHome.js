@@ -63,6 +63,7 @@ export const HiveHome = ({ navigation }) => {
             renderItem={({ item }) => (
               <PostCard
                 postObj={{
+                  userphoto:item.photo,
                   username: item.user.firstName + " " + item.user.lastName,
                   postText: item.text,
                   postImg: item.photo,
@@ -70,10 +71,11 @@ export const HiveHome = ({ navigation }) => {
                   postId: item._id,
                   userId: item.user._id,
                   comments: item.comments
-                
+               
                 }}
               />
             )}
+            
             keyExtractor={(post) => post._id}
           />
         ) : (

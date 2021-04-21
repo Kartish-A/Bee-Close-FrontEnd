@@ -9,7 +9,7 @@ export const UserProfileScreen = ({ props, route }) => {
         <SafeAreaView style={{ flex: 1, backgroundColor: '#f8f8f8' }}>
             <View style={styles.container} >
                 <Image style={styles.userImg}
-                    source={{ uri: {userImg} }}
+                    source={userImg}
                 />
           <Text style={styles.userName}> {JSON.stringify(username)} </Text>
           <Text style={styles.userName}> {JSON.stringify(email)} </Text>

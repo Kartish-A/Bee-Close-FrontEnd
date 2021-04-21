@@ -41,7 +41,8 @@ const initialState = {
   isLoggedIn: false,
   token: AsyncStorage.getItem("token"),
   username: '',
-  userId: ''
+  userId: '',
+  photo:''
 };
 
 //initialising the App context (central storage)

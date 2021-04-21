@@ -17,6 +17,7 @@ import {
 } from "react-native";
 import { Header, Input } from "react-native-elements";
 import axios from "axios";
+import { PhotoPicker } from "../../components/PhotoPicker";
 
 export function SignIn({ navigation, route }) {
   const [userEmail, setuserEmail] = useState(route.params?.email ?? "");
@@ -29,6 +30,7 @@ export function SignIn({ navigation, route }) {
       .post(`https://bee-close.herokuapp.com/api/users/login`, {
         email: userEmail,
         password: password,
+      
       })
       .then(function (response) {
         if (response.status === 200) {
