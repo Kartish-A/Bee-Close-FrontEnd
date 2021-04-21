@@ -12,7 +12,7 @@ export const UserProfileScreen = ({ props, route }) => {
                     source={photo}
                 />
           <Text style={styles.userName}> {JSON.stringify(username)} </Text>
-          <Text style={styles.userName}> {JSON.stringify(email)} </Text>
+         
                 <Text style={styles.aboutUser}>
                     This is {username} who lives in your Hive.
                 </Text>
