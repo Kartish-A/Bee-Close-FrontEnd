@@ -55,6 +55,7 @@ export const PostCard = (props) => {
   const screenDate = date.toLocaleDateString("de-DE", options);
   const hours = date.getHours();
   const minutes = date.getMinutes();
+
   const handelComment = () => {
     axios
       .put(
