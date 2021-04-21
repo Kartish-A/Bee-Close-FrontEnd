@@ -55,15 +55,7 @@ export const PostCard = (props) => {
     };
     const screenDate = date.toLocaleDateString("de-DE", options);
     const hours = date.getHours();
-    const minutes = date.getMinutes()
-    const handelComment = () => {
-        axios.put(`https://bee-close.herokuapp.com/api/updatePosts/${post.postId}`, {
-            author: post.username,
-            text: comment,
-            photo: post.userphoto,
-            replies: [{}],
-        }, {
-            headers: {
+    const minutes = date.getMinutes();
 
     const handelComment = () => {
         axios
@@ -72,6 +64,7 @@ export const PostCard = (props) => {
                 {
                     author: state.username,
                     text: comment,
+                    photo: post.userphoto,
                     replies: [{}],
                 },
                 {
@@ -88,17 +81,6 @@ export const PostCard = (props) => {
             });
     };
 
-                Authorization: `Bearer ${state.token}`,
-            },
-        })
-            .then(res => {
-                if (res.data.success) {
-                    console.log(res.data)
-                    setModalOpen(false)
-                }
-        })
-    }
-
     return (
         <Container>
             <Card>
@@ -109,14 +91,8 @@ export const PostCard = (props) => {
                         justifyContent: "space-between",
                     }}>
                     <UserInfo>
-                        <TouchableOpacity
-                            style={{ flexDirection: "row" }}
-                            onPress={() =>
-                                navigation.navigate("UserProfile", { username: post.username })
-                            }>
+                    <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => navigation.navigate('UserProfile', { username: post.username, photo: post.userphoto })}>
                             <UserImg source={post.userImg} />
-                        <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => navigation.navigate('UserProfile', { username: post.username, photo: post.userphoto })}>
-                            <UserImg source={post.userphoto} />
                             <UserInfoText>
                                 <UserName>{post.username}</UserName>
                                 <PostTime>{`${screenDate}    ${hours}:${minutes}`}</PostTime>

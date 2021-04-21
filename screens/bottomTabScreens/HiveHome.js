@@ -78,6 +78,5 @@ export const HiveHome = ({ navigation, route }) => {
 
         </SafeAreaView>
     );
-                  userphoto:item.user.photo,
-                  postImg: item.photo,
+
 };
