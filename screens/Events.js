@@ -1,23 +1,23 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList, ScrollView, SafeAreaView } from 'react-native'
+import React, { useState, useContext, useEffect } from 'react';
+import { Image, TouchableOpacity, StyleSheet, ScrollView, FlatList, View, Text, SafeAreaView } from 'react-native';
 import { Header } from 'react-native-elements'
-import { EventCard } from '../../components/EventCard';
+import { EventCard } from '../components/EventCard'
 import { Ionicons } from '@expo/vector-icons';
-import { AppContext } from '../../App';
+import { AppContext } from '../App';
 import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios'
 
 
-export const BeeThere = ({ navigation }) => {
+export const Events = ({ navigation }) => {
 
-    const { state } = useContext(AppContext)
+    const { state } = useContext(AppContext);
 
-    const [posts, setPosts] = useState([])
+    const [posts, setPosts] = useState([]);
 
-    const isFocused = useIsFocused()
+    const isFocused = useIsFocused();
 
     useEffect(() => {
-        axios.get(`https://bee-close.herokuapp.com/api/posts/giveaway`, {
+        axios.get(`https://bee-close.herokuapp.com/api/posts/event`, {
             headers: {
                 'Authorization': `Bearer ${state.token}`
             }
@@ -39,7 +39,7 @@ export const BeeThere = ({ navigation }) => {
                     </TouchableOpacity>
                 }
                 centerComponent={{ text: 'BEE CLOSE', style: { color: '#fff', fontSize: 20 } }}
-                rightComponent={<Image source={require('../../assets/logo(1).png')} style={{ width: 40, height: 40 }} />
+                rightComponent={<Image source={require('../assets/logo(1).png')} style={{ width: 40, height: 40 }} />
                 }
             />
             {(posts.length) ?
@@ -51,7 +51,8 @@ export const BeeThere = ({ navigation }) => {
                         postImg: item.image,
                         postTime: item.timestamp,
                         postId: item._id,
-                        userId: item.user._id
+                        userId: item.user._id,
+                        userphoto: item.user.photo
                     }}
                     />
                     )}
@@ -59,7 +60,7 @@ export const BeeThere = ({ navigation }) => {
                 />
                 :
                 <View style={styles.container}>
-                    <Text style={{ fontSize: 24 }}>sorry no items to be shown</Text>
+                    <Text style={{ fontSize: 24 }}>sorry no Events posts</Text>
                 </View>
             }
         </SafeAreaView>
@@ -73,4 +74,3 @@ const styles = StyleSheet.create({
         backgroundColor: '#f7f7f7',
     }
 })
-

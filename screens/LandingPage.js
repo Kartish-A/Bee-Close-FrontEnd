@@ -22,7 +22,7 @@ export function LandingPage({ navigation }) {
           }}
           rightComponent={
             <Image
-              source={require("../../assets/logo(1).png")}
+              source={require("../assets/logo(1).png")}
               style={{ width: 40, height: 40 }}
             />
           }

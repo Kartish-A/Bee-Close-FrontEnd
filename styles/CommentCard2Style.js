@@ -17,7 +17,6 @@ export const Card = styled.View`
     border-radius: 10px;
     border-width: 1px;
     border-color: #37cab8;
-    margin-top:5px;
     flex-grow:1
 `;
 

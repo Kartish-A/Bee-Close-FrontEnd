@@ -1,11 +1,6 @@
 import React, { useState, useContext } from "react";
 import { AppContext } from "../App";
-import {
-    TouchableOpacity, View, Text, StyleSheet, TextInput,
-    Modal,
-    ScrollView,
-    FlatList,
-} from "react-native";
+import { TouchableOpacity, View, Text, StyleSheet, TextInput, Modal, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import {
@@ -24,7 +19,7 @@ import { CommentCard } from './CommentCard'
 import axios from "axios";
 
 export const PostCard = (props) => {
-    const { state, dispatch } = useContext(AppContext);
+    const { state } = useContext(AppContext);
 
     //this useNavigation function enable us to use the "navigation props" in deep nested components
     const navigation = useNavigation();
@@ -51,11 +46,11 @@ export const PostCard = (props) => {
 
     const handelComment = () => {
         axios
-            .put(
-                `https://bee-close.herokuapp.com/api/updatePosts/${post.postId}`,
+            .put(`https://bee-close.herokuapp.com/api/updatePosts/${post.postId}`,
                 {
                     author: state.username,
                     text: comment,
+                    photo: post.userphoto,
                     replies: [{}],
                 },
                 {
@@ -85,9 +80,9 @@ export const PostCard = (props) => {
                         <TouchableOpacity
                             style={{ flexDirection: "row" }}
                             onPress={() =>
-                                navigation.navigate("UserProfile", { username: post.username })
+                                navigation.navigate("UserProfile", { username: post.username, photo: post.userphoto })
                             }>
-                            <UserImg source={post.userImg} />
+                            <UserImg source={post.userphoto} />
                             <UserInfoText>
                                 <UserName>{post.username}</UserName>
                                 <PostTime>{`${screenDate}    ${hours}:${minutes}`}</PostTime>
@@ -145,18 +140,6 @@ export const PostCard = (props) => {
                     <Modal animationType={"slide"} visible={modalOpen} transparent={true}>
                         <View>
                             <ScrollView>
-                                {/* {post.comments ? (
-                                    post.comments.map((item) => (
-                                        <View>
-                                            <Text>{item.text}</Text>
-                                        </View>
-                                    ))
-                                ) : (
-                                    <View>
-                                        <Text></Text>
-                                    </View>
-                                )} */}
-
                                 <View style={styles.comment}>
                                     <TextInput
                                         style={styles.commentInput}

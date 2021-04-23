@@ -1,16 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-    View,
-    Text,
-    StyleSheet,
-    Image,
-    TouchableOpacity,
-    TextInput,
-} from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from "react-native";
 import { Header, CheckBox } from "react-native-elements";
 import { Ionicons } from "@expo/vector-icons";
-import { PhotoPicker } from "../../components/PhotoPicker";
-import { AppContext } from "../../App";
+import { PhotoPicker } from "../components/PhotoPicker";
+import { AppContext } from "../App";
 import ActionButton from "react-native-action-button";
 import { useIsFocused } from '@react-navigation/native'
 import axios from "axios";
@@ -165,7 +158,7 @@ export const CreatePost = ({ navigation, route, props }) => {
                     text: "BEE CLOSE", style: { color: "#fff", fontSize: 20 }
                 }}
                 rightComponent={
-                    <Image source={require("../../assets/logo(1).png")}
+                    <Image source={require("../assets/logo(1).png")}
                         style={{
                             width: 40,
                             height: 40,

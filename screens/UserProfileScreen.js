@@ -2,19 +2,19 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
 
 
-
 export const UserProfileScreen = ({ navigation, route }) => {
-    const { username } = route.params;
+    const { username, photo } = route.params;
 
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#f8f8f8' }}>
             <View style={styles.container} >
                 <Image style={styles.userImg}
-                    source={{ uri: 'https://picsum.photos/id/338/200/300' }}
+                    source={photo}
                 />
                 <Text style={styles.userName}> {username} </Text>
                 <Text style={styles.aboutUser}>
+                    this is {username}
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqui
                 </Text>
 

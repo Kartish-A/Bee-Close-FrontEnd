@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
     align-items: center;
     background-color: #fff;
-    padding: 20px;
+    padding: 10px;
 
 `;
 
@@ -14,8 +14,7 @@ export const Card = styled.View`
     border-radius: 5px;
     border-width: 1px;
     border-color: #ccc;
-    margin-top:5px;
-    margin-bottom:5px;
+    
 `;
 
 export const UserInfo = styled.View`

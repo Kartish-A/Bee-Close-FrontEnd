@@ -9,21 +9,21 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 // importing AuthStack Screens
-import { LandingPage } from "./screens/authStack/LandingPage";
-import { SignIn } from "./screens/authStack/SignIn";
-import { SignUp } from "./screens/authStack/SignUp";
+import { LandingPage } from "./screens/LandingPage";
+import { SignIn } from "./screens/SignIn";
+import { SignUp } from "./screens/SignUp";
 
 // importing BottomTab Screens
-import { HiveHome } from "./screens/bottomTabScreens/HiveHome";
-import { CreatePost } from "./screens/bottomTabScreens/CreatePost";
-import { Events } from "./screens/bottomTabScreens/Events";
-import { BeeThere } from "./screens/bottomTabScreens/BeeThere";
+import { HiveHome } from "./screens/HiveHome";
+import { CreatePost } from "./screens/CreatePost";
+import { Events } from "./screens/Events";
+import { BeeThere } from "./screens/BeeThere";
 
 //importing DrawerScreens (and custom functions)
-import { CustomDrawerContent } from "./screens/drawerItems/CustomDrawerContent";
+import { CustomDrawerContent } from "./screens/CustomDrawerContent";
 
 // import { ProfileScreen }from './components/drawerItems/ProfileStack/ProfileScreen';
-import { BeesInMyHive } from "./screens/drawerItems/BeesInMyHive";
+import { BeesInMyHive } from "./screens/BeesInMyHive";
 
 // import TopTab Screens
 import { SavedPosts } from './screens/SavedPosts';
@@ -31,8 +31,8 @@ import { SavedEvents } from './screens/SavedEvents';
 import { SavedBeeThere } from './screens/SavedBeeThere';
 
 //importing ProfileStackScreens
-import { PersonalProfileScreen } from "./screens/drawerItems/PersonalProfileStack/PersonalProfileScreen";
-import { EditPersonalProfileScreen } from "./screens/drawerItems/PersonalProfileStack/EditPersonalProfileScreen";
+import { PersonalProfileScreen } from "./screens/PersonalProfileScreen";
+import { EditPersonalProfileScreen } from "./screens/EditPersonalProfileScreen";
 
 import { UserProfileScreen } from "./screens/UserProfileScreen";
 

@@ -4,7 +4,7 @@ import { Header, Input } from "react-native-elements";
 import axios from "axios";
 import { Ionicons } from "@expo/vector-icons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { UserImgWrapper } from "../../styles/ContactPersonStyle";
+
 
 export function SignUp({ navigation }) {
   const [user, setUser] = useState({
@@ -64,7 +64,7 @@ export function SignUp({ navigation }) {
             }}
             rightComponent={
               <Image
-                source={require("../../assets/logo(1).png")}
+                source={require("../assets/logo(1).png")}
                 style={{ width: 40, height: 40 }}
               />
             }
@@ -191,7 +191,7 @@ export function SignUp({ navigation }) {
             </View>
           ) : (
             <View>
-              <Text>test</Text>
+              <Text></Text>
             </View>
           )}
         </View>

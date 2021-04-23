@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Image, ScrollView, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
+import { Image, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
 import { Header } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
-import { ContactPerson } from '../../components/ContactPerson'
+import { ContactPerson } from '../components/ContactPerson'
 import { useIsFocused } from '@react-navigation/native'
 import axios from 'axios'
-import { AppContext } from '../../App'
+import { AppContext } from '../App'
 
 export const BeesInMyHive = ({ navigation }) => {
 
@@ -38,12 +38,14 @@ export const BeesInMyHive = ({ navigation }) => {
                     </TouchableOpacity>
                 }
                 centerComponent={{ text: 'BEE CLOSE', style: { color: '#fff', fontSize: 20 } }}
-                rightComponent={<Image source={require('../../assets/logo(1).png')} style={{ width: 40, height: 40 }} />}
+                rightComponent={<Image source={require('../assets/logo(1).png')} style={{ width: 40, height: 40 }} />}
             />
             <FlatList
                 data={users}
                 renderItem={({ item }) => (<ContactPerson usersObj={{
                     username: item.firstName + ' ' + item.lastName,
+                    email: item.email,
+                    photo: item.photo
 
                 }} />)}
                 keyExtractor={user => user._id}

@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
-import { AppContext } from '../../App'
-import { setToken, setUsername, login, setUserId } from '../../appContextActions'
+import { AppContext } from '../App'
+import { setToken, setUsername, login, setUserId } from '../appContextActions'
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
 import { Header, Input } from 'react-native-elements';
 import axios from 'axios';
 
-export function SignIn({ navigation, route }) {
+export function SignIn(route) {
     const [userEmail, setuserEmail] = useState(route.params?.email ?? "");
     const [password, setpassword] = useState(route.params?.password ?? "");
 
@@ -51,13 +51,13 @@ export function SignIn({ navigation, route }) {
                     }}
                     rightComponent={
                         <Image
-                            source={require("../../assets/logo(1).png")}
+                            source={require("../assets/logo(1).png")}
                             style={{ width: 40, height: 40 }}
                         />
                     }
                 />
                 <Image
-                    source={require("../../assets/AppLogo.png")}
+                    source={require("../assets/logo(1).png")}
                     style={{ marginTop: 10 }}
                 />
                 <View style={{ justifyContent: "center", alignItems: "center" }}>

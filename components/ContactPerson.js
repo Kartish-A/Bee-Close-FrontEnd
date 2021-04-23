@@ -12,11 +12,11 @@ export const ContactPerson = (props) => {
         <Container>
             <Card>
                 <UserImgWrapper>
-                    <UserImg source={{ uri: 'https://picsum.photos/id/281/200/300' }} />
+                    <UserImg source={user.photo} />
                 </UserImgWrapper>
                 <UserInfoText>
                     <UserName>{user.username}</UserName>
-                    <Interaction onPress={() => navigation.navigate('UserProfile', { username: user.username })}>
+                    <Interaction onPress={() => navigation.navigate('UserProfile', { username: user.username, email: user.email, photo: user.photo })}>
                         <ProfileBtn> see profile </ProfileBtn>
                     </Interaction>
                 </UserInfoText>

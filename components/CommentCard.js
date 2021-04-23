@@ -17,6 +17,11 @@ export const CommentCard = (props) => {
 
     const isFocused = useIsFocused();
 
+    const options = {
+        weekday: "long", year: "numeric", month: "long", day: "numeric",
+    };
+
+
     useEffect(() => {
 
         axios.get(`https://bee-close.herokuapp.com/api/posts/getsinglepost/${props.postId}`, {
@@ -45,7 +50,7 @@ export const CommentCard = (props) => {
                             <UserInfo>
                                 <UserInfoText>
                                     <UserName> {comment.author} </UserName>
-                                    <CommentTime> {comment.timestamp} </CommentTime>
+                                    <CommentTime> {new Date(comment.timestamp).toLocaleDateString('de-DE', options)} </CommentTime>
                                 </UserInfoText>
                             </UserInfo>
                         </View>

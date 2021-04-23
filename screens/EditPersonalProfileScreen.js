@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { AppContext } from "../../../App";
+import { AppContext } from "../App";
 import { useIsFocused } from "@react-navigation/native";
 import { View, Text, TouchableOpacity, ImageBackground, TextInput, StyleSheet, ScrollView } from "react-native";
 import { useTheme } from "react-native-paper";
@@ -39,7 +39,7 @@ export const EditPersonalProfileScreen = ({ navigation }) => {
                     setUserLastName(res.data.user.lastName);
                     setPhone(res.data.user.phoneNumber);
                     setEmail(res.data.user.email);
-                    // setUserPhoto(res.data.user.photo)
+                    setUserPhoto(res.data.user.photo)
                 }
             });
     }, [isFocused]);
